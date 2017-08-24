@@ -1,7 +1,7 @@
 'use strict'
 
 import { app } from 'electron'
-import MenubarWindow from 'menubar'
+import MenubarWindow from './menubar'
 
 /**
  * Set `__static` path to static files in production
@@ -22,9 +22,10 @@ function createWindow () {
    */
   mainWindow = new MenubarWindow({
     index: winURL,
-    height: 563,
-    width: 1000,
-    transparent: true
+    height: 180,
+    width: 400,
+    transparent: false,
+    alwaysOnTop: true
   })
 
   // npm v5.3.0 builded is blank
