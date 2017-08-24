@@ -1,4 +1,5 @@
 .DS_Store
+.vscode
 dist/electron/*
 dist/web/*
 build/*
