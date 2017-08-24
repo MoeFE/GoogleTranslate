@@ -1,6 +1,7 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app } from 'electron'
+import MenubarWindow from 'menubar'
 
 /**
  * Set `__static` path to static files in production
@@ -19,14 +20,16 @@ function createWindow () {
   /**
    * Initial window options
    */
-  mainWindow = new BrowserWindow({
+  mainWindow = new MenubarWindow({
+    index: winURL,
     height: 563,
-    useContentSize: true,
-    width: 1000
+    width: 1000,
+    transparent: true
   })
 
-  mainWindow.webContents.openDevTools()
-  mainWindow.loadURL(winURL)
+  // npm v5.3.0 builded is blank
+  // mainWindow.webContents.openDevTools()
+  // mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {
     mainWindow = null
