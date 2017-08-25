@@ -24,6 +24,7 @@ function createWindow () {
     index: winURL,
     height: 180,
     width: 400,
+    resizable: false,
     transparent: true,
     alwaysOnTop: true
   })
