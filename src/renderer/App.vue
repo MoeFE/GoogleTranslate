@@ -7,13 +7,22 @@
 </template>
 
 <script>
-  export default {
-    name: 'translation'
+import { remote } from 'electron'
+const Window = remote.getCurrentWindow()
+export default {
+  name: 'translation',
+  created () {
+    window.addEventListener('resize', () => {
+      Window.setSize(window.innerWidth, window.innerHeight)
+    })
   }
+}
 </script>
 
 <style lang="stylus">
 @import './assets/fonts/index.styl'
+html, body, #app
+  height 100%
 html
   -webkit-font-smoothing antialiased
   user-select none
