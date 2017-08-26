@@ -33,8 +33,13 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
   // mainWindow.loadURL(winURL)
 
-  mainWindow.on('closed', () => {
-    mainWindow = null
+  mainWindow.on('after-create-window', () => {
+    const window = mainWindow.window
+    window.on('closed', () => (mainWindow = null))
+    window.on('resize', () => {
+      setTimeout(() => window.hide(), 30)
+      setTimeout(() => window.show(), 30)
+    })
   })
 }
 
