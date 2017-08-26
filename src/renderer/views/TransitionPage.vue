@@ -1,7 +1,7 @@
 <template>
   <section>
     <Header title="Translate">
-      <Icon icon="fixed" slot="fixed" />
+      <Icon :rotate="isAlwaysOnTop ? 0 : -45" icon="fixed" slot="fixed" @click.native="switchFixed" />
       <Icon icon="settings" slot="settings" @click.native="showSettings" />
     </Header>
     <main>
@@ -28,6 +28,7 @@ export default {
   components: { Icon, Header, Divider, Language },
   data () {
     return {
+      isAlwaysOnTop: Window.isAlwaysOnTop(),
       model: {
         source: { country: 'auto', value: '' },
         target: { country: 'zh-CN', value: '' }
@@ -35,6 +36,10 @@ export default {
     }
   },
   methods: {
+    switchFixed () {
+      this.isAlwaysOnTop = !Window.isAlwaysOnTop()
+      Window.setAlwaysOnTop(!Window.isAlwaysOnTop())
+    },
     showSettings () {
       const menu = new Menu()
       menu.append(new MenuItem({ label: '偏好设置', accelerator: 'Cmd+,' }))
