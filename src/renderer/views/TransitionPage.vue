@@ -37,7 +37,7 @@ export default {
 section
   display flex
   flex-direction column
-  height 100vh
+  height 100%
   &::before
     content '\e601'
     display block
