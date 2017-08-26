@@ -2,33 +2,55 @@
   <section>
     <Header title="Translate">
       <Icon icon="fixed" slot="fixed" />
-      <Icon icon="settings" slot="settings" />
+      <Icon icon="settings" slot="settings" @click.native="showSettings" />
     </Header>
     <main>
       <form action method="post" @submit.prevent>
-        <Language country="auto" v-model="model.source" />
+        <Language :country="model.source.country" v-model="model.source.value" />
         <Divider>
-          <Icon icon="exchange" />
+          <Icon icon="exchange" @click.native="switchLanguage" />
         </Divider>
-        <Language country="zh-CN" v-model="model.target" />
+        <Language :country="model.target.country" v-model="model.target.value" />
       </form>
     </main>
   </section>
 </template>
 <script>
+import { remote } from 'electron'
 import Icon from '@/components/Icon'
 import Header from '@/components/Header'
 import Divider from '@/components/Divider'
 import Language from '@/components/Language'
+const Window = remote.getCurrentWindow()
+const { Menu, MenuItem } = remote
 export default {
   name: 'transition-page',
   components: { Icon, Header, Divider, Language },
   data () {
     return {
       model: {
-        source: '',
-        target: ''
+        source: { country: 'auto', value: '' },
+        target: { country: 'zh-CN', value: '' }
       }
+    }
+  },
+  methods: {
+    showSettings () {
+      const menu = new Menu()
+      menu.append(new MenuItem({ label: '偏好设置', accelerator: 'Cmd+,' }))
+      menu.append(new MenuItem({ type: 'separator' }))
+      menu.append(new MenuItem({ label: '切换语言', accelerator: 'Cmd+S' }))
+      menu.append(new MenuItem({ label: '更改源语言', accelerator: 'Cmd+1' }))
+      menu.append(new MenuItem({ label: '切换目标语言', accelerator: 'Cmd+2' }))
+      menu.append(new MenuItem({ label: '说源语言', accelerator: 'Shift+Cmd+1', enabled: false }))
+      menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Shift+Cmd+2', enabled: false }))
+      menu.append(new MenuItem({ type: 'separator' }))
+      menu.append(new MenuItem({ label: '退出 Google Translate', accelerator: 'Cmd+Q' }))
+      menu.popup(Window)
+    },
+    switchLanguage () {
+      if (this.model.source.country === 'auto') return // 检测语言不能掉换
+      [this.model.source, this.model.target] = [this.model.target, this.model.source]
     }
   }
 }
