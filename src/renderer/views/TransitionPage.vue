@@ -6,11 +6,11 @@
     </Header>
     <main>
       <form action method="post" @submit.prevent>
-        <Language :country="model.source.country" v-model="model.source.value" />
+        <Language :country="model.source.country" v-model="model.source.value" @changeLanguage="changeSourceLanguage" />
         <Divider>
           <Icon icon="exchange" @click.native="switchLanguage" />
         </Divider>
-        <Language :country="model.target.country" v-model="model.target.value" />
+        <Language :country="model.target.country" v-model="model.target.value" @changeLanguage="changeTargetLanguage" />
       </form>
     </main>
   </section>
@@ -35,6 +35,9 @@ export default {
       }
     }
   },
+  beforeCreate () {
+    window.resizeTo(400, 180)
+  },
   methods: {
     switchFixed () {
       this.isAlwaysOnTop = !Window.isAlwaysOnTop()
@@ -44,41 +47,31 @@ export default {
       const menu = new Menu()
       menu.append(new MenuItem({ label: '偏好设置', accelerator: 'Cmd+,' }))
       menu.append(new MenuItem({ type: 'separator' }))
-      menu.append(new MenuItem({ label: '切换语言', accelerator: 'Cmd+S' }))
-      menu.append(new MenuItem({ label: '更改源语言', accelerator: 'Cmd+1' }))
-      menu.append(new MenuItem({ label: '切换目标语言', accelerator: 'Cmd+2' }))
-      menu.append(new MenuItem({ label: '说源语言', accelerator: 'Shift+Cmd+1', enabled: false }))
-      menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Shift+Cmd+2', enabled: false }))
+      menu.append(new MenuItem({ label: '切换语言', accelerator: 'Cmd+S', enabled: this.model.source.country !== 'auto', click: this.switchLanguage }))
+      menu.append(new MenuItem({ label: '更改源语言', accelerator: 'Cmd+1', click: this.changeSourceLanguage }))
+      menu.append(new MenuItem({ label: '更改目标语言', accelerator: 'Cmd+2', click: this.changeTargetLanguage }))
+      menu.append(new MenuItem({ label: '说源语言', accelerator: 'Shift+Cmd+1', enabled: !!this.model.source.value, click: this.speakSourceLanguage }))
+      menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Shift+Cmd+2', enabled: !!this.model.target.value, click: this.speakTargetLanguage }))
       menu.append(new MenuItem({ type: 'separator' }))
-      menu.append(new MenuItem({ label: '退出 Google Translate', accelerator: 'Cmd+Q' }))
+      menu.append(new MenuItem({ label: '退出 Google Translate', accelerator: 'Cmd+Q', click: remote.app.quit }))
       menu.popup(Window)
     },
     switchLanguage () {
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
-    }
+    },
+    changeSourceLanguage () {
+      this.$router.push({ name: 'change-language-page', query: { from: 'source' } })
+    },
+    changeTargetLanguage () {
+      this.$router.push({ name: 'change-language-page', query: { from: 'target' } })
+    },
+    speakSourceLanguage () {},
+    speakTargetLanguage () {}
   }
 }
 </script>
 <style lang="stylus" scoped>
-section
-  display flex
-  flex-direction column
-  height 100%
-  &::before
-    content '\e601'
-    display block
-    color #4286f5
-    font-family icon
-    font-size 32px
-    text-align center
-    line-height .3
-    transform rotate(180deg)
-main
+main >:first-child
   flex 1
-  display flex
-  align-items center
-  background #fff
-  >:first-child
-    flex 1
 </style>
