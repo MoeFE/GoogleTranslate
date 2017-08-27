@@ -19,7 +19,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "translation",
+    "productName": "Google 翻译",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"
