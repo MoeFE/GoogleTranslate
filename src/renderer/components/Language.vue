@@ -1,6 +1,8 @@
 <template>
   <div class="lang">
-    <img :src="`http://api.itranslateapp.com/flags/${country}-2x.png`">
+    <div class="icon-wrap" @click="$emit('changeLanguage')">
+      <Country :code="country" />
+    </div>
     <input :placeholder="currentPlaceholder" :value="value" @input="$emit('input', $event.target.value)">
     <template v-if="value">
       <Icon icon="close" @click.native="$emit('input', '')" />
@@ -10,10 +12,11 @@
 </template>
 <script>
 import Icon from '@/components/Icon'
-import country from '../assets/json/languages.js'
+import Country from '@/components/Country'
+import languages from '../assets/json/languages.js'
 export default {
   name: 'language',
-  components: { Icon },
+  components: { Icon, Country },
   props: {
     country: { type: String, default: 'auto', required: true },
     value: { type: String, default: '', required: true },
@@ -21,7 +24,7 @@ export default {
   },
   computed: {
     currentPlaceholder () {
-      return this.placeholder || country[this.country]
+      return this.placeholder || languages[this.country]
     }
   }
 }
@@ -31,11 +34,32 @@ font-size = 22px
 .lang
   display flex
   align-items center
-  padding-right 10px
-  img
-    size = 44
-    width 44px
-    height 44px
+  padding 0 10px
+  .icon-wrap
+    position relative
+    size = 44px
+    width size
+    height size
+    &::after
+      content '\e602'
+      color #3e83f8
+      font-family icon
+      font-weight bold
+      position absolute
+      z-index 1
+      left 50%
+      bottom -5px
+      opacity 0
+      transition transform .2s cubic-bezier(0, 0.26, 0.71, 1.61)
+      transform translate3d(-50%, -20px, 0)
+    &:hover::after
+      opacity 1
+      transform translate3d(-50%, 0, 0)
+    img
+      position relative
+      z-index 2
+      width size
+      height size
   input,
   textarea
     appearance none
