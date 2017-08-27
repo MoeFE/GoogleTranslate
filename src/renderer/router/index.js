@@ -16,6 +16,11 @@ export default new Router({
       component: require('@/views/TransitionPage')
     },
     {
+      path: '/search',
+      name: 'change-language-page',
+      component: require('@/views/ChangeLanguagePage')
+    },
+    {
       path: '*',
       redirect: '/'
     }
