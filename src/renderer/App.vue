@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -28,7 +26,26 @@ html
   user-select none
   font-family -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif
   font-weight 300
+  cursor default
 body
   margin 0
   overflow hidden
+#app > :first-child
+  display flex
+  flex-direction column
+  height 100%
+  &::before
+    content '\e601'
+    display block
+    color #4286f5
+    font-family icon
+    font-size 32px
+    text-align center
+    line-height .3
+    transform rotate(180deg)
+  > main
+    flex 1
+    display flex
+    align-items center
+    background #fff
 </style>
