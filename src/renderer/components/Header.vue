@@ -9,7 +9,7 @@
 export default {
   name: 'header',
   props: {
-    title: { type: String, default: 'Translate', required: true }
+    title: { type: String, default: 'Translate', required: false }
   }
 }
 </script>
@@ -18,14 +18,19 @@ export default {
 header
   display flex
   align-items center
+  position relative
   color #fff
   background #4286f5
   padding 10px
   border-radius 6px 6px 0 0
-  cursor default
   .icon
+    position absolute
     color #eee
     transition color .3s
+    &:nth-of-type(1)
+      left 10px
+    &:nth-of-type(2)
+      right 10px
     &:hover
       color #fff
   .icon-fixed
