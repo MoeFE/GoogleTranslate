@@ -5,7 +5,7 @@
       <Icon icon="settings" slot="settings" @click.native="showSettings" />
     </Header>
     <main>
-      <form action method="post" @submit.prevent>
+      <form action method="post" style="transform: translateY(-40px)" @submit.prevent>
         <Language :country="model.source.country" v-model="model.source.value" @changeLanguage="changeSourceLanguage" />
         <Divider>
           <Icon icon="exchange" @click.native="switchLanguage" />
@@ -17,6 +17,7 @@
 </template>
 <script>
 import { remote } from 'electron'
+import anime from 'animejs'
 import Icon from '@/components/Icon'
 import Header from '@/components/Header'
 import Divider from '@/components/Divider'
@@ -37,6 +38,12 @@ export default {
   },
   beforeCreate () {
     window.resizeTo(400, 180)
+  },
+  mounted () {
+    anime({
+      targets: 'form',
+      translateY: 0
+    })
   },
   methods: {
     switchFixed () {
@@ -72,6 +79,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-main >:first-child
-  flex 1
+main
+  align-items flex-start !important
+  > form
+    flex 1
+    margin 9px 0
 </style>
