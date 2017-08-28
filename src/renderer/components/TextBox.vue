@@ -58,6 +58,7 @@ div[role="textbox"]
   min-height 26px
   max-height 300px
   overflow scroll
+  word-break break-all
   &:empty::before
     content attr(placeholder)
     position absolute
