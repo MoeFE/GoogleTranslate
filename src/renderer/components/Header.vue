@@ -19,22 +19,24 @@ header
   display flex
   align-items center
   position relative
+  z-index 9
   color #fff
   background #4286f5
   padding 10px
   border-radius 6px 6px 0 0
   .icon
     position absolute
-    color #eee
-    transition color .3s
+    color #fff
+    text-shadow 0 0 10px rgba(255, 255, 255, 0)
+    transition text-shadow .3s
     &:nth-of-type(1)
       left 10px
     &:nth-of-type(2)
       right 10px
     &:hover
-      color #fff
+      text-shadow 0 0 10px rgba(255, 255, 255, .5)
   .icon-fixed
-    transition transform .3s
+    transition transform text-shadow .3s
     transform rotate(-45deg)
   .icon-settings::after
     content '\e601'
