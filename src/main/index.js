@@ -27,6 +27,7 @@ function createWindow () {
     height: 180,
     width: 400,
     resizable: false,
+    scrollBounce: true,
     transparent: true,
     alwaysOnTop: true
   })
