@@ -24,8 +24,9 @@ function createWindow () {
   mainWindow = new MenubarWindow({
     icon: path.join(__static, 'icon.ico'),
     index: winURL,
-    height: 180,
-    width: 400,
+    height: 190,
+    width: 420,
+    hasShadow: false,
     resizable: false,
     scrollBounce: true,
     transparent: true,
@@ -40,8 +41,7 @@ function createWindow () {
     const window = mainWindow.window
     window.on('closed', () => (mainWindow = null))
     window.on('resize', () => {
-      setTimeout(() => window.hide(), 30)
-      setTimeout(() => window.show(), 30)
+      window.setHasShadow(false)
     })
   })
 }

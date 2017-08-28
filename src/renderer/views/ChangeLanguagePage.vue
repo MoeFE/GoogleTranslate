@@ -1,7 +1,7 @@
 <template>
   <section>
     <Header>
-      <router-link class="close" type="button" slot="settings" :to="{ name: 'translate-page' }">关闭</router-link>
+      <router-link class="close" type="button" slot="settings" :to="{ name: 'transition-page' }">关闭</router-link>
     </Header>
     <main>
       <header ref="header" style="transform: translateY(-40px)">
@@ -41,7 +41,7 @@ export default {
     }
   },
   beforeCreate () {
-    window.resizeTo(400, 520)
+    window.resizeTo(420, 530)
   },
   created () {
     if (this.query.from === 'target') delete country.auto
@@ -126,6 +126,7 @@ main
     background #f7fafb
     border-bottom 1px solid #d7dce0
     margin-bottom 10px
+    width calc(100% - 2px)
     .search-box
       position relative
       padding 10px 20px

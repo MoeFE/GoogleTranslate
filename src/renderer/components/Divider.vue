@@ -13,7 +13,7 @@
     position absolute
     left 0
     top 50%
-    transform translateY(-50%)
+    transform translateY(-50%) scaleY(.5)
     width 100%
     height 1px
     background #eee

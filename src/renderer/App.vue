@@ -34,11 +34,28 @@ body
   > :first-child
     display flex
     flex-direction column
-    height 100%
+    margin auto
+    width calc(100% - 20px)
+    height calc(100% - 20px)
+    border-radius 6px
+    box-shadow 0 0 10px rgba(0, 0, 0, .3)
     overflow hidden
     > main
       flex 1
       display flex
       align-items center
+      position relative
       background #fff
+      box-sizing border-box
+      border-radius 0 0 6px 6px
+      &::before
+        content '';
+        position absolute
+        top 0px
+        left 0px
+        width calc(100% - 1px)
+        height calc(100% - 1px)
+        border-radius 0 0 6px 6px
+        box-shadow 0 0 .5px
+        transform translate(.5px, .5px)
 </style>
