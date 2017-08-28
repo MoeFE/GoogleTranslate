@@ -1,30 +1,58 @@
 <template>
-  <div class="lang">
+  <div ref="lang" class="lang">
     <div class="icon-wrap" @click="$emit('changeLanguage')">
       <Country :code="country" />
     </div>
-    <input :placeholder="currentPlaceholder" :value="value" @input="$emit('input', $event.target.value)">
-    <template v-if="value">
+    <Textbox :placeholder="currentPlaceholder" v-model="currentValue" @keydown.enter.prevent.stop.native />
+    <div v-if="value" class="action" :style="{ alignSelf: false ? 'flex-start' : 'center' }">
       <Icon icon="close" @click.native="$emit('input', '')" />
       <Icon icon="volume" @click.native="$emit('speak', value)" />
-    </template>
+    </div>
   </div>
 </template>
 <script>
 import Icon from '@/components/Icon'
 import Country from '@/components/Country'
+import Textbox from '@/components/Textbox'
 import languages from '../assets/json/languages.js'
 export default {
   name: 'language',
-  components: { Icon, Country },
+  components: { Icon, Country, Textbox },
   props: {
     country: { type: String, default: 'auto', required: true },
     value: { type: String, default: '', required: true },
     placeholder: { type: String, default: '', required: false }
   },
+  data () {
+    return {
+      currentValue: ''
+    }
+  },
+  mounted () {
+    this.initHeight = this.$refs.lang.offsetHeight
+  },
+  watch: {
+    value () {
+      this.currentValue = this.value
+    },
+    currentValue () {
+      this.$emit('input', this.currentValue)
+      this.updateWindowHeight()
+    }
+  },
   computed: {
     currentPlaceholder () {
       return this.placeholder || languages[this.country]
+    }
+  },
+  methods: {
+    updateWindowHeight () {
+      this.$nextTick(function () {
+        const margin = 18
+        const headerHeight = 42
+        const innerHeight = [...this.$refs.lang.parentNode.children].map(el => el.offsetHeight).reduce((prev, next) => prev + next) + margin + headerHeight + 9
+        window.resizeTo(window.innerWidth, innerHeight)
+      })
     }
   }
 }
@@ -33,7 +61,7 @@ export default {
 font-size = 22px
 .lang
   display flex
-  align-items center
+  align-items flex-start
   padding 0 10px
   .icon-wrap
     position relative
@@ -60,18 +88,11 @@ font-size = 22px
       z-index 2
       width size
       height size
-  input,
-  textarea
-    appearance none
-    display block
-    flex 1
-    outline 0
-    border 0
-    border-radius 0
-    font-size font-size
-    font-weight 300
-    resize none
+  .action
+    display flex
+    align-items center
   .icon
+    align-self center
     color #ccc
     font-size font-size
     margin 0 5px
