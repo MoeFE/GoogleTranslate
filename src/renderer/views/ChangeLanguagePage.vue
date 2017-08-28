@@ -17,7 +17,7 @@
           <LanguageItem country="en-US">英语</LanguageItem>
         </LanguageList>
         <LanguageList ref="list" :title="isSearch ? `${Object.keys(country).length} 个语言` : '所有语言'">
-          <LanguageItem v-for="(value, key) in country" :key="key" :country="key">{{ value }}</LanguageItem>
+          <LanguageItem v-for="(value, key, index) in country" :key="key" :active="key === query.active.country" :country="key" @click.native="changeLanguageHandler(key, value, index)">{{ value }}</LanguageItem>
         </LanguageList>
       </div>
     </main>
@@ -25,22 +25,27 @@
 </template>
 <script>
 import anime from 'animejs'
-import country from '../assets/json/languages.js'
+import rawCountry from '../assets/json/languages.js'
 import Header from '@/components/Header'
 import LanguageList from '@/components/LanguageList'
 import LanguageItem from '@/components/LanguageItem'
+let country = { ...rawCountry }
 export default {
   name: 'change-language-page',
   components: { Header, LanguageList, LanguageItem },
   data () {
     return {
+      query: this.$route.query,
       country,
       language: ''
     }
   },
   beforeCreate () {
     window.resizeTo(400, 520)
-    window.anime = anime
+  },
+  created () {
+    if (this.query.from === 'target') delete country.auto
+    else this.country = country = { ...rawCountry }
   },
   mounted () {
     anime({
@@ -76,6 +81,9 @@ export default {
         this.country = country
         window.resizeTo(400, 520)
       }
+    },
+    changeLanguageHandler (country, value) {
+      this.$router.push({ name: 'transition-page', query: { lang: { country, value: '' }, action: this.$route.query.from } })
     }
   }
 }
@@ -144,4 +152,6 @@ main
     overflow scroll
     height 100%
     box-sizing border-box
+    >>> .language-list:nth-last-of-type(1) ul
+      margin-bottom 15px
 </style>

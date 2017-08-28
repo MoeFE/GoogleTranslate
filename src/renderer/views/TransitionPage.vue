@@ -30,6 +30,7 @@ export default {
   data () {
     return {
       isAlwaysOnTop: Window.isAlwaysOnTop(),
+      query: this.$route.query,
       model: {
         source: { country: 'auto', value: '' },
         target: { country: 'zh-CN', value: '' }
@@ -38,6 +39,9 @@ export default {
   },
   beforeCreate () {
     window.resizeTo(400, 180)
+  },
+  created () {
+    if (this.query.action) this.model[this.query.action] = this.query.lang
   },
   mounted () {
     anime({
@@ -60,7 +64,7 @@ export default {
       menu.append(new MenuItem({ label: '说源语言', accelerator: 'Shift+Cmd+1', enabled: !!this.model.source.value, click: this.speakSourceLanguage }))
       menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Shift+Cmd+2', enabled: !!this.model.target.value, click: this.speakTargetLanguage }))
       menu.append(new MenuItem({ type: 'separator' }))
-      menu.append(new MenuItem({ label: '退出 Google Translate', accelerator: 'Cmd+Q', click: remote.app.quit }))
+      menu.append(new MenuItem({ label: '退出 Google 翻译', accelerator: 'Cmd+Q', click: remote.app.quit }))
       menu.popup(Window)
     },
     switchLanguage () {
@@ -68,10 +72,10 @@ export default {
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
     },
     changeSourceLanguage () {
-      this.$router.push({ name: 'change-language-page', query: { from: 'source' } })
+      this.$router.push({ name: 'change-language-page', query: { from: 'source', active: this.model.source } })
     },
     changeTargetLanguage () {
-      this.$router.push({ name: 'change-language-page', query: { from: 'target' } })
+      this.$router.push({ name: 'change-language-page', query: { from: 'target', active: this.model.source } })
     },
     speakSourceLanguage () {},
     speakTargetLanguage () {}
