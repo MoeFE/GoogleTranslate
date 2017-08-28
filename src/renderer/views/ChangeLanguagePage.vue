@@ -41,7 +41,16 @@ export default {
     }
   },
   beforeCreate () {
-    window.resizeTo(420, 530)
+    const targets = { height: window.innerHeight }
+    anime({
+      targets,
+      height: 530,
+      duration: 300,
+      easing: 'easeOutBack',
+      update () {
+        window.resizeTo(420, targets.height)
+      }
+    })
   },
   created () {
     if (this.query.from === 'target') delete country.auto
@@ -50,7 +59,8 @@ export default {
   mounted () {
     anime({
       targets: [this.$refs.header, '.languages'],
-      translateY: 0
+      translateY: 0,
+      translateZ: 0
     })
   },
   computed: {

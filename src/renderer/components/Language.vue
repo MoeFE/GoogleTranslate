@@ -11,6 +11,7 @@
   </div>
 </template>
 <script>
+import anime from 'animejs'
 import Icon from '@/components/Icon'
 import Country from '@/components/Country'
 import Textbox from '@/components/Textbox'
@@ -48,10 +49,20 @@ export default {
   methods: {
     updateWindowHeight () {
       this.$nextTick(function () {
-        const margin = 18
+        const margin = 24
         const headerHeight = 42
-        const innerHeight = [...this.$refs.lang.parentNode.children].map(el => el.offsetHeight).reduce((prev, next) => prev + next) + margin + headerHeight + 9
-        window.resizeTo(window.innerWidth, innerHeight)
+        const innerHeight = this.$refs.lang.parentNode.offsetHeight + margin + headerHeight + 19
+        const targets = { height: window.innerHeight }
+        anime({
+          targets,
+          height: innerHeight,
+          duration: 150,
+          easing: 'easeOutSine',
+          update () {
+            console.log(targets.height)
+            window.resizeTo(window.innerWidth, targets.height)
+          }
+        })
       })
     }
   }

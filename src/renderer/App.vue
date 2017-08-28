@@ -10,6 +10,8 @@ export default {
 </script>
 <style lang="stylus">
 @import './assets/fonts/index.styl'
+*
+  backface-visibility: hidden
 html, body, #app
   height 100%
 html

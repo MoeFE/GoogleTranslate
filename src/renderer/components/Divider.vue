@@ -8,7 +8,6 @@
   position relative
   text-align center
   color #ccc
-  margin -2px 0 -4px 0
   &::before
     content ''
     position absolute

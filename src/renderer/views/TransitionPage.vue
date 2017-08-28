@@ -38,7 +38,16 @@ export default {
     }
   },
   beforeCreate () {
-    window.resizeTo(420, 190)
+    const targets = { height: window.innerHeight }
+    anime({
+      targets,
+      height: 190,
+      duration: 300,
+      easing: 'easeInOutBack',
+      update () {
+        window.resizeTo(420, targets.height)
+      }
+    })
   },
   created () {
     if (this.query.action) this.model[this.query.action] = this.query.lang
@@ -46,7 +55,9 @@ export default {
   mounted () {
     anime({
       targets: 'form',
-      translateY: 0
+      translateY: 0,
+      translateZ: 0,
+      delay: 300
     })
   },
   methods: {
