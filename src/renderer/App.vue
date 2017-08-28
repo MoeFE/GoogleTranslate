@@ -3,20 +3,11 @@
     <router-view></router-view>
   </div>
 </template>
-
 <script>
-import { remote } from 'electron'
-const Window = remote.getCurrentWindow()
 export default {
-  name: 'translation',
-  created () {
-    window.addEventListener('resize', () => {
-      Window.setSize(window.innerWidth, window.innerHeight)
-    })
-  }
+  name: 'translation'
 }
 </script>
-
 <style lang="stylus">
 @import './assets/fonts/index.styl'
 html, body, #app
@@ -30,10 +21,7 @@ html
 body
   margin 0
   overflow hidden
-#app > :first-child
-  display flex
-  flex-direction column
-  height 100%
+#app 
   &::before
     content '\e601'
     display block
@@ -43,9 +31,14 @@ body
     text-align center
     line-height .3
     transform rotate(180deg)
-  > main
-    flex 1
+  > :first-child
     display flex
-    align-items center
-    background #fff
+    flex-direction column
+    height 100%
+    overflow hidden
+    > main
+      flex 1
+      display flex
+      align-items center
+      background #fff
 </style>
