@@ -153,6 +153,4 @@ main
     overflow scroll
     height 100%
     box-sizing border-box
-    >>> .language-list:nth-last-of-type(1) ul
-      margin-bottom 15px
 </style>
