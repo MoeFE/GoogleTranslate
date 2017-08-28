@@ -36,7 +36,7 @@ body
     flex-direction column
     margin auto
     width calc(100% - 20px)
-    height calc(100% - 20px)
+    height calc(100% - 19px)
     border-radius 6px
     box-shadow 0 0 10px rgba(0, 0, 0, .3)
     overflow hidden
