@@ -36,7 +36,7 @@ header
     &:hover
       text-shadow 0 0 10px rgba(255, 255, 255, .5)
   .icon-fixed
-    transition transform text-shadow .3s
+    transition .3s
     transform rotate(-45deg)
   .icon-settings::after
     content '\e601'
