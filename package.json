@@ -53,6 +53,7 @@
     }
   },
   "dependencies": {
+    "animejs": "^2.0.2",
     "axios": "^0.16.1",
     "menubar": "^5.2.3",
     "vue": "^2.3.3",
