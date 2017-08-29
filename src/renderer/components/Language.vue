@@ -62,7 +62,6 @@ export default {
           duration: 150,
           easing: 'easeOutSine',
           update () {
-            console.log(targets.height)
             window.resizeTo(window.innerWidth, targets.height)
           }
         })
