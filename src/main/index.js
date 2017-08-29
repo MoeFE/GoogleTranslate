@@ -22,6 +22,7 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new MenubarWindow({
+    title: 'Google Translate',
     icon: path.join(__static, 'icon.ico'),
     index: winURL,
     height: 190,
