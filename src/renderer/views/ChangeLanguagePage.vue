@@ -12,7 +12,7 @@
         </form>
       </header>
       <div class="languages" style="transform: translateY(40px)">
-        <LanguageList v-if="!isSearch" title="最近使用">
+        <LanguageList v-if="!isSearch && false" title="最近使用">
           <LanguageItem country="zh-CN" active>中文（简体）</LanguageItem>
           <LanguageItem country="en-US">英语</LanguageItem>
         </LanguageList>
@@ -165,7 +165,7 @@ main
         padding 10px 20px 10px 40px
         box-shadow 0 1px .5px rgba(0, 0, 0, .1)
   .languages
+    flex 1
     overflow scroll
-    height 100%
     box-sizing border-box
 </style>
