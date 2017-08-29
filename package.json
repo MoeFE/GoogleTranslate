@@ -1,7 +1,7 @@
 {
   "name": "translation",
-  "version": "0.0.0",
-  "author": "u3u <quq@quq.cat>",
+  "version": "1.0.0",
+  "author": "MoeFE <quq@quq.cat>",
   "description": "An electron-vue project",
   "license": null,
   "main": "./dist/electron/main.js",
