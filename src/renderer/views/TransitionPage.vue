@@ -43,6 +43,7 @@ export default {
       targets,
       height: 190,
       duration: 300,
+      elasticity: 500,
       easing: 'easeInOutBack',
       update () {
         window.resizeTo(420, targets.height)

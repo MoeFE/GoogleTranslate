@@ -89,7 +89,7 @@ font-size = 22px
       left 50%
       bottom -5px
       opacity 0
-      transition transform .2s cubic-bezier(0, 0.26, 0.71, 1.61)
+      transition transform .2s cubic-bezier(0.175, 0.885, 0.32, 1.275)
       transform translate3d(-50%, -20px, 0)
     &:hover::after
       opacity 1

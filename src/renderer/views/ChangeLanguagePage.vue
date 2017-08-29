@@ -45,8 +45,8 @@ export default {
     anime({
       targets,
       height: 530,
-      duration: 300,
-      easing: 'easeOutBack',
+      duration: 500,
+      elasticity: 300,
       update () {
         window.resizeTo(420, targets.height)
       }
