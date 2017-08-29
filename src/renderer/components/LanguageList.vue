@@ -25,4 +25,8 @@ ul
   padding 0
   list-style none
   font-weight 500
+  &:empty::before
+    content: ''
+    display block
+    height 10px
 </style>

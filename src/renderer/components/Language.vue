@@ -26,7 +26,8 @@ export default {
   },
   data () {
     return {
-      currentValue: ''
+      currentValue: '',
+      config: {}
     }
   },
   mounted () {
@@ -49,9 +50,11 @@ export default {
   methods: {
     updateWindowHeight () {
       this.$nextTick(function () {
-        const margin = 24
-        const headerHeight = 42
-        const innerHeight = this.$refs.lang.parentNode.offsetHeight + margin + headerHeight + 19
+        const formHeight = this.$refs.lang.parentNode.offsetHeight
+        if (!this.config.firstChild) this.config.firstChild = document.querySelector('#app').firstChild
+        if (!this.config.headerHeight) this.config.headerHeight = this.config.firstChild.querySelector('header').offsetHeight
+        if (!this.config.margin) this.config.margin = this.config.firstChild.querySelector('main').offsetHeight - formHeight
+        const innerHeight = formHeight + this.config.margin + this.config.headerHeight + (window.innerHeight - this.config.firstChild.offsetHeight)
         const targets = { height: window.innerHeight }
         anime({
           targets,

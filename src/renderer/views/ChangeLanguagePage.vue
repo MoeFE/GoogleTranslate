@@ -40,18 +40,6 @@ export default {
       language: ''
     }
   },
-  beforeCreate () {
-    const targets = { height: window.innerHeight }
-    anime({
-      targets,
-      height: 530,
-      duration: 500,
-      elasticity: 300,
-      update () {
-        window.resizeTo(420, targets.height)
-      }
-    })
-  },
   created () {
     if (this.query.from === 'target') delete country.auto
     else this.country = country = { ...rawCountry }
@@ -62,6 +50,7 @@ export default {
       translateY: 0,
       translateZ: 0
     })
+    this.animateHeight()
   },
   computed: {
     isSearch () {
@@ -69,6 +58,22 @@ export default {
     }
   },
   methods: {
+    animateHeight (height = 530) {
+      const targets = { height: window.innerHeight }
+      if (height === targets.height) { // 防抖动
+        window.resizeTo(window.innerWidth, targets.height)
+        return
+      }
+      anime({
+        targets,
+        height: height,
+        duration: 500,
+        elasticity: 300,
+        update () {
+          window.resizeTo(window.innerWidth, targets.height)
+        }
+      })
+    },
     searchHandler () {
       if (this.language) {
         const result = {}
@@ -85,11 +90,11 @@ export default {
           const headers = [...document.querySelectorAll('header')]
           const headerHeight = headers.map(x => outerHeight(x)).reduce((prev, next) => prev + next)
           const listHeight = this.$refs.list.$el.offsetHeight
-          window.resizeTo(400, headerHeight + listHeight + 10)
+          this.animateHeight(headerHeight + listHeight + 19 + 5)
         })
       } else {
         this.country = country
-        window.resizeTo(400, 520)
+        this.animateHeight()
       }
     },
     changeLanguageHandler (country, value) {
