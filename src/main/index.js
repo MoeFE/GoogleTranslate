@@ -44,7 +44,6 @@ function createWindow () {
 
   mainWindow.on('after-create-window', () => {
     const window = mainWindow.window
-    // window.webContents.openDevTools('undocked')
     window.on('closed', () => (mainWindow = null))
     window.on('resize', () => {
       window.setHasShadow(false)
