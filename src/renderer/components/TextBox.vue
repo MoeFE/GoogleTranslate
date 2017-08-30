@@ -4,8 +4,8 @@
     role="textbox" 
     contenteditable="true" 
     :placeholder="placeholder" 
+    :style="style" 
     @input="updateValue"
-    @keydown="keydownHandler"
     @compositionstart="isComposition = true" 
     @compositionupdate="isComposition = true" 
     @compositionend="isComposition = false"
@@ -24,6 +24,11 @@ export default {
       isComposition: false
     }
   },
+  computed: {
+    style () {
+      return { userModify: this.readonly ? 'read-only' : 'read-write-plaintext-only' }
+    }
+  },
   watch: {
     value () {
       if (!this.isComposition) {
@@ -33,9 +38,6 @@ export default {
     }
   },
   methods: {
-    keydownHandler () {
-      if (this.readonly) event.preventDefault()
-    },
     updateValue () {
       this.$emit('input', event.target.innerText)
     }
@@ -64,6 +66,7 @@ div[role="textbox"]
   max-height 300px
   overflow scroll
   word-break break-all
+  user-select text
   &:empty::before
     content attr(placeholder)
     position absolute
