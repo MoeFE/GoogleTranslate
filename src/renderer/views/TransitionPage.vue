@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       languages,
-      params: this.$route.params,
+      query: this.$route.query,
       isAlwaysOnTop: Window.isAlwaysOnTop(),
       model: {
         source: { country: 'auto', value: '' },
@@ -87,7 +87,7 @@ export default {
     }
   },
   created () {
-    if (this.params) this.model[this.params.action] = this.params.lang
+    if (this.query.lang) this.model[this.query.action].country = this.query.lang
     this.$watch('model.source.value', () => {
       this.model.target.value = ''
       this.updateWindowHeight()
@@ -125,10 +125,10 @@ export default {
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
     },
     changeSourceLanguage () {
-      this.$router.push({ name: 'change-language-page', params: { from: 'source', active: this.model.source } })
+      this.$router.push({ name: 'change-language-page', query: { from: 'source', active: this.model.source.country } })
     },
     changeTargetLanguage () {
-      this.$router.push({ name: 'change-language-page', params: { from: 'target', active: this.model.source } })
+      this.$router.push({ name: 'change-language-page', query: { from: 'target', active: this.model.source.country } })
     },
     updateWindowHeight () {
       this.$nextTick(function () {

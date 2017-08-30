@@ -1,7 +1,7 @@
 <template>
   <section>
     <Header>
-      <router-link class="close" type="button" slot="settings" :to="{ name: 'transition-page' }">关闭</router-link>
+      <button class="close" type="button" slot="settings" @click="view.animationEnd && $router.push('/')">关闭</button>
     </Header>
     <main>
       <header ref="header" style="transform: translateY(-40px)">
@@ -22,7 +22,7 @@
             :key="key" 
             :country="key" 
             :text="value" 
-            :active="key === params.active.country" 
+            :active="key === query.active" 
             @click.native="changeLanguageHandler(key, value, index)" 
           />
         </LanguageList>
@@ -43,22 +43,28 @@ export default {
   components: { Header, LanguageList, LanguageItem },
   data () {
     return {
-      params: this.$route.params,
+      query: Object.keys(this.$route.query).length > 0 ? this.$route.query : { from: 'source', active: 'auto' },
       country,
       language: '',
       view: {
         height: 530,
-        animeOptions: { duration: 500, elasticity: 300 }
+        animeOptions: { duration: 500, elasticity: 300 },
+        animationEnd: false
       }
     }
   },
   created () {
-    if (this.params.from === 'target') delete country.auto
+    if (this.query.from === 'target') delete country.auto
     else this.country = country = { ...rawCountry }
   },
   mounted () {
     WindowHelper.setSize(window.innerWidth, 530, this.view.animeOptions)
-    anime({ targets: [this.$refs.header, '.languages'], translateY: 0, translateZ: 0 })
+    anime({
+      targets: [this.$refs.header, '.languages'],
+      translateY: 0,
+      translateZ: 0,
+      complete: () => (this.view.animationEnd = true)
+    })
   },
   computed: {
     isSearch () {
@@ -89,8 +95,8 @@ export default {
         WindowHelper.setSize(window.innerWidth, this.view.height, this.view.animeOptions)
       }
     },
-    changeLanguageHandler (country, value) {
-      this.$router.push({ name: 'transition-page', params: { lang: { country, value: '' }, action: this.$route.params.from } })
+    changeLanguageHandler (lang) {
+      this.$router.push({ path: '/', query: { lang, action: this.query.from } })
     }
   }
 }
