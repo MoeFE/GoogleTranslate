@@ -31,7 +31,11 @@ function createWindow () {
     resizable: false,
     scrollBounce: true,
     transparent: true,
-    alwaysOnTop: true
+    alwaysOnTop: true,
+    webPreferences: {
+      webSecurity: false,
+      allowRunningInsecureContent: true
+    }
   })
 
   // npm v5.3.0 builded is blank
