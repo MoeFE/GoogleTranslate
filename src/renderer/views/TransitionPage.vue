@@ -32,9 +32,10 @@
           @changeLanguage="changeTargetLanguage" 
         >
           <TextBox 
-            :readonly="true" 
+            :readonly="model.source.country === 'auto'"
             :placeholder="languages[model.target.country]" 
-            v-model="model.target.value" 
+            :value="model.target.value" 
+            @input.native="targetInputHandler"
           />
         </Language>
       </form>
@@ -87,7 +88,10 @@ export default {
   },
   created () {
     if (this.params) this.model[this.params.action] = this.params.lang
-    this.$watch('model.source.value', this.updateWindowHeight)
+    this.$watch('model.source.value', () => {
+      this.model.target.value = ''
+      this.updateWindowHeight()
+    })
     this.$watch('model.target.value', this.updateWindowHeight)
     WindowHelper.setSize(window.innerWidth, this.view.height, {
       duration: 300,
@@ -136,6 +140,12 @@ export default {
 
         WindowHelper.setSize(window.innerWidth, innerHeight, { duration: 150, easing: 'easeOutSine' })
       })
+    },
+    targetInputHandler () {
+      if (this.model.source.country === 'auto') return // 检测语言不能掉换
+      [this.model.source, this.model.target] = [this.model.target, this.model.source]
+      this.model.source.value = event.target.innerText
+      this.model.target.value = event.target.innerText = ''
     },
     async speakSourceLanguage () {
       const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.source.value })
