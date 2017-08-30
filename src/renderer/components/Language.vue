@@ -3,10 +3,15 @@
     <div class="icon-wrap" @click="$emit('changeLanguage')">
       <Country :code="country" />
     </div>
-    <Textbox :readonly="readonly" :placeholder="currentPlaceholder" v-model="currentValue" @keydown.enter.prevent.stop.native />
+    <Textbox 
+      :readonly="readonly" 
+      :placeholder="currentPlaceholder" 
+      v-model="currentValue" 
+      @keydown.enter.prevent.stop.native="$emit('translation')" 
+    />
     <div v-if="value" class="action" :style="{ alignSelf: false ? 'flex-start' : 'center' }">
-      <Icon icon="close" @click.native="$emit('input', '')" />
-      <Icon icon="volume" @click.native="$emit('speak', value)" />
+      <Icon v-if="close" icon="close" @click.native="$emit('input', '')" />
+      <Icon v-if="volume" icon="volume" @click.native="$emit('speak', value)" />
     </div>
   </div>
 </template>
@@ -23,7 +28,9 @@ export default {
     country: { type: String, default: 'auto', required: true },
     value: { type: String, default: '', required: true },
     placeholder: { type: String, default: '', required: false },
-    readonly: { type: Boolean, default: false, required: false }
+    readonly: { type: Boolean, default: false, required: false },
+    close: { type: Boolean, default: true, required: false },
+    volume: { type: Boolean, default: true, required: false }
   },
   data () {
     return {
