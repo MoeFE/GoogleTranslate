@@ -3,7 +3,7 @@
     <div class="icon-wrap" @click="$emit('changeLanguage')">
       <Country :code="country" />
     </div>
-    <Textbox :placeholder="currentPlaceholder" v-model="currentValue" @keydown.enter.prevent.stop.native />
+    <Textbox :readonly="readonly" :placeholder="currentPlaceholder" v-model="currentValue" @keydown.enter.prevent.stop.native />
     <div v-if="value" class="action" :style="{ alignSelf: false ? 'flex-start' : 'center' }">
       <Icon icon="close" @click.native="$emit('input', '')" />
       <Icon icon="volume" @click.native="$emit('speak', value)" />
@@ -22,7 +22,8 @@ export default {
   props: {
     country: { type: String, default: 'auto', required: true },
     value: { type: String, default: '', required: true },
-    placeholder: { type: String, default: '', required: false }
+    placeholder: { type: String, default: '', required: false },
+    readonly: { type: Boolean, default: false, required: false }
   },
   data () {
     return {

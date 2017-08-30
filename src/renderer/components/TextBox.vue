@@ -5,6 +5,7 @@
     contenteditable="true" 
     :placeholder="placeholder" 
     @input="updateValue"
+    @keydown="keydownHandler"
     @compositionstart="isComposition = true" 
     @compositionupdate="isComposition = true" 
     @compositionend="isComposition = false"
@@ -15,7 +16,8 @@ export default {
   name: 'textbox',
   props: {
     value: { type: String, default: '', required: true },
-    placeholder: { type: String, default: '', required: false }
+    placeholder: { type: String, default: '', required: false },
+    readonly: { type: Boolean, default: false, required: false }
   },
   data () {
     return {
@@ -31,6 +33,9 @@ export default {
     }
   },
   methods: {
+    keydownHandler () {
+      if (this.readonly) event.preventDefault()
+    },
     updateValue () {
       this.$emit('input', event.target.innerText)
     }
