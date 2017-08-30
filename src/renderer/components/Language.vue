@@ -3,72 +3,23 @@
     <div class="icon-wrap" @click="$emit('changeLanguage')">
       <Country :code="country" />
     </div>
-    <Textbox 
-      :readonly="readonly" 
-      :placeholder="currentPlaceholder" 
-      v-model="currentValue" 
-      @keydown.enter.prevent.stop.native="$emit('translation')" 
-    />
-    <div v-if="value" class="action" :style="{ alignSelf: false ? 'flex-start' : 'center' }">
-      <Icon v-if="close" icon="close" @click.native="$emit('input', '')" />
-      <Icon v-if="volume" icon="volume" @click.native="$emit('speak', value)" />
+    <slot />
+    <div class="action" :style="{ alignSelf: false ? 'flex-start' : 'center' }">
+      <Icon v-if="clear" icon="clear" @click.native="$emit('clear')" />
+      <Icon v-if="speak" icon="speak" @click.native="$emit('speak')" />
     </div>
   </div>
 </template>
 <script>
-import { WindowHelper } from '../utils'
 import Icon from '@/components/Icon'
 import Country from '@/components/Country'
-import Textbox from '@/components/Textbox'
-import languages from '../assets/json/languages.js'
 export default {
   name: 'language',
-  components: { Icon, Country, Textbox },
+  components: { Icon, Country },
   props: {
     country: { type: String, default: 'auto', required: true },
-    value: { type: String, default: '', required: true },
-    placeholder: { type: String, default: '', required: false },
-    readonly: { type: Boolean, default: false, required: false },
-    close: { type: Boolean, default: true, required: false },
-    volume: { type: Boolean, default: true, required: false }
-  },
-  data () {
-    return {
-      currentValue: '',
-      config: {}
-    }
-  },
-  mounted () {
-    this.initHeight = this.$refs.lang.offsetHeight
-  },
-  watch: {
-    value () {
-      this.currentValue = this.value
-    },
-    currentValue () {
-      this.$emit('input', this.currentValue)
-      this.updateWindowHeight()
-    }
-  },
-  computed: {
-    currentPlaceholder () {
-      return this.placeholder || languages[this.country]
-    }
-  },
-  methods: {
-    updateWindowHeight () {
-      this.$nextTick(function () {
-        const formHeight = this.$refs.lang.parentNode.offsetHeight
-        if (!this.config.firstChild) this.config.firstChild = document.querySelector('#app').firstChild
-        if (!this.config.headerHeight) this.config.headerHeight = this.config.firstChild.querySelector('header').offsetHeight
-        if (!this.config.margin) this.config.margin = this.config.firstChild.querySelector('main').offsetHeight - formHeight
-        const innerHeight = formHeight + this.config.margin + this.config.headerHeight + (window.innerHeight - this.config.firstChild.offsetHeight)
-        WindowHelper.setSize(window.innerWidth, innerHeight, {
-          duration: 150,
-          easing: 'easeOutSine'
-        })
-      })
-    }
+    clear: { type: Boolean, default: true, required: false },
+    speak: { type: Boolean, default: true, required: false }
   }
 }
 </script>
@@ -115,7 +66,7 @@ font-size = 22px
     hover-color = #bbb
     &:hover
       color hover-color
-    &.icon-close
+    &.icon-clear
       position relative
       color #fff
       background font-color
