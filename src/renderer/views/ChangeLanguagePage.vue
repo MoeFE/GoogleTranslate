@@ -29,6 +29,7 @@ import rawCountry from '../assets/json/languages.js'
 import Header from '@/components/Header'
 import LanguageList from '@/components/LanguageList'
 import LanguageItem from '@/components/LanguageItem'
+import { WindowHelper } from '../utils'
 let country = { ...rawCountry }
 export default {
   name: 'change-language-page',
@@ -37,7 +38,11 @@ export default {
     return {
       query: this.$route.query,
       country,
-      language: ''
+      language: '',
+      view: {
+        height: 530,
+        animeOptions: { duration: 500, elasticity: 300 }
+      }
     }
   },
   created () {
@@ -45,12 +50,8 @@ export default {
     else this.country = country = { ...rawCountry }
   },
   mounted () {
-    anime({
-      targets: [this.$refs.header, '.languages'],
-      translateY: 0,
-      translateZ: 0
-    })
-    this.animateHeight()
+    WindowHelper.setSize(window.innerWidth, 530, this.view.animeOptions)
+    anime({ targets: [this.$refs.header, '.languages'], translateY: 0, translateZ: 0 })
   },
   computed: {
     isSearch () {
@@ -58,22 +59,6 @@ export default {
     }
   },
   methods: {
-    animateHeight (height = 530) {
-      const targets = { height: window.innerHeight }
-      if (height === targets.height) { // 防抖动
-        window.resizeTo(window.innerWidth, targets.height)
-        return
-      }
-      anime({
-        targets,
-        height: height,
-        duration: 500,
-        elasticity: 300,
-        update () {
-          window.resizeTo(window.innerWidth, targets.height)
-        }
-      })
-    },
     searchHandler () {
       if (this.language) {
         const result = {}
@@ -90,11 +75,11 @@ export default {
           const headers = [...document.querySelectorAll('header')]
           const headerHeight = headers.map(x => outerHeight(x)).reduce((prev, next) => prev + next)
           const listHeight = this.$refs.list.$el.offsetHeight
-          this.animateHeight(headerHeight + listHeight + 19 + 5)
+          WindowHelper.setSize(window.innerWidth, headerHeight + listHeight + 19 + 5, this.view.animeOptions)
         })
       } else {
         this.country = country
-        this.animateHeight()
+        WindowHelper.setSize(window.innerWidth, this.view.height, this.view.animeOptions)
       }
     },
     changeLanguageHandler (country, value) {

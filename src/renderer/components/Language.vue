@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import anime from 'animejs'
+import { WindowHelper } from '../utils'
 import Icon from '@/components/Icon'
 import Country from '@/components/Country'
 import Textbox from '@/components/Textbox'
@@ -55,15 +55,9 @@ export default {
         if (!this.config.headerHeight) this.config.headerHeight = this.config.firstChild.querySelector('header').offsetHeight
         if (!this.config.margin) this.config.margin = this.config.firstChild.querySelector('main').offsetHeight - formHeight
         const innerHeight = formHeight + this.config.margin + this.config.headerHeight + (window.innerHeight - this.config.firstChild.offsetHeight)
-        const targets = { height: window.innerHeight }
-        anime({
-          targets,
-          height: innerHeight,
+        WindowHelper.setSize(window.innerWidth, innerHeight, {
           duration: 150,
-          easing: 'easeOutSine',
-          update () {
-            window.resizeTo(window.innerWidth, targets.height)
-          }
+          easing: 'easeOutSine'
         })
       })
     }

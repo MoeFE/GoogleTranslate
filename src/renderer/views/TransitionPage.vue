@@ -17,6 +17,7 @@
 </template>
 <script>
 import { remote } from 'electron'
+import { WindowHelper } from '../utils'
 import anime from 'animejs'
 import Icon from '@/components/Icon'
 import Header from '@/components/Header'
@@ -38,28 +39,17 @@ export default {
     }
   },
   beforeCreate () {
-    const targets = { height: window.innerHeight }
-    anime({
-      targets,
-      height: 190,
+    WindowHelper.setSize(window.innerWidth, 190, {
       duration: 300,
       elasticity: 500,
-      easing: 'easeInOutBack',
-      update () {
-        window.resizeTo(420, targets.height)
-      }
+      easing: 'easeInOutBack'
     })
   },
   created () {
     if (this.query.action) this.model[this.query.action] = this.query.lang
   },
   mounted () {
-    anime({
-      targets: 'form',
-      translateY: 0,
-      translateZ: 0,
-      delay: 300
-    })
+    anime({ targets: 'form', translateY: 0, translateZ: 0, delay: 300 })
   },
   methods: {
     switchFixed () {
