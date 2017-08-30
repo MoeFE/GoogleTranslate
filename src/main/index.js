@@ -3,6 +3,7 @@
 import { app } from 'electron'
 import path from 'path'
 import MenubarWindow from './menubar'
+import setReferer from 'electron-referer'
 
 /**
  * Set `__static` path to static files in production
@@ -44,6 +45,8 @@ function createWindow () {
 
   mainWindow.on('after-create-window', () => {
     const window = mainWindow.window
+    window.setReferer = (ref) => setReferer(ref, window)
+    window.setReferer('https://www.google.com')
     window.on('closed', () => (mainWindow = null))
     window.on('resize', () => {
       window.setHasShadow(false)
