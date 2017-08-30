@@ -17,7 +17,14 @@
           <LanguageItem country="en-US">英语</LanguageItem>
         </LanguageList>
         <LanguageList ref="list" :title="isSearch ? `${Object.keys(country).length} 个语言` : '所有语言'">
-          <LanguageItem v-for="(value, key, index) in country" :key="key" :active="key === query.active.country" :country="key" @click.native="changeLanguageHandler(key, value, index)">{{ value }}</LanguageItem>
+          <LanguageItem 
+            v-for="(value, key, index) in country" 
+            :key="key" 
+            :country="key" 
+            :text="value" 
+            :active="key === params.active.country" 
+            @click.native="changeLanguageHandler(key, value, index)" 
+          />
         </LanguageList>
       </div>
     </main>
@@ -36,7 +43,7 @@ export default {
   components: { Header, LanguageList, LanguageItem },
   data () {
     return {
-      query: this.$route.query,
+      params: this.$route.params,
       country,
       language: '',
       view: {
@@ -46,7 +53,7 @@ export default {
     }
   },
   created () {
-    if (this.query.from === 'target') delete country.auto
+    if (this.params.from === 'target') delete country.auto
     else this.country = country = { ...rawCountry }
   },
   mounted () {
@@ -83,7 +90,7 @@ export default {
       }
     },
     changeLanguageHandler (country, value) {
-      this.$router.push({ name: 'transition-page', query: { lang: { country, value: '' }, action: this.$route.query.from } })
+      this.$router.push({ name: 'transition-page', params: { lang: { country, value: '' }, action: this.$route.params.from } })
     }
   }
 }
