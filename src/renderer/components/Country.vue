@@ -1,5 +1,5 @@
 <template>
-  <img :src="`http://${ssl ? 'ssl-' : ''}api.itranslateapp.com/flags/${code}${retina ? '-2x' : ''}.png`">
+  <img :src="`http://${ssl ? 'ssl-' : ''}api.itranslateapp.com/flags/${code}${retina ? '-2x' : ''}.png`" draggable="false">
 </template>
 <script>
 export default {
