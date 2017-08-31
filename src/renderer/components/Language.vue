@@ -7,7 +7,7 @@
     <slot v-else />
     <div class="action">
       <Icon v-if="clear" icon="clear" @click.native="$emit('clear')" />
-      <Icon v-if="speak" icon="speak" @click.native="$emit('speak')" />
+      <Icon :style="{ visibility: speak ? '' : 'hidden' }" icon="speak" @click.native="$emit('speak')" />
     </div>
   </div>
 </template>
