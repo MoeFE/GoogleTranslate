@@ -1,6 +1,6 @@
 <template>
   <div 
-    ref="text" 
+    ref="input" 
     role="textbox" 
     contenteditable="true" 
     :placeholder="placeholder" 
@@ -30,11 +30,18 @@ export default {
     }
   },
   watch: {
-    value () {
-      if (!this.isComposition) {
-        this.$refs.text.innerText = this.value
-        if (this.value) document.getSelection().setPosition(this.$refs.text, 1)
-      } else this.$refs.text.focus()
+    value: {
+      immediate: true,
+      handler () {
+        console.log('[watcher] value change: ', this.value)
+        this.$nextTick(function () {
+          if (!this.$refs.input) return
+          if (!this.isComposition) {
+            this.$refs.input.innerText = this.value
+            if (this.value) document.getSelection().setPosition(this.$refs.input, 1)
+          } else this.$refs.input.focus()
+        })
+      }
     }
   },
   methods: {
@@ -59,6 +66,7 @@ div[role="textbox"]
   border-radius 0
   margin 5px 0
   padding 0
+  color #333
   font-size 22px
   font-weight 300
   resize none
