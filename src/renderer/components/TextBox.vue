@@ -19,7 +19,7 @@ export default {
     value: { type: String, default: '', required: true },
     placeholder: { type: String, default: '', required: false },
     readonly: { type: Boolean, default: false, required: false },
-    error: { type: String, default: '', required: false }
+    error: { type: Boolean, default: false, required: false }
   },
   data () {
     return {
