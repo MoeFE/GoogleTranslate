@@ -8,7 +8,7 @@
       <form ref="form" action method="post" style="transform: translateY(-40px)" @submit.prevent>
         <Language 
           :clear="!!model.source.value"
-          :speak="!!model.source.value"
+          :speak="!!model.source.value && model.source.country !== 'auto'"
           :country="model.source.country" 
           @clear="model.source.value = ''" 
           @speak="speakSourceLanguage" 
@@ -97,6 +97,7 @@ export default {
   created () {
     if (this.query.lang) this.model[this.query.action].country = this.query.lang
     this.$watch('model.source.value', () => {
+      this.view.loading = false
       this.model.target.value = ''
       this.updateWindowHeight()
     })
