@@ -27,13 +27,16 @@
           :clear="false" 
           :speak="!!model.target.value"
           :country="model.target.country" 
+          :loading="view.loading"
           @clear="model.target.value = ''" 
           @speak="speakTargetLanguage" 
           @changeLanguage="changeTargetLanguage" 
         >
-          <TextBox 
+          <TextBox  
+            ref="target" 
             :readonly="model.source.country === 'auto'"
             :placeholder="languages[model.target.country]" 
+            :error="hasError"
             :value="model.target.value" 
             @input.native="targetInputHandler"
           />
@@ -44,7 +47,7 @@
 </template>
 <script>
 import { remote } from 'electron'
-import { WindowHelper } from '../utils'
+import { WindowHelper, Thread } from '../utils'
 import anime from 'animejs'
 import Icon from '@/components/Icon'
 import Header from '@/components/Header'
@@ -56,7 +59,10 @@ import tjs from 'translation.js'
 tjs.add(new tjs.BaiDu())
 tjs.add(new tjs.Google())
 tjs.add(new tjs.GoogleCN())
-tjs.add(new tjs.Bing())
+tjs.add(new tjs.YouDao({
+  apiKey: '1361128838',
+  keyFrom: 'chrome'
+}))
 const Window = remote.getCurrentWindow()
 const { Menu, MenuItem } = remote
 export default {
@@ -67,6 +73,7 @@ export default {
       languages,
       query: this.$route.query,
       isAlwaysOnTop: Window.isAlwaysOnTop(),
+      hasError: false,
       model: {
         source: { country: 'auto', value: '' },
         target: { country: 'zh-CN', value: '' }
@@ -75,7 +82,8 @@ export default {
         height: 190,
         mainMargin: 18,
         shadowHeight: 19,
-        headerHeight: 42
+        headerHeight: 42,
+        loading: false
       },
       keymap: {
         'meta+s': this.switchLanguage,
@@ -93,14 +101,10 @@ export default {
       this.updateWindowHeight()
     })
     this.$watch('model.target.value', this.updateWindowHeight)
-    WindowHelper.setSize(window.innerWidth, this.view.height, {
-      duration: 300,
-      elasticity: 500,
-      easing: 'easeInOutBack'
-    })
+    WindowHelper.setSize(window.innerWidth, this.view.height, { duration: 200, easing: 'easeOutQuart' })
   },
   mounted () {
-    anime({ targets: 'form', translateY: 0, translateZ: 0, delay: 300 })
+    anime({ targets: 'form', translateY: 0, translateZ: 0 })
   },
   methods: {
     switchFixed () {
@@ -130,46 +134,55 @@ export default {
     changeTargetLanguage () {
       this.$router.push({ name: 'change-language-page', query: { from: 'target', active: this.model.source.country } })
     },
-    updateWindowHeight () {
-      this.$nextTick(function () {
-        const innerHeight =
-        this.$refs.form.offsetHeight +
-        this.view.shadowHeight +
-        this.view.headerHeight +
-        this.view.mainMargin
-
-        WindowHelper.setSize(window.innerWidth, innerHeight, { duration: 150, easing: 'easeOutSine' })
-      })
+    async updateWindowHeight () {
+      await Thread.sleep()
+      const innerHeight =
+      [...this.$refs.form.children].map(el => el.offsetHeight).reduce((prev, next) => prev + next) +
+      this.view.shadowHeight +
+      this.view.headerHeight +
+      this.view.mainMargin
+      WindowHelper.setSize(window.innerWidth, innerHeight, { duration: 200, easing: 'easeOutQuart' })
     },
     targetInputHandler () {
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
       this.model.source.value = event.target.innerText
-      this.model.target.value = event.target.innerText = ''
+      this.model.target.value = ''
     },
     async speakSourceLanguage () {
-      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.source.value })
+      const from = this.model.source.country
+      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.source.value, from: from === 'auto' ? void 0 : from })
       new Audio(audioUrl).play()
     },
     async speakTargetLanguage () {
-      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.target.value })
+      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.target.value, from: this.model.target.country })
       new Audio(audioUrl).play()
     },
     async translation () {
+      this.model.target.value = ''
+      this.view.loading = true
       const json = await tjs.translate({
         api: 'GoogleCN',
         text: this.model.source.value,
         from: this.model.source.country,
         to: this.model.target.country
       })
+      this.view.loading = false
       if (json.result && json.result.length > 0) {
-        this.model.target.value = json.result[0]
+        this.hasError = false
+        this.model.target.value = json.result.join('\n')
+      } else {
+        this.hasError = true
+        this.model.target.value = json.error
       }
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
+main
+  align-items flex-start !important
 form
   flex 1
+  margin 9px 0
 </style>

@@ -48,7 +48,7 @@ export default {
       language: '',
       view: {
         height: 530,
-        animeOptions: { duration: 500, elasticity: 300 },
+        animeOptions: { duration: 200, easing: 'easeOutQuart' },
         animationEnd: false
       }
     }
@@ -72,24 +72,23 @@ export default {
     }
   },
   methods: {
-    searchHandler () {
+    async searchHandler () {
       if (this.language) {
         const result = {}
         Object.entries(this.country).filter(x => x[1].includes(this.language)).forEach(x => (result[x[0]] = x[1]))
         this.country = result
-        this.$nextTick(function () {
-          const outerHeight = el => {
-            const style = getComputedStyle(el)
-            const height = el.offsetHeight
-            const marginTop = Number.parseInt(style.marginTop)
-            const marginBottom = Number.parseInt(style.marginBottom)
-            return height + Number.parseInt(marginTop + marginBottom)
-          }
-          const headers = [...document.querySelectorAll('header')]
-          const headerHeight = headers.map(x => outerHeight(x)).reduce((prev, next) => prev + next)
-          const listHeight = this.$refs.list.$el.offsetHeight
-          WindowHelper.setSize(window.innerWidth, headerHeight + listHeight + 19 + 5, this.view.animeOptions)
-        })
+        await this.$nextTick()
+        const outerHeight = el => {
+          const style = getComputedStyle(el)
+          const height = el.offsetHeight
+          const marginTop = Number.parseInt(style.marginTop)
+          const marginBottom = Number.parseInt(style.marginBottom)
+          return height + Number.parseInt(marginTop + marginBottom)
+        }
+        const headers = [...document.querySelectorAll('header')]
+        const headerHeight = headers.map(x => outerHeight(x)).reduce((prev, next) => prev + next)
+        const listHeight = this.$refs.list.$el.offsetHeight
+        WindowHelper.setSize(window.innerWidth, headerHeight + listHeight + 19 + 5, this.view.animeOptions)
       } else {
         this.country = country
         WindowHelper.setSize(window.innerWidth, this.view.height, this.view.animeOptions)
