@@ -4,6 +4,7 @@
     role="textbox" 
     contenteditable="true" 
     :placeholder="placeholder" 
+    :class="classNames"
     :style="style" 
     @input="updateValue"
     @compositionstart="isComposition = true" 
@@ -17,7 +18,8 @@ export default {
   props: {
     value: { type: String, default: '', required: true },
     placeholder: { type: String, default: '', required: false },
-    readonly: { type: Boolean, default: false, required: false }
+    readonly: { type: Boolean, default: false, required: false },
+    error: { type: String, default: '', required: false }
   },
   data () {
     return {
@@ -27,20 +29,21 @@ export default {
   computed: {
     style () {
       return { userModify: this.readonly ? 'read-only' : 'read-write-plaintext-only' }
+    },
+    classNames () {
+      return { error: this.error }
     }
   },
   watch: {
     value: {
       immediate: true,
-      handler () {
-        console.log('[watcher] value change: ', this.value)
-        this.$nextTick(function () {
-          if (!this.$refs.input) return
-          if (!this.isComposition) {
-            this.$refs.input.innerText = this.value
-            if (this.value) document.getSelection().setPosition(this.$refs.input, 1)
-          } else this.$refs.input.focus()
-        })
+      async handler () {
+        await this.$nextTick()
+        if (!this.$refs.input) return
+        if (!this.isComposition) {
+          this.$refs.input.innerText = this.value
+          if (this.value) document.getSelection().setPosition(this.$refs.input, 1)
+        } else this.$refs.input.focus()
       }
     }
   },
@@ -79,4 +82,6 @@ div[role="textbox"]
     content attr(placeholder)
     position absolute
     color #ccc
+  &.error
+    color #ff2600
 </style>
