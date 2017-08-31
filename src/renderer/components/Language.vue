@@ -3,7 +3,8 @@
     <div class="icon-wrap" @click="$emit('changeLanguage')">
       <Country :code="country" />
     </div>
-    <slot />
+    <Loading v-if="loading" />
+    <slot v-else />
     <div class="action" :style="{ alignSelf: false ? 'flex-start' : 'center' }">
       <Icon v-if="clear" icon="clear" @click.native="$emit('clear')" />
       <Icon v-if="speak" icon="speak" @click.native="$emit('speak')" />
@@ -12,14 +13,16 @@
 </template>
 <script>
 import Icon from '@/components/Icon'
+import Loading from '@/components/Loading'
 import Country from '@/components/Country'
 export default {
   name: 'language',
-  components: { Icon, Country },
+  components: { Icon, Loading, Country },
   props: {
     country: { type: String, default: 'auto', required: true },
     clear: { type: Boolean, default: true, required: false },
-    speak: { type: Boolean, default: true, required: false }
+    speak: { type: Boolean, default: true, required: false },
+    loading: { type: Boolean, default: false, required: false }
   }
 }
 </script>
