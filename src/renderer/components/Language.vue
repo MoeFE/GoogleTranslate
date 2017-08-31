@@ -5,7 +5,7 @@
     </div>
     <Loading v-if="loading" />
     <slot v-else />
-    <div class="action" :style="{ alignSelf: false ? 'flex-start' : 'center' }">
+    <div class="action">
       <Icon v-if="clear" icon="clear" @click.native="$emit('clear')" />
       <Icon v-if="speak" icon="speak" @click.native="$emit('speak')" />
     </div>
@@ -59,7 +59,9 @@ font-size = 22px
       height size
   .action
     display flex
+    align-self flex-start
     align-items center
+    margin 10px 0
   .icon
     align-self center
     color #ccc
