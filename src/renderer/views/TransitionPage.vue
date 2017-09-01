@@ -29,7 +29,7 @@
           />
         </Language>
         <Divider>
-          <Icon icon="switch" @click.native="switchLanguage" />
+          <Icon ref="switch" icon="switch" :class="{ disabled: this.model.source.country === 'auto' }" @click.native="switchLanguage" />
         </Divider>
         <Language 
           :clear="false" 
@@ -149,6 +149,12 @@ export default {
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
       this.translation()
+      const targets = this.$refs.switch.$el
+      targets.style.transform = 'rotate(0deg)'
+      anime({
+        targets,
+        rotate: '180deg'
+      })
     },
     changeSourceLanguage () {
       this.$router.push({ name: 'change-language-page', query: { from: 'source', active: this.model.source.country } })
@@ -218,4 +224,8 @@ main
 form
   flex 1
   margin 9px 0
+.icon-switch
+  font-weight bold
+  &:not(.disabled):active
+    color #3e83f8
 </style>

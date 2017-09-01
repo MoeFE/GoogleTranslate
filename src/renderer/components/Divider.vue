@@ -18,6 +18,7 @@
     height 1px
     background #eee
   .icon
+    display inline-block
     position relative
     z-index 1
     font-size 20px
