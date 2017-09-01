@@ -148,6 +148,7 @@ export default {
     switchLanguage () {
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
+      this.translation()
     },
     changeSourceLanguage () {
       this.$router.push({ name: 'change-language-page', query: { from: 'source', active: this.model.source.country } })
@@ -190,6 +191,7 @@ export default {
       this.audio.pause()
     },
     async translation () {
+      if (!this.model.source.value) return
       this.model.target.value = ''
       this.view.loading = true
       const json = await tjs.translate({
