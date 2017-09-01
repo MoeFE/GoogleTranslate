@@ -145,15 +145,17 @@ export default {
       menu.append(new MenuItem({ label: '退出 Google 翻译', accelerator: 'Cmd+Q', click: remote.app.quit }))
       menu.popup(Window)
     },
-    switchLanguage () {
+    async switchLanguage () {
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
-      this.translation()
+      await Thread.sleep()
+      this.view.loading = Boolean(this.model.source.value)
       const targets = this.$refs.switch.$el
       targets.style.transform = 'rotate(0deg)'
       anime({
         targets,
-        rotate: '180deg'
+        rotate: '180deg',
+        complete: this.translation
       })
     },
     changeSourceLanguage () {
@@ -202,6 +204,7 @@ export default {
       if (!this.model.source.value) return
       this.model.target.value = ''
       this.view.loading = true
+      await Thread.sleep(200) // 至少延迟 200ms 否则会导致窗口抖动
       const json = await tjs.translate({
         api: 'GoogleCN',
         text: this.model.source.value,
