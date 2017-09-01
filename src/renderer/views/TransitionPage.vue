@@ -45,7 +45,7 @@
             :readonly="model.source.country === 'auto'"
             :placeholder="languages[model.target.country]" 
             :error="hasError"
-            :value="model.target.value" 
+            v-model="model.target.value" 
             @input.native="targetInputHandler"
           />
           <ProgressBar 
@@ -171,10 +171,12 @@ export default {
       this.view.mainMargin
       WindowHelper.setSize(window.innerWidth, innerHeight, { duration: 200, easing: 'easeOutQuart' })
     },
-    targetInputHandler () {
+    async targetInputHandler (evt) {
+      await Thread.sleep()
+      if (this.$refs.target.isComposition) return // 输入法未上屏
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
-      this.model.source.value = event.target.innerText
+      this.model.source.value = evt.target.innerText
       this.model.target.value = ''
     },
     async speakLanguage (action) {
