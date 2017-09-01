@@ -11,7 +11,7 @@
           :speak="!!model.source.value && model.source.country !== 'auto' && !model.source.progress.type"
           :country="model.source.country" 
           @clear="model.source.value = ''" 
-          @speak="speakSourceLanguage" 
+          @speak="speakLanguage('source')" 
           @changeLanguage="changeSourceLanguage"
         >
           <TextBox 
@@ -21,7 +21,7 @@
           />
           <ProgressBar 
             v-if="model.source.progress.type"
-            ref="progressSource" 
+            ref="sourceProgress" 
             slot="progress" 
             :type="model.source.progress.type" 
             :duration="model.source.progress.duration" 
@@ -37,7 +37,7 @@
           :country="model.target.country" 
           :loading="view.loading"
           @clear="model.target.value = ''" 
-          @speak="speakTargetLanguage" 
+          @speak="speakLanguage('target')" 
           @changeLanguage="changeTargetLanguage" 
         >
           <TextBox  
@@ -50,7 +50,7 @@
           />
           <ProgressBar 
             v-if="model.target.progress.type"
-            ref="progressTarget" 
+            ref="targetProgress" 
             slot="progress" 
             :type="model.target.progress.type" 
             :duration="model.target.progress.duration" 
@@ -139,8 +139,8 @@ export default {
       menu.append(new MenuItem({ label: '切换语言', accelerator: 'Cmd+S', enabled: this.model.source.country !== 'auto', click: this.switchLanguage }))
       menu.append(new MenuItem({ label: '更改源语言', accelerator: 'Cmd+1', click: this.changeSourceLanguage }))
       menu.append(new MenuItem({ label: '更改目标语言', accelerator: 'Cmd+2', click: this.changeTargetLanguage }))
-      menu.append(new MenuItem({ label: '说源语言', accelerator: 'Shift+Cmd+1', enabled: !!this.model.source.value, click: this.speakSourceLanguage }))
-      menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Shift+Cmd+2', enabled: !!this.model.target.value, click: this.speakTargetLanguage }))
+      menu.append(new MenuItem({ label: '说源语言', accelerator: 'Shift+Cmd+1', enabled: !!this.model.source.value, click: this.speakLanguage('source') }))
+      menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Shift+Cmd+2', enabled: !!this.model.target.value, click: this.speakLanguage('target') }))
       menu.append(new MenuItem({ type: 'separator' }))
       menu.append(new MenuItem({ label: '退出 Google 翻译', accelerator: 'Cmd+Q', click: remote.app.quit }))
       menu.popup(Window)
@@ -170,30 +170,18 @@ export default {
       this.model.source.value = event.target.innerText
       this.model.target.value = ''
     },
-    async speakSourceLanguage () {
-      this.model.source.progress.type = 'loading'
+    async speakLanguage (action) {
+      if (!this.model[action].value) return
+      this.model[action].progress.type = 'loading'
       await Thread.sleep(500)
-      const from = this.model.source.country
-      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.source.value, from: from === 'auto' ? void 0 : from })
+      const from = this.model[action].country
+      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model[action].value, from: from === 'auto' ? void 0 : from })
       this.audio.onloadeddata = async () => {
-        this.model.source.progress.type = 'progress'
-        this.model.source.progress.duration = this.audio.duration * 1000
+        this.model[action].progress.type = 'progress'
+        this.model[action].progress.duration = this.audio.duration * 1000
         this.audio.play()
-        await this.$refs.progressSource.run()
-        this.model.source.progress.type = ''
-      }
-      this.audio.src = audioUrl
-    },
-    async speakTargetLanguage () {
-      this.model.target.progress.type = 'loading'
-      await Thread.sleep(500)
-      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.target.value, from: this.model.target.country })
-      this.audio.onloadeddata = async () => {
-        this.model.target.progress.type = 'progress'
-        this.model.target.progress.duration = this.audio.duration * 1000
-        this.audio.play()
-        await this.$refs.progressTarget.run()
-        this.model.target.progress.type = ''
+        await this.$refs[`${action}Progress`].run()
+        this.model[action].progress.type = ''
       }
       this.audio.src = audioUrl
     },
