@@ -7,8 +7,8 @@
     <main ref="main">
       <form ref="form" action method="post" style="transform: translateY(-40px)" @submit.prevent>
         <Language 
-          :clear="!!model.source.value"
-          :speak="!!model.source.value && model.source.country !== 'auto'"
+          :clear="!!model.source.value && !model.source.progress.type"
+          :speak="!!model.source.value && model.source.country !== 'auto' && !model.source.progress.type"
           :country="model.source.country" 
           @clear="model.source.value = ''" 
           @speak="speakSourceLanguage" 
@@ -19,13 +19,21 @@
             v-model="model.source.value" 
             @keydown.enter.prevent.stop.native="translation" 
           />
+          <ProgressBar 
+            v-if="model.source.progress.type"
+            ref="progressSource" 
+            slot="progress" 
+            :type="model.source.progress.type" 
+            :duration="model.source.progress.duration" 
+            @pause="pauseSpeakHandler('source')"
+          />
         </Language>
         <Divider>
           <Icon icon="switch" @click.native="switchLanguage" />
         </Divider>
         <Language 
           :clear="false" 
-          :speak="!!model.target.value"
+          :speak="!!model.target.value && !model.target.progress.type"
           :country="model.target.country" 
           :loading="view.loading"
           @clear="model.target.value = ''" 
@@ -39,6 +47,14 @@
             :error="hasError"
             :value="model.target.value" 
             @input.native="targetInputHandler"
+          />
+          <ProgressBar 
+            v-if="model.target.progress.type"
+            ref="progressTarget" 
+            slot="progress" 
+            :type="model.target.progress.type" 
+            :duration="model.target.progress.duration" 
+            @pause="pauseSpeakHandler('target')"
           />
         </Language>
       </form>
@@ -54,6 +70,7 @@ import Header from '@/components/Header'
 import Divider from '@/components/Divider'
 import Language from '@/components/Language'
 import TextBox from '@/components/TextBox'
+import ProgressBar from '@/components/ProgressBar'
 import languages from '../assets/json/languages.js'
 import tjs from 'translation.js'
 tjs.add(new tjs.BaiDu())
@@ -67,16 +84,17 @@ const Window = remote.getCurrentWindow()
 const { Menu, MenuItem } = remote
 export default {
   name: 'transition-page',
-  components: { Icon, Header, Divider, Language, TextBox },
+  components: { Icon, Header, Divider, Language, TextBox, ProgressBar },
   data () {
     return {
       languages,
       query: this.$route.query,
       isAlwaysOnTop: Window.isAlwaysOnTop(),
       hasError: false,
+      audio: new Audio(),
       model: {
-        source: { country: 'auto', value: '' },
-        target: { country: 'zh-CN', value: '' }
+        source: { country: 'auto', value: '', progress: { type: '', duration: 0 } },
+        target: { country: 'zh-CN', value: '', progress: { type: '', duration: 0 } }
       },
       view: {
         height: 190,
@@ -99,6 +117,8 @@ export default {
     this.$watch('model.source.value', () => {
       this.view.loading = false
       this.model.target.value = ''
+      this.model.target.progress.type = ''
+      this.model.source.progress.type = ''
       this.updateWindowHeight()
     })
     this.$watch('model.target.value', this.updateWindowHeight)
@@ -151,13 +171,35 @@ export default {
       this.model.target.value = ''
     },
     async speakSourceLanguage () {
+      this.model.source.progress.type = 'loading'
+      await Thread.sleep(500)
       const from = this.model.source.country
       const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.source.value, from: from === 'auto' ? void 0 : from })
-      new Audio(audioUrl).play()
+      this.audio.onloadeddata = async () => {
+        this.model.source.progress.type = 'progress'
+        this.model.source.progress.duration = this.audio.duration * 1000
+        this.audio.play()
+        await this.$refs.progressSource.run()
+        this.model.source.progress.type = ''
+      }
+      this.audio.src = audioUrl
     },
     async speakTargetLanguage () {
+      this.model.target.progress.type = 'loading'
+      await Thread.sleep(500)
       const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model.target.value, from: this.model.target.country })
-      new Audio(audioUrl).play()
+      this.audio.onloadeddata = async () => {
+        this.model.target.progress.type = 'progress'
+        this.model.target.progress.duration = this.audio.duration * 1000
+        this.audio.play()
+        await this.$refs.progressTarget.run()
+        this.model.target.progress.type = ''
+      }
+      this.audio.src = audioUrl
+    },
+    pauseSpeakHandler (action) {
+      this.model[action].progress.type = ''
+      this.audio.pause()
     },
     async translation () {
       this.model.target.value = ''
