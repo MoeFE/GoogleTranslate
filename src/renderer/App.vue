@@ -50,6 +50,7 @@ body
       background #fff
       box-sizing border-box
       border-radius 0 0 6px 6px
+      overflow hidden
       &::before
         content '';
         position absolute
