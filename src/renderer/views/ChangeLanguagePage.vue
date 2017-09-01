@@ -48,7 +48,7 @@ export default {
       language: '',
       view: {
         height: 530,
-        animeOptions: { duration: 200, easing: 'easeOutQuart' },
+        animeOptions: { duration: 150, easing: 'easeOutQuart' },
         animationEnd: false
       }
     }

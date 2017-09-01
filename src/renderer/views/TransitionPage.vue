@@ -122,7 +122,7 @@ export default {
       this.updateWindowHeight()
     })
     this.$watch('model.target.value', this.updateWindowHeight)
-    WindowHelper.setSize(window.innerWidth, this.view.height, { duration: 200, easing: 'easeOutQuart' })
+    WindowHelper.setSize(window.innerWidth, this.view.height, { duration: 150, easing: 'easeOutQuart' })
   },
   mounted () {
     anime({ targets: 'form', translateY: 0, translateZ: 0 })
