@@ -5,9 +5,12 @@
     </div>
     <Loading v-if="loading" />
     <slot v-else />
-    <div class="action">
+    <div v-if="clear === true || speak === true" class="action">
       <Icon v-if="clear" icon="clear" @click.native="$emit('clear')" />
       <Icon :style="{ visibility: speak ? '' : 'hidden' }" icon="speak" @click.native="$emit('speak')" />
+    </div>
+    <div v-else class="progress-bar">
+      <slot name="progress" />
     </div>
   </div>
 </template>
@@ -57,11 +60,18 @@ font-size = 22px
       z-index 2
       width size
       height size
-  .action
+  .action,
+  .progress-bar
     display flex
     align-self flex-start
+    justify-content flex-end
     align-items center
+    width 60px
+  .action
     margin 10px 0
+  .progress-bar
+    margin 8px 0
+    margin-right 5px
   .icon
     align-self center
     color #ccc
