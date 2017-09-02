@@ -3,7 +3,7 @@
     <header ref="header" style="transform: translateY(-40px)">
       <form action method="post" @submit.prevent>
         <div class="search-box">
-          <input type="search" placeholder="搜索语言" v-model="language" @input="searchHandler">
+          <vInput ref="search" type="search" placeholder="搜索语言" v-model="language" @input.native="searchHandler" />
         </div>
       </form>
     </header>
@@ -29,13 +29,14 @@
 import anime from 'animejs'
 import rawCountry from '../assets/json/languages.js'
 import Layout from '@/views/_Layout'
+import vInput from '@/components/Input'
 import LanguageList from '@/components/LanguageList'
 import LanguageItem from '@/components/LanguageItem'
-import { WindowHelper } from '../utils'
+import { WindowHelper, Thread } from '../utils'
 let country = { ...rawCountry }
 export default {
   name: 'change-language-page',
-  components: { Layout, LanguageList, LanguageItem },
+  components: { Layout, vInput, LanguageList, LanguageItem },
   data () {
     return {
       query: Object.keys(this.$route.query).length > 0 ? this.$route.query : { from: 'source', active: 'auto' },
@@ -68,6 +69,8 @@ export default {
   },
   methods: {
     async searchHandler () {
+      await Thread.sleep()
+      if (this.$refs.search.isComposition) return // 输入法未上屏
       if (this.language) {
         const result = {}
         Object.entries(this.country).filter(x => x[1].includes(this.language)).forEach(x => (result[x[0]] = x[1]))
@@ -115,15 +118,7 @@ main
         left 30px
         transform translate3d(0, -50%, 0)
       input[type="search"]
-        appearance none
-        outline 0
-        border 0
-        border-radius 6px
-        font-size 16px
-        font-weight 300
-        width 100%
-        padding 10px 20px 10px 40px
-        box-shadow 0 1px .5px rgba(0, 0, 0, .1)
+        padding-left 40px
   .languages
     flex 1
     overflow scroll
