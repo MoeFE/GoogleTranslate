@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import App from './App'
 import router from './router'
-import store from './store'
 
 import VueHotkey from 'v-hotkey'
 Vue.use(VueHotkey)
@@ -16,6 +15,5 @@ Vue.config.productionTip = false
 new Vue({
   components: { App },
   router,
-  store,
   template: '<App/>'
 }).$mount('#app')
