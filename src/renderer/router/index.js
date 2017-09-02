@@ -21,6 +21,11 @@ export default new Router({
       component: require('@/views/ChangeLanguagePage')
     },
     {
+      path: '/settings',
+      name: 'settings-page',
+      component: require('@/views/SettingsPage')
+    },
+    {
       path: '*',
       redirect: '/'
     }

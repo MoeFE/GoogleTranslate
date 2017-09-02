@@ -104,6 +104,7 @@ export default {
         loading: false
       },
       keymap: {
+        'meta+,': this.goSettings,
         'meta+s': this.switchLanguage,
         'meta+1': this.changeSourceLanguage,
         'meta+2': this.changeTargetLanguage,
@@ -134,7 +135,7 @@ export default {
     },
     showSettings () {
       const menu = new Menu()
-      menu.append(new MenuItem({ label: '偏好设置', accelerator: 'Cmd+,' }))
+      menu.append(new MenuItem({ label: '偏好设置', accelerator: 'Cmd+,', click: this.goSettings }))
       menu.append(new MenuItem({ type: 'separator' }))
       menu.append(new MenuItem({ label: '切换语言', accelerator: 'Cmd+S', enabled: this.model.source.country !== 'auto', click: this.switchLanguage }))
       menu.append(new MenuItem({ label: '更改源语言', accelerator: 'Cmd+1', click: this.changeSourceLanguage }))
@@ -157,6 +158,9 @@ export default {
         rotate: '180deg',
         complete: this.translation
       })
+    },
+    goSettings () {
+      this.$router.push({ name: 'settings-page' })
     },
     changeSourceLanguage () {
       this.$router.push({ name: 'change-language-page', query: { from: 'source', active: this.model.source.country } })
