@@ -48,9 +48,6 @@ function createWindow () {
     window.setReferer = (ref) => setReferer(ref, window)
     window.setReferer('https://www.google.com')
     window.on('closed', () => (mainWindow = null))
-    window.on('resize', () => {
-      window.setHasShadow(false)
-    })
   })
 }
 
