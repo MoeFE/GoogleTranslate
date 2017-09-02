@@ -8,7 +8,7 @@
 // https://ssl-api.itranslateapp.com/flags/auto.png
 // https://ssl-api.itranslateapp.com/flags/auto-2x.png
 
-export const country = {
+module.exports = {
   'af': '布尔语（南非荷兰语）',
   // 'ar': '阿拉伯语',
   // 'ar-AE': '阿拉伯语（阿拉伯聯合大公國）',
@@ -116,5 +116,3 @@ export const country = {
   'zh-TW': '中文（繁体）',
   'zu': '祖魯语'
 }
-
-export default country
