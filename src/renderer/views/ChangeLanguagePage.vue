@@ -1,46 +1,41 @@
 <template>
-  <section>
-    <Header>
-      <button class="close" type="button" slot="settings" @click="view.animationEnd && $router.push('/')">关闭</button>
-    </Header>
-    <main>
-      <header ref="header" style="transform: translateY(-40px)">
-        <form action method="post" @submit.prevent>
-          <div class="search-box">
-            <input type="search" placeholder="搜索语言" v-model="language" @input="searchHandler">
-          </div>
-        </form>
-      </header>
-      <div class="languages" style="transform: translateY(40px)">
-        <LanguageList v-if="!isSearch && false" title="最近使用">
-          <LanguageItem country="zh-CN" active>中文（简体）</LanguageItem>
-          <LanguageItem country="en-US">英语</LanguageItem>
-        </LanguageList>
-        <LanguageList ref="list" :title="isSearch ? `${Object.keys(country).length} 个语言` : '所有语言'">
-          <LanguageItem 
-            v-for="(value, key, index) in country" 
-            :key="key" 
-            :country="key" 
-            :text="value" 
-            :active="key === query.active" 
-            @click.native="changeLanguageHandler(key, value, index)" 
-          />
-        </LanguageList>
-      </div>
-    </main>
-  </section>
+  <Layout @close="view.animationEnd && $router.push('/')">
+    <header ref="header" style="transform: translateY(-40px)">
+      <form action method="post" @submit.prevent>
+        <div class="search-box">
+          <input type="search" placeholder="搜索语言" v-model="language" @input="searchHandler">
+        </div>
+      </form>
+    </header>
+    <div class="languages" style="transform: translateY(40px)">
+      <LanguageList v-if="!isSearch && false" title="最近使用">
+        <LanguageItem country="zh-CN" active>中文（简体）</LanguageItem>
+        <LanguageItem country="en-US">英语</LanguageItem>
+      </LanguageList>
+      <LanguageList ref="list" :title="isSearch ? `${Object.keys(country).length} 个语言` : '所有语言'">
+        <LanguageItem 
+          v-for="(value, key, index) in country" 
+          :key="key" 
+          :country="key" 
+          :text="value" 
+          :active="key === query.active" 
+          @click.native="changeLanguageHandler(key, value, index)" 
+        />
+      </LanguageList>
+    </div>
+  </Layout>
 </template>
 <script>
 import anime from 'animejs'
 import rawCountry from '../assets/json/languages.js'
-import Header from '@/components/Header'
+import Layout from '@/views/_Layout'
 import LanguageList from '@/components/LanguageList'
 import LanguageItem from '@/components/LanguageItem'
 import { WindowHelper } from '../utils'
 let country = { ...rawCountry }
 export default {
   name: 'change-language-page',
-  components: { Header, LanguageList, LanguageItem },
+  components: { Layout, LanguageList, LanguageItem },
   data () {
     return {
       query: Object.keys(this.$route.query).length > 0 ? this.$route.query : { from: 'source', active: 'auto' },
@@ -101,39 +96,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.close
-  display flex
-  align-items center
-  appearance none
-  text-decoration none
-  cursor default
-  position absolute
-  top 0
-  right 0
-  height 100%
-  color #fff
-  background inherit
-  outline 0
-  border 0
-  border-radius 0 6px 0 0
-  padding 0 20px
-  font-size 14px
-  font-weight 500
-  transition .3s
-  &:active
-    box-shadow 0px 0px 30px rgba(0, 0, 0, .2) inset
-  &::before
-    content ''
-    position absolute
-    top 0
-    left 0
-    width 1px
-    height 100%
-    background #357df3
 main
-  flex-direction column
-  > *
-    width 100%
   > header
     background #f7fafb
     border-bottom 1px solid #d7dce0
