@@ -53,7 +53,7 @@ export default {
     else this.country = country = { ...rawCountry }
   },
   mounted () {
-    WindowHelper.setSize(window.innerWidth, 530, this.view.animeOptions)
+    WindowHelper.setSize(window.innerWidth, this.view.height, this.view.animeOptions)
     anime({
       targets: [this.$refs.header, '.languages'],
       translateY: 0,
