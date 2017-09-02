@@ -1,18 +1,18 @@
 <template>
   <section>
-    <Header>
+    <vHeader>
       <button class="close" type="button" slot="settings" @click="$emit('close')">关闭</button>
-    </Header>
+    </vHeader>
     <main>
       <slot />
     </main>
   </section>
 </template>
 <script>
-import Header from '@/components/Header'
+import vHeader from '@/components/Header'
 export default {
   name: 'layout',
-  components: { Header }
+  components: { vHeader }
 }
 </script>
 <style lang="stylus" scoped>

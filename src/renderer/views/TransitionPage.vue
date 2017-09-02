@@ -1,9 +1,9 @@
 <template>
   <section ref="container" v-hotkey="keymap">
-    <Header ref="header" title="Translate">
+    <vHeader ref="header" title="Translate">
       <Icon :rotate="isAlwaysOnTop ? 0 : -45" icon="fixed" slot="fixed" @click.native="switchFixed" />
       <Icon icon="settings" slot="settings" @click.native="showSettings" />
-    </Header>
+    </vHeader>
     <main ref="main">
       <form ref="form" action method="post" style="transform: translateY(-40px)" @submit.prevent>
         <Language 
@@ -66,7 +66,7 @@ import { remote } from 'electron'
 import { WindowHelper, Thread } from '../utils'
 import anime from 'animejs'
 import Icon from '@/components/Icon'
-import Header from '@/components/Header'
+import vHeader from '@/components/Header'
 import Divider from '@/components/Divider'
 import Language from '@/components/Language'
 import TextBox from '@/components/TextBox'
@@ -84,7 +84,7 @@ const Window = remote.getCurrentWindow()
 const { Menu, MenuItem } = remote
 export default {
   name: 'transition-page',
-  components: { Icon, Header, Divider, Language, TextBox, ProgressBar },
+  components: { Icon, vHeader, Divider, Language, TextBox, ProgressBar },
   data () {
     return {
       languages,
