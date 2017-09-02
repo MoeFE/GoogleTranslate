@@ -37,4 +37,5 @@ input
   width 100%
   padding 10px 20px
   box-shadow 0 1px .5px rgba(0, 0, 0, .1)
+  box-sizing border-box
 </style>
