@@ -8,9 +8,15 @@
       </form>
     </header>
     <div class="languages" style="transform: translateY(40px)">
-      <LanguageList v-if="!isSearch && false" title="最近使用">
-        <LanguageItem country="zh-CN" active>中文（简体）</LanguageItem>
-        <LanguageItem country="en-US">英语</LanguageItem>
+      <LanguageList v-if="!isSearch" title="最近使用">
+        <LanguageItem 
+          v-for="(value, key, index) in recent" 
+          :key="key" 
+          :country="key" 
+          :text="value" 
+          :active="key === query.active" 
+          @click.native="changeLanguageHandler(key, value, index)" 
+        />
       </LanguageList>
       <LanguageList ref="list" :title="isSearch ? `${Object.keys(country).length} 个语言` : '所有语言'">
         <LanguageItem 
@@ -33,6 +39,7 @@ import vInput from '@/components/Input'
 import LanguageList from '@/components/LanguageList'
 import LanguageItem from '@/components/LanguageItem'
 import { WindowHelper, Thread } from '../utils'
+import { SAVE_STATE } from '../store/types'
 let country = { ...rawCountry }
 export default {
   name: 'change-language-page',
@@ -42,6 +49,7 @@ export default {
       query: Object.keys(this.$route.query).length > 0 ? this.$route.query : { from: 'source', active: 'auto' },
       country,
       language: '',
+      recent: this.$store.getters.state.recent,
       view: {
         height: 530,
         animeOptions: { duration: 150, easing: 'easeOutQuart' },
@@ -92,7 +100,9 @@ export default {
         WindowHelper.setSize(window.innerWidth, this.view.height, this.view.animeOptions)
       }
     },
-    changeLanguageHandler (lang) {
+    changeLanguageHandler (lang, name) {
+      this.$set(this.recent, lang, name)
+      this.$store.commit(SAVE_STATE, { recent: this.recent })
       this.$router.push({ path: '/', query: { lang, action: this.query.from } })
     }
   }
