@@ -49,7 +49,6 @@ export default {
       query: Object.keys(this.$route.query).length > 0 ? this.$route.query : { from: 'source', active: 'auto' },
       country,
       language: '',
-      recent: this.$store.getters.state.recent,
       view: {
         height: 530,
         animeOptions: { duration: 150, easing: 'easeOutQuart' },
@@ -73,6 +72,9 @@ export default {
   computed: {
     isSearch () {
       return Object.keys(this.country).length !== Object.keys(country).length
+    },
+    recent () {
+      return this.$store.getters.state.recent
     }
   },
   methods: {
@@ -101,9 +103,14 @@ export default {
       }
     },
     changeLanguageHandler (lang, name) {
-      this.$set(this.recent, lang, name)
-      this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, recent: this.recent })
       this.$router.push({ path: '/', query: { lang, action: this.query.from } })
+      this.$store.commit(SAVE_STATE, {
+        ...this.$store.getters.state,
+        recent: {
+          ...this.recent,
+          ...{ [lang]: name }
+        }
+      })
     }
   }
 }
