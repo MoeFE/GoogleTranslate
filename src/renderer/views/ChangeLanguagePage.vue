@@ -102,7 +102,7 @@ export default {
     },
     changeLanguageHandler (lang, name) {
       this.$set(this.recent, lang, name)
-      this.$store.commit(SAVE_STATE, { recent: this.recent })
+      this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, recent: this.recent })
       this.$router.push({ path: '/', query: { lang, action: this.query.from } })
     }
   }
