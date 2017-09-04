@@ -1,5 +1,6 @@
 export const state = {
-  isAlwaysOnTop: false,
+  isAlwaysOnTop: true,
+  isAutoStart: false,
   source: 'auto',
   target: 'zh-CN',
   recent: {

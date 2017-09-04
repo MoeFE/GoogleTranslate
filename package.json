@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "animejs": "^2.0.2",
+    "auto-launch": "^5.0.1",
     "axios": "^0.16.1",
     "electron-log": "^2.2.7",
     "electron-referer": "^0.3.0",
