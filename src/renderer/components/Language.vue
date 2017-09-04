@@ -71,7 +71,8 @@ font-size = 22px
     margin 10px 0
   .progress-bar
     margin 8px 0
-    margin-right 5px
+    padding-right 5px
+    box-sizing border-box
   .icon
     align-self center
     color #ccc
