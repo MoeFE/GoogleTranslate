@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <keep-alive include="transition-page">
-      <router-view></router-view>
+      <router-view class="menubarWindow"></router-view>
     </keep-alive>
+    <router-view class="normalWindow" name="normalWindow"></router-view>
   </div>
 </template>
 <script>
@@ -35,7 +36,7 @@ body
     text-align center
     line-height .3
     transform rotate(180deg)
-  > :first-child
+  > .menubarWindow
     display flex
     flex-direction column
     margin auto
