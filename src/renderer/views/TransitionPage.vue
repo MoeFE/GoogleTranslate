@@ -114,6 +114,11 @@ export default {
       }
     }
   },
+  computed: {
+    engine () {
+      return this.$store.getters.state.engine
+    }
+  },
   created () {
     if (this.query.lang) {
       this.model[this.query.action].country = this.query.lang
@@ -195,7 +200,7 @@ export default {
       this.model[action].progress.type = 'loading'
       await Thread.sleep(500)
       const from = this.model[action].country
-      const audioUrl = await tjs.audio({ api: 'GoogleCN', text: this.model[action].value, from: from === 'auto' ? void 0 : from })
+      const audioUrl = await tjs.audio({ api: this.engine, text: this.model[action].value, from: from === 'auto' ? void 0 : from })
       if (!audioUrl) {
         this.model[action].progress.type = ''
         return
@@ -219,7 +224,7 @@ export default {
       this.view.loading = true
       await Thread.sleep(200) // 至少延迟 200ms 否则会导致窗口抖动
       const json = await tjs.translate({
-        api: 'GoogleCN',
+        api: this.engine,
         text: this.model.source.value,
         from: this.model.source.country,
         to: this.model.target.country
