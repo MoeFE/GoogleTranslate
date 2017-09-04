@@ -26,6 +26,13 @@ export default new Router({
       component: require('@/views/SettingsPage')
     },
     {
+      path: '/update',
+      name: 'update-page',
+      components: {
+        normalWindow: require('@/views/SoftwareUpdate')
+      }
+    },
+    {
       path: '*',
       redirect: '/'
     }
