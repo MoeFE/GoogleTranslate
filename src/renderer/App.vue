@@ -1,14 +1,22 @@
 <template>
-  <div id="app">
+  <div :id="id">
     <keep-alive include="transition-page">
       <router-view class="menubarWindow"></router-view>
     </keep-alive>
-    <router-view class="normalWindow" name="normalWindow"></router-view>
+    <router-view ref="normalWindow" class="normalWindow" name="normalWindow"></router-view>
   </div>
 </template>
 <script>
 export default {
-  name: 'translation'
+  name: 'translation',
+  data () {
+    return {
+      id: 'app'
+    }
+  },
+  mounted () {
+    this.id = this.$refs.normalWindow ? 'window' : 'app'
+  }
 }
 </script>
 <style lang="stylus">
