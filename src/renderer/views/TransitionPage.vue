@@ -120,10 +120,6 @@ export default {
     }
   },
   created () {
-    if (this.query.lang) {
-      this.model[this.query.action].country = this.query.lang
-      this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, source: this.model.source.country, target: this.model.target.country })
-    }
     this.$watch('model.source.value', () => {
       this.view.loading = false
       this.model.target.value = ''
@@ -132,10 +128,32 @@ export default {
       this.updateWindowHeight()
     })
     this.$watch('model.target.value', this.updateWindowHeight)
-    WindowHelper.setSize(window.innerWidth, this.view.height, { duration: 150, easing: 'easeOutQuart' })
   },
-  mounted () {
+  activated () {
+    // 更新查询字符串
+    this.query = this.$route.query
+    // 判断是否需要修改语言
+    if (this.query.lang) {
+      // 获取要修改的对象
+      const model = this.model[this.query.action]
+      // 判断源语言是否发生改变
+      if (model.country !== this.query.lang) {
+        // 发生改变时才修改
+        model.country = this.query.lang
+        // 保存状态
+        this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, source: this.model.source.country, target: this.model.target.country })
+        // 手动触发一次翻译确保结结果正确
+        setTimeout(() => this.translation(), 200)
+      }
+    }
+    // 调整窗口大小
+    WindowHelper.setSize(window.innerWidth, this.view.height, { duration: 150, easing: 'easeOutQuart' })
+    // 添加动效
     anime({ targets: 'form', translateY: 0, translateZ: 0 })
+  },
+  deactivated () {
+    // 重置 translate 确保下次进入时有动效
+    this.$refs.form.style.transform = 'translateY(-40px)'
   },
   methods: {
     switchFixed () {
