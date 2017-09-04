@@ -35,23 +35,43 @@
 </template>
 <script>
 import anime from 'animejs'
+import AutoLaunch from 'auto-launch'
 import Layout from '@/views/_Layout'
 import Radio from '@/components/Radio'
 import vSwitch from '@/components/Switch'
 import vInput from '@/components/Input'
 import vLink from '@/components/Link'
 import { WindowHelper } from '../utils'
+import { SAVE_STATE } from '../store/types'
 export default {
   name: 'settings-page',
   components: { Layout, Radio, vSwitch, vInput, vLink },
   data () {
     return {
-      autoStart: true,
-      engine: 'Google',
       view: {
         height: 660,
         animeOptions: { duration: 150, easing: 'easeOutQuart' },
         animationEnd: false
+      }
+    }
+  },
+  computed: {
+    autoStart: {
+      get () { return this.$store.getters.state.isAutoStart },
+      set (isAutoStart) { this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, isAutoStart }) }
+    },
+    engine: {
+      get () { return this.$store.getters.state.engine },
+      set (engine) { this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, engine }) }
+    }
+  },
+  watch: {
+    autoStart: {
+      immediate: true,
+      handler () {
+        const autoLaunch = new AutoLaunch({ name: 'Google 翻译' })
+        if (this.autoStart) autoLaunch.enable()
+        else autoLaunch.disable()
       }
     }
   },
