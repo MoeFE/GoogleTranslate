@@ -219,7 +219,11 @@ export default {
       if (!this.model[action].value) return
       this.model[action].progress.type = 'loading'
       await Thread.sleep(500)
-      const from = this.model[action].country
+      let from = this.model[action].country
+      if (this.engine !== 'YouDao') { // 有道翻译不支持 detect
+        const lang = await tjs.detect({ api: this.engine, text: this.model[action].value })
+        if (lang) from = lang
+      }
       const audioUrl = await tjs.audio({ api: this.engine, text: this.model[action].value, from: from === 'auto' ? void 0 : from })
       if (!audioUrl) {
         this.model[action].progress.type = ''
