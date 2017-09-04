@@ -74,7 +74,9 @@ export default {
       return Object.keys(this.country).length !== Object.keys(country).length
     },
     recent () {
-      return this.$store.getters.state.recent
+      const recent = { ...this.$store.getters.state.recent }
+      if (this.query.from === 'target') delete recent.auto
+      return recent
     }
   },
   methods: {
