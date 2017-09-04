@@ -195,7 +195,7 @@ export default {
       this.$router.push({ name: 'change-language-page', query: { from: 'source', active: this.model.source.country } })
     },
     changeTargetLanguage () {
-      this.$router.push({ name: 'change-language-page', query: { from: 'target', active: this.model.source.country } })
+      this.$router.push({ name: 'change-language-page', query: { from: 'target', active: this.model.target.country } })
     },
     async updateWindowHeight () {
       await Thread.sleep()
