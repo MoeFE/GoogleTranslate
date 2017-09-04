@@ -64,6 +64,7 @@
 <script>
 import { remote } from 'electron'
 import { WindowHelper, Thread } from '../utils'
+import { SAVE_STATE } from '../store/types'
 import anime from 'animejs'
 import Icon from '@/components/Icon'
 import vHeader from '@/components/Header'
@@ -89,12 +90,12 @@ export default {
     return {
       languages,
       query: this.$route.query,
-      isAlwaysOnTop: Window.isAlwaysOnTop(),
+      isAlwaysOnTop: this.$store.getters.state.isAlwaysOnTop,
       hasError: false,
       audio: new Audio(),
       model: {
-        source: { country: 'auto', value: '', progress: { type: '', duration: 0 } },
-        target: { country: 'zh-CN', value: '', progress: { type: '', duration: 0 } }
+        source: { country: this.$store.getters.state.source, value: '', progress: { type: '', duration: 0 } },
+        target: { country: this.$store.getters.state.target, value: '', progress: { type: '', duration: 0 } }
       },
       view: {
         height: 190,
@@ -114,7 +115,10 @@ export default {
     }
   },
   created () {
-    if (this.query.lang) this.model[this.query.action].country = this.query.lang
+    if (this.query.lang) {
+      this.model[this.query.action].country = this.query.lang
+      this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, source: this.model.source.country, target: this.model.target.country })
+    }
     this.$watch('model.source.value', () => {
       this.view.loading = false
       this.model.target.value = ''
@@ -131,7 +135,8 @@ export default {
   methods: {
     switchFixed () {
       this.isAlwaysOnTop = !Window.isAlwaysOnTop()
-      Window.setAlwaysOnTop(!Window.isAlwaysOnTop())
+      this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, isAlwaysOnTop: this.isAlwaysOnTop })
+      Window.setAlwaysOnTop(this.isAlwaysOnTop)
     },
     showSettings () {
       const menu = new Menu()
