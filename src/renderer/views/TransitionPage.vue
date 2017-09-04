@@ -159,6 +159,7 @@ export default {
     async switchLanguage () {
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
+      this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, source: this.model.source.country, target: this.model.target.country })
       await Thread.sleep()
       this.view.loading = Boolean(this.model.source.value)
       const targets = this.$refs.switch.$el
