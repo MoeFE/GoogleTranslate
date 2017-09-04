@@ -66,13 +66,10 @@ export default {
     }
   },
   watch: {
-    autoStart: {
-      immediate: true,
-      handler () {
-        const autoLaunch = new AutoLaunch({ name: 'Google 翻译' })
-        if (this.autoStart) autoLaunch.enable()
-        else autoLaunch.disable()
-      }
+    autoStart () {
+      const autoLaunch = new AutoLaunch({ name: 'Google 翻译' })
+      if (this.autoStart) autoLaunch.enable()
+      else autoLaunch.disable()
     }
   },
   mounted () {
