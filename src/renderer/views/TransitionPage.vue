@@ -142,14 +142,15 @@ export default {
         model.country = this.query.lang
         // 保存状态
         this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, source: this.model.source.country, target: this.model.target.country })
-        // 手动触发一次翻译确保结结果正确
-        setTimeout(() => this.translation(), 200)
       }
     }
     // 调整窗口大小
     WindowHelper.setSize(window.innerWidth, this.view.height, { duration: 150, easing: 'easeOutQuart' })
     // 添加动效
     anime({ targets: 'form', translateY: 0, translateZ: 0 })
+    // 手动触发一次翻译确保结结果正确
+    // 每次都触发 用户可能切换了翻译引擎
+    setTimeout(() => this.translation(), 200)
   },
   deactivated () {
     // 重置 translate 确保下次进入时有动效
