@@ -1,9 +1,10 @@
 'use strict'
 
-import { app } from 'electron'
+import { app, BrowserWindow } from 'electron'
+import setReferer from 'electron-referer'
 import path from 'path'
 import MenubarWindow from './menubar'
-import setReferer from 'electron-referer'
+import { checkForUpdates } from './autoUpdate'
 
 /**
  * Set `__static` path to static files in production
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 let mainWindow
+let updateWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
@@ -30,6 +32,8 @@ function createWindow () {
     width: 420,
     hasShadow: false,
     resizable: false,
+    minimizable: false,
+    maximizable: false,
     scrollBounce: true,
     transparent: true,
     alwaysOnTop: true,
@@ -40,18 +44,35 @@ function createWindow () {
   })
 
   // npm v5.3.0 builded is blank
-  // mainWindow.webContents.openDevTools()
-  // mainWindow.loadURL(winURL)
 
   mainWindow.on('after-create-window', () => {
     const window = mainWindow.window
+    // window.webContents.openDevTools()
     window.setReferer = (ref) => setReferer(ref, window)
     window.setReferer('https://www.google.com')
     window.on('closed', () => (mainWindow = null))
   })
 }
 
+function createUpdateWindow () {
+  updateWindow = new BrowserWindow({
+    title: 'Software Update',
+    width: 620,
+    height: 400,
+    minHeight: 400,
+    resizable: false,
+    maximizable: false,
+    show: false
+  })
+  updateWindow.loadURL(winURL + '#/update')
+  updateWindow.on('closed', () => (updateWindow = null))
+  updateWindow.show()
+  updateWindow.webContents.openDevTools()
+  checkForUpdates(updateWindow)
+}
+
 app.on('ready', createWindow)
+app.on('ready', createUpdateWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -64,23 +85,3 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-/**
- * Auto Updater
- *
- * Uncomment the following code below and install `electron-updater` to
- * support auto updating. Code Signing with a valid certificate is required.
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
- */
-
-/*
-import { autoUpdater } from 'electron-updater'
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
-})
-
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-})
- */
