@@ -53,7 +53,7 @@
     }
   },
   "updater": {
-    "url": "https://raw.githubusercontent.com/sorrycc/test-release/master/update.json"
+    "url": "https://coding.net/u/u3u/p/Update/git/raw/master/update.json"
   },
   "dependencies": {
     "animejs": "^2.0.2",
@@ -62,6 +62,7 @@
     "electron-log": "^2.2.7",
     "electron-referer": "^0.3.0",
     "electron-simple-updater": "^1.2.1",
+    "marked": "^0.3.6",
     "menubar": "^5.2.3",
     "translation.js": "^0.4.1",
     "v-hotkey": "^0.1.2",
