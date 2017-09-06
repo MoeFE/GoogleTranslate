@@ -7,6 +7,7 @@
   </div>
 </template>
 <script>
+import { webFrame } from 'electron'
 export default {
   name: 'translation',
   data () {
@@ -16,6 +17,10 @@ export default {
   },
   mounted () {
     this.id = this.$refs.normalWindow ? 'window' : 'app'
+    webFrame.setZoomFactor(1)
+    webFrame.setZoomLevelLimits(1, 1)
+    webFrame.setVisualZoomLevelLimits(1, 1)
+    webFrame.setLayoutZoomLevelLimits(0, 0)
   }
 }
 </script>
