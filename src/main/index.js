@@ -4,7 +4,6 @@ import { app, BrowserWindow } from 'electron'
 import setReferer from 'electron-referer'
 import path from 'path'
 import MenubarWindow from './menubar'
-import { checkForUpdates } from './autoUpdate'
 
 /**
  * Set `__static` path to static files in production
@@ -64,11 +63,8 @@ function createUpdateWindow () {
     maximizable: false,
     show: false
   })
-  updateWindow.loadURL(winURL + '#/update')
+  // updateWindow.loadURL(winURL + '#/update')
   updateWindow.on('closed', () => (updateWindow = null))
-  updateWindow.show()
-  updateWindow.webContents.openDevTools()
-  checkForUpdates(updateWindow)
 }
 
 app.on('ready', createWindow)
