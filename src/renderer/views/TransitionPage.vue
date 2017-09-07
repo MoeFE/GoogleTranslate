@@ -247,19 +247,25 @@ export default {
       this.model.target.value = ''
       this.view.loading = true
       await Thread.sleep(200) // 至少延迟 200ms 否则会导致窗口抖动
-      const json = await tjs.translate({
-        api: this.engine,
-        text: this.model.source.value,
-        from: this.model.source.country,
-        to: this.model.target.country
-      })
-      this.view.loading = false
-      if (json.result && json.result.length > 0) {
-        this.hasError = false
-        this.model.target.value = json.result.join('\n')
-      } else {
+      try {
+        const json = await tjs.translate({
+          api: this.engine,
+          text: this.model.source.value,
+          from: this.model.source.country,
+          to: this.model.target.country
+        })
+        this.view.loading = false
+        if (json.result && json.result.length > 0) {
+          this.hasError = false
+          this.model.target.value = json.result.join('\n')
+        } else {
+          this.hasError = true
+          this.model.target.value = json.error
+        }
+      } catch (ex) {
+        this.view.loading = false
         this.hasError = true
-        this.model.target.value = json.error
+        this.model.target.value = !navigator.onLine ? '网络连接已中断' : '网络繁忙，请稍后再试'
       }
     }
   }
