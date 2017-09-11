@@ -7,10 +7,11 @@
     @focus="keys = []" 
     @keyup="keyupHandler"
     @keydown="keydownHandler">
-    <ShortcutKeys v-for="key in keys" :key="key" :keys="key" />
+    <ShortcutKeys v-if="hasTargetKeys" v-for="(key, index) in keys" :key="key" :keys="key" :style="`transform: translateX(-${55 * index}px)`" />
   </div>
 </template>
 <script>
+import anime from 'animejs'
 import Icon from '@/components/Icon'
 import ShortcutKeys from '@/components/ShortcutKeys'
 const keyCombination = ['Alt', 'Control', 'Meta', 'Shift']
@@ -42,6 +43,14 @@ export default {
     keys () {
       if (this.hasTargetKeys || this.keys.length === 0) {
         this.$emit('input', this.distinctKeys.join('+').replace('Meta', 'Cmd'))
+        this.$nextTick(() => {
+          anime({
+            targets: '.shortcut',
+            easing: 'easeOutQuart',
+            duration: 300,
+            translateX: 0
+          })
+        })
       }
     }
   },

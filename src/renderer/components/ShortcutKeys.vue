@@ -41,6 +41,7 @@ export default {
   box-shadow 0 0 2px rgba(0, 0, 0, .1)
   box-sizing border-box
   color #000
+  background #fff
   font-weight 500
   .key-icon
     font-size 18px
