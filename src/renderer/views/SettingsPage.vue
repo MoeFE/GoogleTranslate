@@ -11,7 +11,7 @@
           <h3 class="title">定义快捷键</h3>
           <div class="body">
             <p>触手可及，使用此快捷键打开：</p>
-            <vInput class="hotkey" :readonly="true" placeholder="按下按键记录快捷键" value="" />
+            <InputShortcutKeys placeholder="按下按键记录快捷键" v-model="hotkey" />
           </div>
         </div>
         <div class="pannel">
@@ -39,15 +39,19 @@ import AutoLaunch from 'auto-launch'
 import Layout from '@/views/_Layout'
 import Radio from '@/components/Radio'
 import vSwitch from '@/components/Switch'
-import vInput from '@/components/Input'
 import vLink from '@/components/Link'
+import InputShortcutKeys from '@/components/InputShortcutKeys'
+import { remote } from 'electron'
 import { WindowHelper } from '../utils'
 import { SAVE_STATE } from '../store/types'
+const { globalShortcut } = remote.require('electron')
+const Window = remote.getCurrentWindow()
 export default {
   name: 'settings-page',
-  components: { Layout, Radio, vSwitch, vInput, vLink },
+  components: { Layout, Radio, vSwitch, vLink, InputShortcutKeys },
   data () {
     return {
+      hotkey: '',
       view: {
         height: 660,
         animeOptions: { duration: 150, easing: 'easeOutQuart' },
@@ -70,6 +74,10 @@ export default {
       const autoLaunch = new AutoLaunch({ name: 'Google 翻译' })
       if (this.autoStart) autoLaunch.enable()
       else autoLaunch.disable()
+    },
+    hotkey () {
+      if (!this.hotkey) globalShortcut.unregisterAll()
+      else globalShortcut.register(this.hotkey, () => Window.isVisible() ? Window.hide() : Window.show())
     }
   },
   mounted () {
@@ -128,11 +136,4 @@ export default {
   .help
     color #9ca3a9
     font-size 12px
-  input.hotkey
-    border 1px solid transparent
-    border-radius 4px
-    font-size 12px
-    padding 15px 10px
-    &:focus
-      border 1px solid #199bff
 </style>
