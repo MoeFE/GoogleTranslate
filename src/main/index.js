@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, Menu, MenuItem } from 'electron'
 import setReferer from 'electron-referer'
 import path from 'path'
 import MenubarWindow from './menubar'
@@ -14,7 +14,6 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 let mainWindow
-let updateWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
@@ -42,6 +41,11 @@ function createWindow () {
     }
   })
 
+  // 修复生产环节下无法复制粘贴
+  const menu = new Menu()
+  menu.append(new MenuItem({ role: 'editMenu' }))
+  Menu.setApplicationMenu(menu)
+
   // npm v5.3.0 builded is blank
 
   mainWindow.on('after-create-window', () => {
@@ -53,22 +57,7 @@ function createWindow () {
   })
 }
 
-function createUpdateWindow () {
-  updateWindow = new BrowserWindow({
-    title: 'Software Update',
-    width: 620,
-    height: 400,
-    minHeight: 400,
-    resizable: false,
-    maximizable: false,
-    show: false
-  })
-  // updateWindow.loadURL(winURL + '#/update')
-  updateWindow.on('closed', () => (updateWindow = null))
-}
-
 app.on('ready', createWindow)
-app.on('ready', createUpdateWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
