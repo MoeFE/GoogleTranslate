@@ -2,8 +2,8 @@
   "name": "translation",
   "version": "1.0.0",
   "author": "MoeFE <quq@quq.cat>",
-  "description": "An electron-vue project",
-  "license": null,
+  "description": "Google 翻译 Mac 客户端",
+  "license": "GPL",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-builder",
@@ -20,7 +20,7 @@
   },
   "build": {
     "productName": "Google 翻译",
-    "appId": "org.simulatedgreg.electron-vue",
+    "appId": "org.moefe.googletranslate",
     "directories": {
       "output": "build"
     },
@@ -51,9 +51,6 @@
     "linux": {
       "icon": "build/icons"
     }
-  },
-  "updater": {
-    "url": "https://coding.net/u/u3u/p/Update/git/raw/master/update.json"
   },
   "dependencies": {
     "animejs": "^2.0.2",
