@@ -16,7 +16,7 @@
 - [ x ] 开机启动
 - [ x ] 自动更新
 - [ x ] 全局快捷键呼出
-- [ x ] 内置 百度、有道、谷歌 三种翻译引擎，默认为谷歌
+- [ x ] 内置多种翻译引擎
 
 # 依赖模块
 
@@ -38,5 +38,5 @@
 
 # 协议
 
-[GNU General Public License v3.0](LICENSE)
+[GNU General Public License v3.0](LICENSE)  
 本项目仅供学习交流和私人使用，禁止用作商业用途
