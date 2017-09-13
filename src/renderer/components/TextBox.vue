@@ -23,8 +23,14 @@ export default {
   },
   data () {
     return {
+      selectionStart: 0,
       isComposition: false
     }
+  },
+  mounted () {
+    document.addEventListener('selectionchange', () => {
+      this.selectionStart = document.getSelection().focusOffset
+    })
   },
   computed: {
     style () {
@@ -37,12 +43,14 @@ export default {
   watch: {
     value: {
       immediate: true,
-      async handler () {
+      async handler (newVal, oldVal) {
         await this.$nextTick()
         if (!this.$refs.input) return
         if (!this.isComposition) {
           this.$refs.input.innerText = this.value
-          if (this.value) document.getSelection().setPosition(this.$refs.input, 1)
+          let length = oldVal ? newVal.length - oldVal.length : newVal.length
+          if (length < 0) length = 0
+          if (this.value) document.getSelection().setPosition(this.$refs.input.childNodes[0], this.selectionStart + length)
         } else this.$refs.input.focus()
       }
     }
