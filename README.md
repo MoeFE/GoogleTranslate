@@ -5,11 +5,11 @@
 [![Build Status](https://travis-ci.org/MoeFE/GoogleTranslate.svg?branch=master)](https://travis-ci.org/MoeFE/GoogleTranslate)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-# 截图
+## 截图
 
 ![preview](preview.png)
 
-# 功能
+## 功能
 - [ x ] 基本翻译
 - [ x ] 语音朗读
 - [ x ] 顶端显示
@@ -18,7 +18,7 @@
 - [ x ] 全局快捷键呼出
 - [ x ] 内置多种翻译引擎
 
-# 依赖模块
+## 依赖模块
 
 - [anime](https://github.com/juliangarnier/anime) JavaScript 动画引擎
 - [auto-launch](https://github.com/Teamwork/node-auto-launch) 在登录时启动应用程序或可执行文件（Mac，Windows 和 Linux）
@@ -36,7 +36,7 @@
 - [vue-router](https://github.com/vuejs/vue-router) 为 Vue.js 提供路由功能
 - [vuex](https://github.com/vuejs/vuex) 为 Vue.js 提供状态管理功能
 
-# 协议
+## 协议
 
 [GNU General Public License v3.0](LICENSE)  
 本项目仅供学习交流和私人使用，禁止用作商业用途
