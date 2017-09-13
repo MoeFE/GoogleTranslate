@@ -7,7 +7,7 @@
     @focus="keys = []" 
     @keyup="keyupHandler"
     @keydown="keydownHandler">
-    <ShortcutKeys v-if="hasTargetKeys" v-for="(key, index) in keys" :key="key" :keys="key" :style="`transform: translateX(-${55 * index}px)`" />
+    <ShortcutKeys v-if="hasTargetKeys" v-for="(key, index) in distinctKeys" :key="key" :keys="key" :style="`transform: translateX(-${55 * index}px)`" />
   </div>
 </template>
 <script>
@@ -51,6 +51,12 @@ export default {
             translateX: 0
           })
         })
+      }
+    },
+    value: {
+      immediate: true,
+      handler () {
+        if (this.value) this.keys = this.value.replace('Cmd', 'Meta').split('+')
       }
     }
   },

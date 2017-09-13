@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     meta () {
-      return { ...win.updater.meta, currentVersion: win.updater.options.version }
+      return { ...win.updater.meta, currentVersion: win.updater.version }
     },
     notes () {
       marked.setOptions({ breaks: true })
@@ -53,10 +53,11 @@ export default {
     }
   },
   async created () {
-    console.log(win.updater)
+    document.title = 'Software Update'
     win.updater.on('update-downloaded', () => {
       if (window.confirm('是否立即重启并安装更新？')) win.updater.quitAndInstall()
     })
+    win.updater.on('update-progress', state => console.log(state))
     const json = await this.$http.get('https://api.github.com/repos/facebook/react/releases/latest')
     this.release = json.data
     await this.$nextTick();

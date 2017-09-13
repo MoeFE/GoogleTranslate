@@ -7,7 +7,9 @@
   </div>
 </template>
 <script>
-import { webFrame } from 'electron'
+import { remote, webFrame } from 'electron'
+const { globalShortcut } = remote.require('electron')
+const Window = remote.getCurrentWindow()
 export default {
   name: 'translation',
   data () {
@@ -21,6 +23,15 @@ export default {
     webFrame.setZoomLevelLimits(1, 1)
     webFrame.setVisualZoomLevelLimits(1, 1)
     webFrame.setLayoutZoomLevelLimits(0, 0)
+    this.$watch(() => this.$store.getters.state.hotkey, this.registerShortcut)
+    this.registerShortcut()
+  },
+  methods: {
+    registerShortcut () {
+      globalShortcut.unregisterAll()
+      const hotkey = this.$store.getters.state.hotkey
+      if (hotkey) globalShortcut.register(hotkey, () => Window.isVisible() ? Window.hide() : Window.show())
+    }
   }
 }
 </script>

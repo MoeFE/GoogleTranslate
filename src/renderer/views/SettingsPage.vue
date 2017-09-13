@@ -41,17 +41,13 @@ import Radio from '@/components/Radio'
 import vSwitch from '@/components/Switch'
 import vLink from '@/components/Link'
 import InputShortcutKeys from '@/components/InputShortcutKeys'
-import { remote } from 'electron'
 import { WindowHelper } from '../utils'
 import { SAVE_STATE } from '../store/types'
-const { globalShortcut } = remote.require('electron')
-const Window = remote.getCurrentWindow()
 export default {
   name: 'settings-page',
   components: { Layout, Radio, vSwitch, vLink, InputShortcutKeys },
   data () {
     return {
-      hotkey: '',
       view: {
         height: 660,
         animeOptions: { duration: 150, easing: 'easeOutQuart' },
@@ -67,6 +63,10 @@ export default {
     engine: {
       get () { return this.$store.getters.state.engine },
       set (engine) { this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, engine }) }
+    },
+    hotkey: {
+      get () { return this.$store.getters.state.hotkey },
+      set (hotkey) { this.$store.commit(SAVE_STATE, { ...this.$store.getters.state, hotkey }) }
     }
   },
   watch: {
@@ -74,10 +74,6 @@ export default {
       const autoLaunch = new AutoLaunch({ name: 'Google 翻译' })
       if (this.autoStart) autoLaunch.enable()
       else autoLaunch.disable()
-    },
-    hotkey () {
-      if (!this.hotkey) globalShortcut.unregisterAll()
-      else globalShortcut.register(this.hotkey, () => Window.isVisible() ? Window.hide() : Window.show())
     }
   },
   mounted () {
