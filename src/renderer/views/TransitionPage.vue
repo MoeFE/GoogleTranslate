@@ -5,7 +5,7 @@
       <Icon icon="settings" slot="settings" @click.native="showSettings" />
     </vHeader>
     <main ref="main">
-      <form ref="form" action method="post" style="transform: translateY(-40px)" @submit.prevent>
+      <form ref="form" action method="post" style="transform: translateY(-40px) translateZ(0)" @submit.prevent>
         <Language 
           :clear="!!model.source.value && !model.source.progress.type"
           :speak="!!model.source.value && model.source.country !== 'auto' && !model.source.progress.type"

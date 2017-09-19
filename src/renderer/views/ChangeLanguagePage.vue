@@ -1,13 +1,13 @@
 <template>
   <Layout @close="view.animationEnd && $router.push('/')">
-    <header ref="header" style="transform: translateY(-40px)">
+    <header ref="header" style="transform: translateY(-40px) translateZ(0)">
       <form action method="post" @submit.prevent>
         <div class="search-box">
           <vInput ref="search" type="search" placeholder="搜索语言" v-model="language" @input.native="searchHandler" />
         </div>
       </form>
     </header>
-    <div class="languages" style="transform: translateY(40px)">
+    <div class="languages" style="transform: translateY(40px) translateZ(0)">
       <LanguageList v-if="!isSearch" title="最近使用">
         <LanguageItem 
           v-for="(value, key, index) in recent" 
