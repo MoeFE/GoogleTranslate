@@ -10,11 +10,12 @@
           :clear="!!model.source.value && !model.source.progress.type"
           :speak="!!model.source.value && model.source.country !== 'auto' && !model.source.progress.type"
           :country="model.source.country" 
-          @clear="model.source.value = ''" 
+          @clear="clearSourceValue" 
           @speak="speakLanguage('source')" 
           @changeLanguage="changeSourceLanguage"
         >
           <TextBox 
+            ref="source"
             :placeholder="languages[model.source.country]" 
             v-model="model.source.value" 
             @keydown.enter.prevent.stop.native="translation" 
@@ -36,7 +37,6 @@
           :speak="!!model.target.value && !model.target.progress.type"
           :country="model.target.country" 
           :loading="view.loading"
-          @clear="model.target.value = ''" 
           @speak="speakLanguage('target')" 
           @changeLanguage="changeTargetLanguage" 
         >
@@ -174,6 +174,11 @@ export default {
       menu.append(new MenuItem({ type: 'separator' }))
       menu.append(new MenuItem({ label: '退出 Google 翻译', accelerator: 'Cmd+Q', click: remote.app.quit }))
       menu.popup(Window)
+    },
+    async clearSourceValue () {
+      this.model.source.value = ''
+      await Thread.sleep()
+      this.$refs.source.$el.focus()
     },
     async switchLanguage () {
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
