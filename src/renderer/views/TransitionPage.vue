@@ -186,7 +186,7 @@ export default {
       anime({
         targets,
         rotate: '180deg',
-        complete: this.translation
+        complete: () => this.view.loading && this.translation()
       })
     },
     goSettings () {

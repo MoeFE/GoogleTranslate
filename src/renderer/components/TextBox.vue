@@ -28,9 +28,9 @@ export default {
     }
   },
   mounted () {
-    document.addEventListener('selectionchange', () => {
-      this.selectionStart = document.getSelection().focusOffset
-    })
+    // document.addEventListener('selectionchange', () => {
+    //   this.selectionStart = document.getSelection().focusOffset
+    // })
   },
   computed: {
     style () {
@@ -48,9 +48,12 @@ export default {
         if (!this.$refs.input) return
         if (!this.isComposition) {
           this.$refs.input.innerText = this.value
-          let length = oldVal ? newVal.length - oldVal.length : newVal.length
-          if (length < 0) length = 0
-          if (this.value) document.getSelection().setPosition(this.$refs.input.childNodes[0], this.selectionStart + length)
+          if (this.value) document.getSelection().setPosition(this.$refs.input.childNodes[0], this.value.length)
+          else if (event) {
+            this.$refs.input.blur()
+            document.getSelection().setPosition(this.$refs.input, 0)
+            this.$refs.input.focus()
+          }
         } else this.$refs.input.focus()
       }
     }
