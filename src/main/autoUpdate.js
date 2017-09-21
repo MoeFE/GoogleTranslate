@@ -25,7 +25,7 @@ function checkForUpdates (win, winURL) {
       const meta = JSON.parse(body)
       const zip = meta.assets.find(x => x.name === `${name}-${meta.name}-mac.zip`)
       if (!zip) return
-      if (version > meta.name) return
+      if (version >= meta.name) return
 
       const savedir = path.resolve(tmpdir, `update-${guid}.zip`)
       win.updater.meta = meta
