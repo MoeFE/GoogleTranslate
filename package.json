@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "MoeFE <quq@quq.cat>",
   "description": "Google 翻译 Mac 客户端",
-  "license": "GPL",
+  "license": "GPL-3.0",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-builder",
@@ -17,6 +17,9 @@
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "postinstall": "npm run lint:fix"
+  },
+  "updater": {
+    "url": "https://api.github.com/repos/MoeFE/GoogleTranslate/releases/latest"
   },
   "build": {
     "productName": "Google 翻译",
@@ -56,12 +59,17 @@
     "animejs": "^2.0.2",
     "auto-launch": "^5.0.1",
     "axios": "^0.16.1",
+    "bytes": "^3.0.0",
     "electron-log": "^2.2.7",
     "electron-referer": "^0.3.0",
     "electron-simple-updater": "^1.2.1",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "marked": "^0.3.6",
     "menubar": "^5.2.3",
+    "request-progress": "^3.0.0",
     "translation.js": "^0.4.1",
+    "uuid": "^3.1.0",
     "v-hotkey": "^0.1.2",
     "vue": "^2.3.3",
     "vue-electron": "^1.0.6",
