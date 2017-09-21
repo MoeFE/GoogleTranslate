@@ -85,7 +85,7 @@ export default {
       if (this.$refs.search.isComposition) return // 输入法未上屏
       if (this.language) {
         const result = {}
-        Object.entries(this.country).filter(x => x[1].includes(this.language)).forEach(x => (result[x[0]] = x[1]))
+        Object.entries(country).filter(x => x[1].includes(this.language)).forEach(x => (result[x[0]] = x[1]))
         this.country = result
         await this.$nextTick()
         const outerHeight = el => {
