@@ -7,7 +7,7 @@ import request from 'request'
 import progress from 'request-progress'
 import process from 'child_process'
 import { app } from 'electron'
-import { version, updater, build } from '../../package.json'
+import { version, updater, name } from '../../package.json'
 const tmpdir = os.tmpdir()
 const guid = uuid()
 
@@ -23,7 +23,7 @@ function checkForUpdates (win, winURL) {
   request(updater.url, opt, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const meta = JSON.parse(body)
-      const zip = meta.assets.find(x => x.name === `${build.productName}-${meta.name}-mac.zip`)
+      const zip = meta.assets.find(x => x.name === `${name}-${meta.name}-mac.zip`)
       if (!zip) return
       if (version > meta.name) return
 
