@@ -104,6 +104,16 @@ export default {
         easing: 'easeOutQuart',
         update: () => (this.progress = targets.progress)
       })
+    },
+    async notes () {
+      await this.$nextTick()
+      console.log(this.$refs.notes.querySelectorAll('a'));
+      [...this.$refs.notes.querySelectorAll('a')].forEach(el => {
+        el.onclick = evt => {
+          evt.preventDefault()
+          shell.openExternal(evt.currentTarget.getAttribute('href'))
+        }
+      })
     }
   },
   async created () {
@@ -122,13 +132,6 @@ export default {
     })
     const json = await this.$http.get(updater.url)
     this.release = json.data
-    await this.$nextTick();
-    [...this.$refs.notes.querySelectorAll('a')].forEach(el => {
-      el.addEventListener('click', evt => {
-        shell.openExternal(evt.target.getAttribute('href'))
-        evt.preventDefault()
-      })
-    })
   },
   methods: {
     installUpdate () {
