@@ -1,7 +1,7 @@
 <template>
   <section>
     <aside>
-      <img src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike72%2C5%2C5%2C72%2C24/sign=00483c93ddca7bcb6976cf7ddf600006/cdbf6c81800a19d8ce78815539fa828ba61e4662.jpg">
+      <img src="../assets/icon.jpg">
     </aside>
     <main>
       <h4>发现新版本的 Google 翻译可用！</h4>

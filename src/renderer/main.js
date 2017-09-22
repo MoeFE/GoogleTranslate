@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 
 import VueHotkey from 'v-hotkey'
+import 'github-markdown-css/github-markdown.css'
+import './assets/icon/iconfont.css'
+
 Vue.use(VueHotkey)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))

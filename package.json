@@ -63,6 +63,7 @@
     "electron-log": "^2.2.7",
     "electron-referer": "^0.3.0",
     "electron-simple-updater": "^1.2.1",
+    "github-markdown-css": "^2.8.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "marked": "^0.3.6",
