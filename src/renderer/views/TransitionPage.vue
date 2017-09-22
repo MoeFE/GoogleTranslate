@@ -109,8 +109,8 @@ export default {
         'meta+s': this.switchLanguage,
         'meta+1': this.changeSourceLanguage,
         'meta+2': this.changeTargetLanguage,
-        'meta+shift+1': this.speakSourceLanguage,
-        'meta+shift+2': this.speakTargetLanguage
+        'meta+shift+1': () => this.speakLanguage('source'),
+        'meta+shift+2': () => this.speakLanguage('target')
       }
     }
   },
