@@ -106,8 +106,7 @@ export default {
       })
     },
     async notes () {
-      await this.$nextTick()
-      console.log(this.$refs.notes.querySelectorAll('a'));
+      await this.$nextTick();
       [...this.$refs.notes.querySelectorAll('a')].forEach(el => {
         el.onclick = evt => {
           evt.preventDefault()
