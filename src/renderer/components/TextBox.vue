@@ -49,7 +49,7 @@ export default {
         if (!this.isComposition) {
           this.$refs.input.innerText = this.value
           if (this.value) document.getSelection().setPosition(this.$refs.input.childNodes[0], this.value.length)
-          else if (event) {
+          else if (event && this.$refs.input === event.target) {
             this.$refs.input.blur()
             document.getSelection().setPosition(this.$refs.input, 0)
             this.$refs.input.focus()
