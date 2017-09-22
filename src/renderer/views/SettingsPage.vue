@@ -28,7 +28,7 @@
       <footer>
         <p class="help">给个 Star 鼓励一下吧 (ฅ´ω`ฅ)</p>
         <p><vLink href="https://github.com/MoeFE/GoogleTranslate">Google Translate</vLink></p>
-        <p class="help">1.0.0</p>
+        <p class="help">{{ version }}</p>
       </footer>
     </div>
   </Layout>
@@ -43,11 +43,13 @@ import vLink from '@/components/Link'
 import InputShortcutKeys from '@/components/InputShortcutKeys'
 import { WindowHelper } from '../utils'
 import { SAVE_STATE } from '../store/types'
+import { version } from '../../../package.json'
 export default {
   name: 'settings-page',
   components: { Layout, Radio, vSwitch, vLink, InputShortcutKeys },
   data () {
     return {
+      version,
       view: {
         height: 660,
         animeOptions: { duration: 150, easing: 'easeOutQuart' },
