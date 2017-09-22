@@ -86,7 +86,7 @@ div[role="textbox"]
   resize none
   min-height 26px
   max-height 300px
-  overflow scroll
+  overflow hidden
   word-break break-all
   user-select text
   &:empty::before
