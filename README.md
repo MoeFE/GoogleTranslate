@@ -13,13 +13,13 @@ https://github.com/MoeFE/GoogleTranslate/releases/latest
 ![preview](preview.png)
 
 ## 功能
-- [ x ] 基本翻译
-- [ x ] 语音朗读
-- [ x ] 顶端显示
-- [ x ] 开机启动
-- [ x ] 自动更新
-- [ x ] 全局快捷键呼出
-- [ x ] 内置多种翻译引擎
+- [x] 基本翻译
+- [x] 语音朗读
+- [x] 顶端显示
+- [x] 开机启动
+- [x] 自动更新
+- [x] 全局快捷键呼出
+- [x] 内置多种翻译引擎
 
 ## 依赖模块
 
