@@ -107,10 +107,10 @@ export default {
       keymap: {
         'meta+,': this.goSettings,
         'meta+s': this.switchLanguage,
-        'meta+1': this.changeSourceLanguage,
-        'meta+2': this.changeTargetLanguage,
-        'meta+shift+1': () => this.speakLanguage('source'),
-        'meta+shift+2': () => this.speakLanguage('target')
+        'meta+shift+1': this.changeSourceLanguage,
+        'meta+shift+2': this.changeTargetLanguage,
+        'meta+1': () => this.speakLanguage('source'),
+        'meta+2': () => this.speakLanguage('target')
       }
     }
   },
@@ -167,10 +167,10 @@ export default {
       menu.append(new MenuItem({ label: '偏好设置', accelerator: 'Cmd+,', click: this.goSettings }))
       menu.append(new MenuItem({ type: 'separator' }))
       menu.append(new MenuItem({ label: '切换语言', accelerator: 'Cmd+S', enabled: this.model.source.country !== 'auto', click: this.switchLanguage }))
-      menu.append(new MenuItem({ label: '更改源语言', accelerator: 'Cmd+1', click: this.changeSourceLanguage }))
-      menu.append(new MenuItem({ label: '更改目标语言', accelerator: 'Cmd+2', click: this.changeTargetLanguage }))
-      menu.append(new MenuItem({ label: '说源语言', accelerator: 'Shift+Cmd+1', enabled: !!this.model.source.value && this.model.source.country !== 'auto', click: () => this.speakLanguage('source') }))
-      menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Shift+Cmd+2', enabled: !!this.model.target.value, click: () => this.speakLanguage('target') }))
+      menu.append(new MenuItem({ label: '更改源语言', accelerator: 'Shift+Cmd+1', click: this.changeSourceLanguage }))
+      menu.append(new MenuItem({ label: '更改目标语言', accelerator: 'Shift+Cmd+2', click: this.changeTargetLanguage }))
+      menu.append(new MenuItem({ label: '说源语言', accelerator: 'Cmd+1', enabled: !!this.model.source.value && this.model.source.country !== 'auto', click: () => this.speakLanguage('source') }))
+      menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Cmd+2', enabled: !!this.model.target.value, click: () => this.speakLanguage('target') }))
       menu.append(new MenuItem({ type: 'separator' }))
       menu.append(new MenuItem({ label: '退出 Google 翻译', accelerator: 'Cmd+Q', click: remote.app.quit }))
       menu.popup(Window)
