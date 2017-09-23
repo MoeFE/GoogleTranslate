@@ -219,6 +219,7 @@ export default {
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
       this.model.source.value = evt.target.innerText
       this.model.target.value = ''
+      this.$refs.source.$el.focus()
     },
     async speakLanguage (action) {
       if (!this.model[action].value) return
