@@ -110,7 +110,12 @@ export default {
         'meta+shift+1': this.changeSourceLanguage,
         'meta+shift+2': this.changeTargetLanguage,
         'meta+1': () => this.speakLanguage('source'),
-        'meta+2': () => this.speakLanguage('target')
+        'meta+2': () => this.speakLanguage('target'),
+        'meta+ctrl+1': () => this.translation('BaiDu'),
+        'meta+ctrl+2': () => this.translation('YouDao'),
+        'meta+ctrl+3': () => this.translation('Google'),
+        'meta+ctrl+4': () => this.translation('GoogleCN'),
+        'meta+q': () => remote.app.quit()
       }
     }
   },
@@ -171,6 +176,11 @@ export default {
       menu.append(new MenuItem({ label: '更改目标语言', accelerator: 'Shift+Cmd+2', click: this.changeTargetLanguage }))
       menu.append(new MenuItem({ label: '说源语言', accelerator: 'Cmd+1', enabled: !!this.model.source.value && this.model.source.country !== 'auto', click: () => this.speakLanguage('source') }))
       menu.append(new MenuItem({ label: '说目标语言', accelerator: 'Cmd+2', enabled: !!this.model.target.value, click: () => this.speakLanguage('target') }))
+      menu.append(new MenuItem({ type: 'separator' }))
+      menu.append(new MenuItem({ label: '使用百度翻译', accelerator: 'Ctrl+Cmd+1', enabled: !!this.model.source.value, click: () => this.translation('BaiDu') }))
+      menu.append(new MenuItem({ label: '使用有道翻译', accelerator: 'Ctrl+Cmd+2', enabled: !!this.model.source.value, click: () => this.translation('YouDao') }))
+      menu.append(new MenuItem({ label: '使用谷歌翻译', accelerator: 'Ctrl+Cmd+3', enabled: !!this.model.source.value, click: () => this.translation('Google') }))
+      menu.append(new MenuItem({ label: '使用谷歌（国内）', accelerator: 'Ctrl+Cmd+4', enabled: !!this.model.source.value, click: () => this.translation('GoogleCN') }))
       menu.append(new MenuItem({ type: 'separator' }))
       menu.append(new MenuItem({ label: '退出 Google 翻译', accelerator: 'Cmd+Q', click: remote.app.quit }))
       menu.popup(Window)
@@ -249,14 +259,14 @@ export default {
       this.model[action].progress.type = ''
       this.audio.pause()
     },
-    async translation () {
+    async translation (engine) {
       if (!this.model.source.value) return
       this.model.target.value = ''
       this.view.loading = true
       await Thread.sleep(200) // 至少延迟 200ms 否则会导致窗口抖动
       try {
         const json = await tjs.translate({
-          api: this.engine,
+          api: typeof engine === 'string' ? engine : this.engine,
           text: this.model.source.value,
           from: this.model.source.country,
           to: this.model.target.country
