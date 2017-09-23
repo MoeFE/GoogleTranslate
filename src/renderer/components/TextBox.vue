@@ -27,11 +27,6 @@ export default {
       isComposition: false
     }
   },
-  mounted () {
-    // document.addEventListener('selectionchange', () => {
-    //   this.selectionStart = document.getSelection().focusOffset
-    // })
-  },
   computed: {
     style () {
       return { userModify: this.readonly ? 'read-only' : 'read-write-plaintext-only' }
@@ -86,9 +81,11 @@ div[role="textbox"]
   resize none
   min-height 26px
   max-height 300px
-  overflow hidden
+  overflow-y scroll // overflow-x 在部分机型上会产生高度 导致输入框变高造成不对齐（wqnmlgb）
   word-break break-all
   user-select text
+  &::-webkit-scrollbar // 在部分机型上会产生滚动条 所以隐藏掉 不影响滚动功能
+    display none
   &:empty::before
     content attr(placeholder)
     position absolute
