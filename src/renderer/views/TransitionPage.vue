@@ -223,6 +223,7 @@ export default {
     },
     async speakLanguage (action) {
       if (!this.model[action].value) return
+      if (this.model[action].country === 'auto') return
       this.model[action].progress.type = 'loading'
       await Thread.sleep(500)
       let from = this.model[action].country
