@@ -47,6 +47,7 @@
             :error="hasError"
             v-model="model.target.value" 
             @input.native="targetInputHandler"
+            @keydown.enter.prevent.stop.native
           />
           <ProgressBar 
             v-if="model.target.progress.type"
@@ -226,10 +227,17 @@ export default {
       await Thread.sleep()
       if (this.$refs.target.isComposition) return // 输入法未上屏
       if (this.model.source.country === 'auto') return // 检测语言不能掉换
+      const cursorPosition = this.$refs.target.selectionStart;
+
       [this.model.source, this.model.target] = [this.model.target, this.model.source]
       this.model.source.value = evt.target.innerText
       this.model.target.value = ''
-      this.$refs.source.$el.focus()
+      await Thread.sleep()
+
+      document.getSelection().setPosition(
+        this.$refs.source.$el.childNodes[0],
+        cursorPosition
+      )
     },
     async speakLanguage (action) {
       if (!this.model[action].value) return
@@ -264,6 +272,7 @@ export default {
       this.model.target.value = ''
       this.view.loading = true
       await Thread.sleep(200) // 至少延迟 200ms 否则会导致窗口抖动
+      let result = ''
       try {
         const json = await tjs.translate({
           api: typeof engine === 'string' ? engine : this.engine,
@@ -274,16 +283,17 @@ export default {
         this.view.loading = false
         if (json.result && json.result.length > 0) {
           this.hasError = false
-          this.model.target.value = json.result.join('\n')
+          result = json.result.join('\n')
         } else {
           this.hasError = true
-          this.model.target.value = json.error
+          result = json.error
         }
       } catch (ex) {
         this.view.loading = false
         this.hasError = true
-        this.model.target.value = !navigator.onLine ? '网络连接已中断' : '网络繁忙，请稍后再试'
+        result = !navigator.onLine ? '网络连接已中断' : '网络繁忙，请稍后再试'
       }
+      this.model.target.value = result
     }
   }
 }
