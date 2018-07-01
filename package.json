@@ -8,7 +8,8 @@
     "build": "vue-cli-service build:electron",
     "lint": "vue-cli-service lint",
     "lint:prettier": "prettier-eslint-check \"**/*.{js,jsx,json,ts,tsx,scss,vue,md}\"",
-    "format": "prettier-eslint \"**/*.{js,jsx,json,ts,tsx,scss,vue,md}\" --write"
+    "format": "prettier-eslint \"**/*.{js,jsx,json,ts,tsx,scss,vue,md}\" --write",
+    "contributors": "all-contributors"
   },
   "dependencies": {
     "vue": "^2.5.16",
@@ -25,6 +26,7 @@
     "@vue/cli-service": "^3.0.0-rc.3",
     "@vue/eslint-config-airbnb": "^3.0.0-rc.3",
     "@vue/eslint-config-typescript": "^3.0.0-rc.3",
+    "all-contributors-cli": "^5.2.1",
     "babel-plugin-emotion": "^9.2.4",
     "babel-plugin-jsx-v-model": "^2.0.3",
     "electron": "^2.0.3",

@@ -1,0 +1,32 @@
+{
+  "projectName": "GoogleTranslate",
+  "projectOwner": "MoeFE",
+  "commit": false,
+  "contributors": [
+    {
+      "login": "u3u",
+      "name": "さくら",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20062482?v=4",
+      "profile": "https://qwq.cat",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "ideas"
+      ]
+    },
+    {
+      "login": "Batur24",
+      "name": "Batur",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/9591690?v=4",
+      "profile": "https://github.com/Batur24",
+      "contributions": [
+        "question",
+        "bug",
+        "ideas",
+        "test"
+      ]
+    }
+  ],
+  "repoType": "github"
+}
