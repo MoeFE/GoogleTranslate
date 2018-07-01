@@ -14,13 +14,13 @@
     "types": ["node"],
     "paths": {
       "@/*": ["src/*"],
-      "assets/*": ["src/assets/*"],
-      "components/*": ["src/components/*"],
-      "plugins/*": ["src/plugins/*"],
-      "router/*": ["src/router/*"],
-      "stores/*": ["src/store/*"],
-      "utils/*": ["src/utils/*"],
-      "views/*": ["src/views/*"]
+      "assets/*": ["src/renderer/assets/*"],
+      "components/*": ["src/renderer/components/*"],
+      "plugins/*": ["src/renderer/plugins/*"],
+      "router/*": ["src/renderer/router/*"],
+      "stores/*": ["src/renderer/store/*"],
+      "utils/*": ["src/renderer/utils/*"],
+      "views/*": ["src/renderer/views/*"]
     },
     "lib": ["es2015", "dom", "dom.iterable", "scripthost"],
     "plugins": [

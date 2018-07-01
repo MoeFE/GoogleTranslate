@@ -25,13 +25,18 @@ module.exports = {
         .loader('vue-jsx-hot-loader');
     }
 
+    config
+      .entry('app')
+      .clear()
+      .add('./src/renderer/main.ts');
+
     config.resolve.alias
-      .set('assets', path.resolve(__dirname, 'src/assets'))
-      .set('components', path.resolve(__dirname, 'src/components'))
-      .set('plugins', path.resolve(__dirname, 'src/plugins'))
-      .set('router', path.resolve(__dirname, 'src/router'))
-      .set('stores', path.resolve(__dirname, 'src/store'))
-      .set('utils', path.resolve(__dirname, 'src/utils'))
-      .set('views', path.resolve(__dirname, 'src/views'));
+      .set('assets', path.resolve(__dirname, 'src/renderer/assets'))
+      .set('components', path.resolve(__dirname, 'src/renderer/components'))
+      .set('plugins', path.resolve(__dirname, 'src/renderer/plugins'))
+      .set('router', path.resolve(__dirname, 'src/renderer/router'))
+      .set('stores', path.resolve(__dirname, 'src/renderer/store'))
+      .set('utils', path.resolve(__dirname, 'src/renderer/utils'))
+      .set('views', path.resolve(__dirname, 'src/renderer/views'));
   },
 };
