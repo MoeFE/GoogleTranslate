@@ -12,6 +12,9 @@
     "contributors": "all-contributors"
   },
   "dependencies": {
+    "animejs": "^2.2.0",
+    "autosize": "^4.0.2",
+    "lodash-decorators": "^6.0.0",
     "vue": "^2.5.16",
     "vue-class-component": "^6.2.0",
     "vue-emotion": "^0.4.2",
@@ -20,6 +23,8 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@types/animejs": "^2.0.0",
+    "@types/autosize": "^3.0.6",
     "@vue/cli-plugin-babel": "^3.0.0-rc.3",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.3",
     "@vue/cli-plugin-typescript": "^3.0.0-rc.3",
@@ -41,7 +46,7 @@
     "sass-loader": "^7.0.3",
     "source-map-support": "^0.5.6",
     "typescript-styled-plugin": "^0.7.0",
-    "vue-cli-plugin-electron-builder": "1.0.0-alpha.11",
+    "vue-cli-plugin-electron-builder": "1.0.0-beta.3",
     "vue-jsx-hot-loader": "^1.3.0",
     "vue-template-compiler": "^2.5.16",
     "vue-tsx-support": "^1.3.0"

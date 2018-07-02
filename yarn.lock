@@ -802,6 +802,20 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@types/animejs@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/@types/animejs/-/animejs-2.0.0.tgz#9163f06aba47595b99951d5560c10e78223f0e20"
+
+"@types/autosize@^3.0.6":
+  version "3.0.6"
+  resolved "https://registry.npmjs.org/@types/autosize/-/autosize-3.0.6.tgz#9022e6a783ec5a4d5e570013701dbc0bfe7667fa"
+  dependencies:
+    "@types/jquery" "*"
+
+"@types/jquery@*":
+  version "3.3.4"
+  resolved "https://registry.npmjs.org/@types/jquery/-/jquery-3.3.4.tgz#f1850fb9a70041a14ace4f81a7ed782db8548317"
+
 "@types/node@*":
   version "10.5.1"
   resolved "https://registry.npmjs.org/@types/node/-/node-10.5.1.tgz#d578446f4abff5c0b49ade9b4e5274f6badaadfc"
@@ -916,9 +930,9 @@
     webpack-merge "^4.1.2"
     yorkie "^1.0.3"
 
-"@vue/cli-service@https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/v1-dev/vue-cli-service-custom-1.tgz":
+"@vue/cli-service@https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/master/vue-cli-service-custom-1.tgz":
   version "3.0.0-rc.2"
-  resolved "https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/v1-dev/vue-cli-service-custom-1.tgz#eafb9935cf747113999462d349eb6b1dc624a10f"
+  resolved "https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/master/vue-cli-service-custom-1.tgz#eafb9935cf747113999462d349eb6b1dc624a10f"
   dependencies:
     "@vue/cli-overlay" "^3.0.0-rc.2"
     "@vue/cli-shared-utils" "^3.0.0-rc.2"
@@ -1264,6 +1278,10 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+animejs@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/animejs/-/animejs-2.2.0.tgz#35eefdfc535b81949c9cb06f0b3e60c02e6fdc80"
+
 ansi-align@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/ansi-align/-/ansi-align-2.0.0.tgz#c36aeccba563b89ceb556f3690f0b1d9e3547f7f"
@@ -1519,6 +1537,10 @@ autoprefixer@^8.4.1:
     num2fraction "^1.2.2"
     postcss "^6.0.23"
     postcss-value-parser "^3.2.3"
+
+autosize@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/autosize/-/autosize-4.0.2.tgz#073cfd07c8bf45da4b9fd153437f5bafbba1e4c9"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -3130,7 +3152,7 @@ electron-builder-lib@~20.17.2:
     stream-json "^1.0.3"
     temp-file "^3.1.3"
 
-electron-builder@^20.15.1:
+electron-builder@^20.18.0:
   version "20.18.0"
   resolved "https://registry.npmjs.org/electron-builder/-/electron-builder-20.18.0.tgz#aa40a1003c0d999fde6de93b8a7fffa7fe8e0f4d"
   dependencies:
@@ -5444,6 +5466,12 @@ locate-path@^3.0.0:
   dependencies:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
+
+lodash-decorators@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/lodash-decorators/-/lodash-decorators-6.0.0.tgz#4e0639ba639d738e5f4993acf54bf292cc95d851"
+  dependencies:
+    tslib "^1.9.2"
 
 lodash.assign@^4.2.0:
   version "4.2.0"
@@ -8539,7 +8567,7 @@ ts-loader@^4.3.1:
     micromatch "^3.1.4"
     semver "^5.0.1"
 
-tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.2:
   version "1.9.3"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
@@ -8912,12 +8940,12 @@ vue-class-component@^6.2.0:
   version "6.2.0"
   resolved "https://registry.npmjs.org/vue-class-component/-/vue-class-component-6.2.0.tgz#7adb1daa9a868c75f30f97f33f4f1b94aee62089"
 
-vue-cli-plugin-electron-builder@1.0.0-alpha.11:
-  version "1.0.0-alpha.11"
-  resolved "https://registry.npmjs.org/vue-cli-plugin-electron-builder/-/vue-cli-plugin-electron-builder-1.0.0-alpha.11.tgz#795bb09a397089ca4343d5d92530f4ae21596efb"
+vue-cli-plugin-electron-builder@1.0.0-beta.3:
+  version "1.0.0-beta.3"
+  resolved "https://registry.npmjs.org/vue-cli-plugin-electron-builder/-/vue-cli-plugin-electron-builder-1.0.0-beta.3.tgz#f3c2d6f252cf49df9510fe7d724494a98dcbb184"
   dependencies:
-    "@vue/cli-service" "https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/v1-dev/vue-cli-service-custom-1.tgz"
-    electron-builder "^20.15.1"
+    "@vue/cli-service" "https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/master/vue-cli-service-custom-1.tgz"
+    electron-builder "^20.18.0"
     execa "^0.10.0"
     fs-extra "^6.0.1"
     uglifyjs-webpack-plugin "^1.2.5"
