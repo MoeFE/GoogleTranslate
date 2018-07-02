@@ -47,15 +47,22 @@ function createMainWindow() {
 
   mb.on('after-create-window', () => {
     const { window } = mb;
+    const { webContents } = window;
     if (isDevelopment) {
-      window.webContents.openDevTools({ mode: 'undocked' });
+      webContents.openDevTools({ mode: 'undocked' });
     } else createProtocol('app');
 
     window.on('closed', () => {
       mainWindow = null;
     });
 
-    window.webContents.on('devtools-opened', () => {
+    webContents.on('did-finish-load', () => {
+      webContents.setZoomFactor(1);
+      webContents.setVisualZoomLevelLimits(1, 1);
+      webContents.setLayoutZoomLevelLimits(0, 0);
+    });
+
+    webContents.on('devtools-opened', () => {
       window.focus();
       setImmediate(() => {
         window.focus();
