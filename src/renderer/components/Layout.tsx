@@ -1,6 +1,6 @@
 import styled from 'vue-emotion';
 
-export const Window = styled.section`
+export default styled.section`
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -62,5 +62,6 @@ export const Main = styled.main`
     border-radius: 0 0 6px 6px;
     box-shadow: 0 0 0.5px;
     transform: translate(0.5px, 0.5px);
+    pointer-events: none;
   }
 `;
