@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop, Watch, Inject } from 'vue-property-decorator';
 import styled from 'vue-emotion';
 import autosize from 'autosize';
 
@@ -44,22 +44,53 @@ export default class TextBox extends Vue {
   @Prop({ type: String, required: false })
   private readonly value!: string;
 
+  private isComposition: boolean = false; // 是否正在输入法输入
+
+  @Inject('handleResize')
+  private readonly handleResize!: EventListenerOrEventListenerObject;
+
   @Watch('value', { immediate: true })
   private async handleChange() {
     await this.$nextTick();
     const tbox = this.$refs.tbox as HTMLTextAreaElement;
+    if (this.value) tbox.focus();
     if (tbox.value !== this.value) {
       tbox.value = this.value;
       autosize.update(tbox);
     }
   }
 
-  private handleInput(e: any) {
-    this.$emit('input', e.target.value);
+  private get text() {
+    return this.value;
+  }
+
+  private set text(e: any) {
+    // 等待输入法上屏后再更新值
+    if (!this.isComposition) this.$emit('input', e.target.value);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  private handleKeydown(e: Event) {
+    // 禁止回车键
+    if ((e as KeyboardEvent).keyCode === 13) {
+      e.preventDefault();
+    }
+  }
+
+  private handleComposition(e: Event) {
+    this.isComposition = e.type !== 'compositionend';
   }
 
   mounted() {
-    autosize(this.$refs.tbox as HTMLTextAreaElement);
+    const tbox = this.$refs.tbox as HTMLTextAreaElement;
+    tbox.addEventListener('autosize:resized', this.handleResize);
+    autosize(tbox);
+  }
+
+  beforeDestroy() {
+    const tbox = this.$refs.tbox as HTMLTextAreaElement;
+    tbox.removeEventListener('autosize:resized', this.handleResize);
+    autosize.destroy(tbox);
   }
 
   render() {
@@ -67,8 +98,11 @@ export default class TextBox extends Vue {
       <TextArea
         ref="tbox"
         rows={1}
-        value={this.value}
-        onInput={this.handleInput}
+        v-model={this.text}
+        onKeydown={this.handleKeydown}
+        onCompositionstart={this.handleComposition}
+        onCompositionupdate={this.handleComposition}
+        onCompositionend={this.handleComposition}
       />
     );
   }
