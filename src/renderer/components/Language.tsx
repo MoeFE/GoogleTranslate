@@ -21,8 +21,8 @@ const country = css`
   img {
     position: relative;
     z-index: 2;
-    width: 44px;
-    height: 44px;
+    width: 100%;
+    height: 100%;
   }
   &:after {
     content: '\\e602';
@@ -36,6 +36,7 @@ const country = css`
     opacity: 0;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: translate3d(-50%, -20px, 0);
+    pointer-events: none;
   }
   &:hover:after {
     opacity: 1;
@@ -130,6 +131,9 @@ export default class Language extends Vue {
   @Prop({ type: Boolean, required: false, default: false })
   private readonly allowClear!: boolean;
 
+  @Prop({ type: Boolean, required: false, default: false })
+  private readonly readOnly!: boolean;
+
   private get text(): string {
     return this.value;
   }
@@ -138,27 +142,34 @@ export default class Language extends Vue {
     this.$emit('input', value);
   }
 
+  public get tbox(): HTMLTextAreaElement {
+    return (this.$refs.tbox as TextBox).$el as HTMLTextAreaElement;
+  }
+
   private handleClear() {
     this.text = '';
   }
 
   render() {
-    const { allowClear } = this;
+    const { loading, allowClear, readOnly } = this;
 
     return (
       <Lang>
         <div class={country}>
           <Country code={this.country} />
         </div>
-        {this.loading ? (
+        {loading ? (
           <Loading />
         ) : (
-          <TextBox placeholder={languages[this.country]} v-model={this.text} />
+          <TextBox
+            ref="tbox"
+            placeholder={languages[this.country]}
+            readonly={readOnly}
+            v-model={this.text}
+          />
         )}
         <Action v-show={this.text}>
-          {allowClear ? (
-            <Icon type="clear" nativeOnClick={this.handleClear} />
-          ) : null}
+          {allowClear ? <Icon type="clear" onClick={this.handleClear} /> : null}
           <Icon
             type="speak"
             style={{ visibility: this.country === 'auto' ? 'hidden' : '' }}
