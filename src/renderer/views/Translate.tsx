@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Watch } from 'vue-property-decorator';
+import { Watch, Provide } from 'vue-property-decorator';
 import styled, { css } from 'vue-emotion';
 import Layout, { Main } from 'components/Layout';
 import Header from 'components/Header';
@@ -62,23 +62,26 @@ export default class Translate extends Vue {
   private source = { country: 'zh-CN', value: '', loading: false };
   private target = { country: 'en-UK', value: '', loading: false };
 
-  @Watch('source.value')
-  @Watch('target.value')
+  @Provide('handleResize')
   private async handleResize() {
-    await Tools.sleep();
     const form = this.$refs.form as HTMLFormElement;
     const formHeight = [...form.children]
       .map(el => el.clientHeight)
       .reduce((prev, next) => prev + next);
-    const height = 190 + (formHeight + 18) - 129; // eslint-disable-line no-mixed-operators
-    if (height !== window.innerHeight) {
-      form.scrollTop = 0;
-      Tools.resize(window.innerWidth, height);
+    const innerHeight = 190 + (formHeight + 18) - 129; // eslint-disable-line no-mixed-operators
+    if (innerHeight !== window.innerHeight) {
+      form.scrollTop = 0; // 滚动条位置始终设置为0，防止视觉抖动
+      Tools.resize(window.innerWidth, innerHeight);
     }
   }
 
-  private handleSwitch() {
-    [this.source, this.target] = [this.target, this.source];
+  private async handleSwitch(e: MouseEvent | string) {
+    await this.$nextTick();
+    if (typeof e === 'object' || this.target.value) {
+      [this.source, this.target] = [this.target, this.source];
+      (this.$refs.slang as Language).tbox.focus();
+      this.target.value = '';
+    }
   }
 
   activated() {
@@ -95,6 +98,7 @@ export default class Translate extends Vue {
         <Main style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
           <Form ref="form">
             <Language
+              ref="slang"
               country={this.source.country}
               loading={this.source.loading}
               v-model={this.source.value}
@@ -107,6 +111,8 @@ export default class Translate extends Vue {
               country={this.target.country}
               loading={this.target.loading}
               v-model={this.target.value}
+              readOnly={this.source.country === 'auto'}
+              onInput={this.handleSwitch}
             />
           </Form>
         </Main>
