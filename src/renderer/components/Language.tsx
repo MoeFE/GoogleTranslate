@@ -119,6 +119,10 @@ const Spin = styled.div`
 
 @Component
 export default class Language extends Vue {
+  public readonly $refs!: {
+    tbox: TextBox;
+  };
+
   @Prop({ type: String, required: false })
   private readonly value!: string;
 
@@ -143,7 +147,7 @@ export default class Language extends Vue {
   }
 
   public get tbox(): HTMLTextAreaElement {
-    return (this.$refs.tbox as TextBox).$el as HTMLTextAreaElement;
+    return this.$refs.tbox.$el as HTMLTextAreaElement;
   }
 
   private handleClear() {

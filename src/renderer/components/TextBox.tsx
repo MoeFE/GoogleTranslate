@@ -41,6 +41,10 @@ const TextArea = styled.textarea`
 
 @Component
 export default class TextBox extends Vue {
+  public readonly $refs!: {
+    tbox: HTMLTextAreaElement;
+  };
+
   @Prop({ type: String, required: false })
   private readonly value!: string;
 
@@ -52,7 +56,7 @@ export default class TextBox extends Vue {
   @Watch('value', { immediate: true })
   private async handleChange() {
     await this.$nextTick();
-    const tbox = this.$refs.tbox as HTMLTextAreaElement;
+    const { tbox } = this.$refs;
     if (this.value) tbox.focus();
     if (tbox.value !== this.value) {
       tbox.value = this.value;
@@ -82,13 +86,13 @@ export default class TextBox extends Vue {
   }
 
   mounted() {
-    const tbox = this.$refs.tbox as HTMLTextAreaElement;
+    const { tbox } = this.$refs;
     tbox.addEventListener('autosize:resized', this.handleResize);
     autosize(tbox);
   }
 
   beforeDestroy() {
-    const tbox = this.$refs.tbox as HTMLTextAreaElement;
+    const { tbox } = this.$refs;
     tbox.removeEventListener('autosize:resized', this.handleResize);
     autosize.destroy(tbox);
   }
