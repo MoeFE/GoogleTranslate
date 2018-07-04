@@ -1,4 +1,4 @@
-import { app, protocol } from 'electron';
+import { app, protocol, Menu, MenuItem } from 'electron';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 import { format as formatUrl } from 'url';
 import path from 'path';
@@ -40,6 +40,13 @@ function createMainWindow() {
       allowRunningInsecureContent: true,
     },
   });
+
+  if (!isDevelopment) {
+    const menu = new Menu();
+    menu.append(new MenuItem({ role: 'about' }));
+    menu.append(new MenuItem({ role: 'editMenu' }));
+    Menu.setApplicationMenu(menu);
+  }
 
   mb.on('after-create-window', () => {
     const { window } = mb;
