@@ -41,10 +41,6 @@ function createMainWindow() {
     },
   });
 
-  mb.on('show', () => {
-    mb.tray.setHighlightMode('selection');
-  });
-
   mb.on('after-create-window', () => {
     const { window } = mb;
     const { webContents } = window;
