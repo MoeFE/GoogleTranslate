@@ -133,6 +133,9 @@ export default class Language extends Vue {
   private readonly loading!: boolean;
 
   @Prop({ type: Boolean, required: false, default: false })
+  private readonly error!: boolean;
+
+  @Prop({ type: Boolean, required: false, default: false })
   private readonly allowClear!: boolean;
 
   @Prop({ type: Boolean, required: false, default: false })
@@ -171,6 +174,7 @@ export default class Language extends Vue {
         ) : (
           <TextBox
             ref="tbox"
+            style={{ color: this.error ? '#ff2600' : '' }}
             placeholder={languages[this.country]}
             readonly={readOnly}
             v-model={this.text}
