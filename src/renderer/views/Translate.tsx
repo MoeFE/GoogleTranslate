@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch, Provide } from 'vue-property-decorator';
 import styled, { css } from 'vue-emotion';
+import anime from 'animejs';
 import Layout, { Main } from 'components/Layout';
 import Header from 'components/Header';
 import Icon from 'components/Icon';
@@ -59,12 +60,18 @@ const Switch = styled(Icon)`
 
 @Component
 export default class Translate extends Vue {
+  public readonly $refs!: {
+    form: HTMLFormElement;
+    slang: Language;
+    switch: Vue;
+  };
+
   private source = { country: 'zh-CN', value: '', loading: false };
   private target = { country: 'en-UK', value: '', loading: false };
 
   @Provide('handleResize')
   private async handleResize() {
-    const form = this.$refs.form as HTMLFormElement;
+    const { form } = this.$refs;
     const formHeight = [...form.children]
       .map(el => el.clientHeight)
       .reduce((prev, next) => prev + next);
@@ -79,8 +86,12 @@ export default class Translate extends Vue {
     await this.$nextTick();
     if (typeof e === 'object' || this.target.value) {
       [this.source, this.target] = [this.target, this.source];
-      (this.$refs.slang as Language).tbox.focus();
+      this.$refs.slang.tbox.focus();
       this.target.value = '';
+      anime({
+        targets: this.$refs.switch.$el,
+        rotate: ['0deg', '180deg'],
+      });
     }
   }
 
@@ -105,7 +116,11 @@ export default class Translate extends Vue {
               allowClear
             />
             <Divider>
-              <Switch type="switch" nativeOnClick={this.handleSwitch} />
+              <Switch
+                ref="switch"
+                type="switch"
+                nativeOnClick={this.handleSwitch}
+              />
             </Divider>
             <Language
               country={this.target.country}
