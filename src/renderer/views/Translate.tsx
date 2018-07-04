@@ -1,5 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { remote } from 'electron';
+import referer from 'electron-referer';
+import url from 'url';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch, Provide } from 'vue-property-decorator';
@@ -9,6 +11,7 @@ import Layout, { Main } from 'components/Layout';
 import Header from 'components/Header';
 import Icon from 'components/Icon';
 import Language from 'components/Language';
+import Progress, { Spin } from 'components/Progress';
 import Tools from 'utils/tools';
 import * as tjs from 'translation.js';
 
@@ -83,12 +86,12 @@ export default class Translate extends Vue {
     'meta+v': this.handlePaste,
     'meta+shift+1': () => {},
     'meta+shift+2': () => {},
-    'meta+1': () => {},
-    'meta+2': () => {},
-    'meta+ctrl+1': () => {},
-    'meta+ctrl+2': () => {},
-    'meta+ctrl+3': () => {},
-    'meta+ctrl+4': () => {},
+    'meta+1': () => this.speak('source'),
+    'meta+2': () => this.speak('target'),
+    'meta+ctrl+1': () => this.translate('baidu'),
+    'meta+ctrl+2': () => this.translate('youdao'),
+    'meta+ctrl+3': () => this.translate('google', true),
+    'meta+ctrl+4': () => this.translate('google'),
     'meta+q': () => remote.app.quit(),
   };
 
@@ -98,6 +101,8 @@ export default class Translate extends Vue {
     key: 'zh-CN',
     country: 'zh-CN',
     value: '',
+    progress: 0,
+    action: true,
     loading: false,
     error: false,
   };
@@ -106,6 +111,8 @@ export default class Translate extends Vue {
     key: 'en',
     country: 'en-UK',
     value: '',
+    progress: 0,
+    action: true,
     loading: false,
     error: false,
   };
@@ -125,10 +132,16 @@ export default class Translate extends Vue {
 
   @Watch('source.value')
   private handleChangeSource() {
+    this.source.action = true;
     this.target.value = '';
     this.target.error = false;
     this.target.loading = false;
     this.$refs.slang.tbox.focus();
+  }
+
+  @Watch('target.value')
+  private handleChangeTarget() {
+    this.target.action = true;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -173,7 +186,7 @@ export default class Translate extends Vue {
         label: '说源语言',
         accelerator: 'Cmd+1',
         enabled: !!this.source.value && this.source.country !== 'auto',
-        click: () => {},
+        click: () => this.speak('source'),
       }),
     );
     menu.append(
@@ -181,7 +194,7 @@ export default class Translate extends Vue {
         label: '说目标语言',
         accelerator: 'Cmd+2',
         enabled: !!this.target.value,
-        click: () => {},
+        click: () => this.speak('target'),
       }),
     );
     menu.append(new MenuItem({ type: 'separator' }));
@@ -190,7 +203,7 @@ export default class Translate extends Vue {
         label: '使用百度翻译',
         accelerator: 'Ctrl+Cmd+1',
         enabled: !!this.source.value,
-        click: () => {},
+        click: () => this.translate('baidu'),
       }),
     );
     menu.append(
@@ -198,7 +211,7 @@ export default class Translate extends Vue {
         label: '使用有道翻译',
         accelerator: 'Ctrl+Cmd+2',
         enabled: !!this.source.value,
-        click: () => {},
+        click: () => this.translate('youdao'),
       }),
     );
     menu.append(
@@ -206,7 +219,7 @@ export default class Translate extends Vue {
         label: '使用谷歌翻译',
         accelerator: 'Ctrl+Cmd+3',
         enabled: !!this.source.value,
-        click: () => {},
+        click: () => this.translate('google', true),
       }),
     );
     menu.append(
@@ -214,7 +227,7 @@ export default class Translate extends Vue {
         label: '使用谷歌（国内）',
         accelerator: 'Ctrl+Cmd+4',
         enabled: !!this.source.value,
-        click: () => {},
+        click: () => this.translate('google'),
       }),
     );
     menu.append(new MenuItem({ type: 'separator' }));
@@ -259,21 +272,48 @@ export default class Translate extends Vue {
     });
   }
 
+  public async speak(t: 'source' | 'target') {
+    this[t].action = false;
+    const { value: text, key: from } = this[t];
+    const uri = await tjs.google.audio({ text, from, com: true });
+    await Tools.sleep(600);
+    if (text === this[t].value) {
+      const { protocol, hostname } = url.parse(uri);
+      referer(`${protocol}//${hostname}`);
+      this.audio.src = uri;
+      this.audio.play();
+      this.audio.onloadedmetadata = () => {
+        anime({
+          targets: this[t],
+          progress: 1,
+          duration: this.audio.duration * 1e3,
+          easing: 'linear',
+          complete: () => {
+            this[t].progress = 0;
+            this[t].action = true;
+          },
+        });
+      };
+    } else {
+      this[t].action = true;
+    }
+  }
+
   public async translate(
     engine: 'baidu' | 'google' | 'youdao' = 'google',
-    com: boolean = false,
+    com: boolean = true,
   ) {
     try {
       const { key: sourceLang, value } = this.source;
       const { key: targetLang } = this.target;
       if (value) {
+        this.target.loading = true;
         const lang = await tjs.google.detect({ text: value, com });
 
         // eslint-disable-next-line max-len
         const swap = lang !== sourceLang && [sourceLang, targetLang].includes(lang); // prettier-ignore
         const auto = swap || sourceLang === 'auto';
         const googl = tjs[engine] as typeof tjs.google;
-        this.target.loading = true;
         await Tools.sleep(200);
         const { text, result, dict } = await googl.translate({
           text: value,
@@ -338,10 +378,18 @@ export default class Translate extends Vue {
               ref="slang"
               v-model={this.source.value}
               country={this.source.country}
+              action={this.source.action}
               loading={this.source.loading}
               onEnter={this.handleTranslate}
+              onSpeak={() => this.speak('source')}
               allowClear
-            />
+            >
+              {this.source.progress > 0 ? (
+                <Progress slot="progress" value={this.source.progress} />
+              ) : !this.source.action ? (
+                <Spin slot="progress" />
+              ) : null}
+            </Language>
             <Divider>
               <Switch
                 ref="switch"
@@ -352,12 +400,20 @@ export default class Translate extends Vue {
             <Language
               v-model={this.target.value}
               country={this.target.country}
+              action={this.target.action}
               loading={this.target.loading}
               error={this.target.error}
               readOnly={this.source.country === 'auto'}
               onInput={this.handleSwitch}
               onEnter={this.handleSwitch}
-            />
+              onSpeak={() => this.speak('target')}
+            >
+              {this.target.progress > 0 ? (
+                <Progress slot="progress" value={this.target.progress} />
+              ) : !this.target.action ? (
+                <Spin slot="progress" />
+              ) : null}
+            </Language>
           </Form>
         </Main>
       </Layout>
