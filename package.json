@@ -15,6 +15,8 @@
     "animejs": "^2.2.0",
     "autosize": "^4.0.2",
     "lodash-decorators": "^6.0.0",
+    "translation.js": "^0.7.5",
+    "v-hotkey": "^0.2.3",
     "vue": "^2.5.16",
     "vue-class-component": "^6.2.0",
     "vue-emotion": "^0.4.2",
