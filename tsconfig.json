@@ -22,7 +22,13 @@
       "utils/*": ["src/renderer/utils/*"],
       "views/*": ["src/renderer/views/*"]
     },
-    "lib": ["es2015", "dom", "dom.iterable", "scripthost"],
+    "lib": [
+      "es2015",
+      "es2016.array.include",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
     "plugins": [
       {
         "name": "typescript-styled-plugin",
