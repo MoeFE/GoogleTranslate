@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import styled from 'vue-emotion';
 
 const Indicator = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   align-self: center;
