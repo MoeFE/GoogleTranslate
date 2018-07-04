@@ -8636,18 +8636,18 @@ typescript-eslint-parser@^16.0.0:
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-typescript-styled-plugin@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/typescript-styled-plugin/-/typescript-styled-plugin-0.8.0.tgz#21e9811cf7561a60391a3c2c457e269b38371abe"
+typescript-styled-plugin@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/typescript-styled-plugin/-/typescript-styled-plugin-0.8.1.tgz#2f7dcd291249681afc7dfeb598584b27f3a0f363"
   dependencies:
-    typescript-template-language-service-decorator "^1.4.0"
+    typescript-template-language-service-decorator "^1.5.0"
     vscode-css-languageservice "^3.0.9-next.19"
     vscode-emmet-helper "1.2.10"
     vscode-languageserver-types "^3.8.2"
 
-typescript-template-language-service-decorator@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/typescript-template-language-service-decorator/-/typescript-template-language-service-decorator-1.4.0.tgz#6486d614a0fddc93158dab768718cbf030243bc3"
+typescript-template-language-service-decorator@^1.5.0:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/typescript-template-language-service-decorator/-/typescript-template-language-service-decorator-1.6.1.tgz#36396ae5dcae945fc664b5f3ff8660b7ff1de95c"
 
 typescript@^2.5.1, typescript@~2.9.0:
   version "2.9.2"
