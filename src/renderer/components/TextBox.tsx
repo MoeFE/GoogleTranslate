@@ -78,6 +78,7 @@ export default class TextBox extends Vue {
     // 禁止回车键
     if ((e as KeyboardEvent).keyCode === 13) {
       e.preventDefault();
+      this.$emit('enter', e);
     }
   }
 

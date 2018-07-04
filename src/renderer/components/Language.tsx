@@ -154,6 +154,10 @@ export default class Language extends Vue {
     this.text = '';
   }
 
+  private handleEnter(e: Event) {
+    this.$emit('enter', e);
+  }
+
   render() {
     const { loading, allowClear, readOnly } = this;
 
@@ -170,6 +174,7 @@ export default class Language extends Vue {
             placeholder={languages[this.country]}
             readonly={readOnly}
             v-model={this.text}
+            onEnter={this.handleEnter}
           />
         )}
         <Action v-show={this.text}>
