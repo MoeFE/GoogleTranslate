@@ -36,6 +36,7 @@
     "all-contributors-cli": "^5.2.1",
     "babel-plugin-emotion": "^9.2.4",
     "babel-plugin-jsx-v-model": "^2.0.3",
+    "download": "^7.0.0",
     "electron": "^2.0.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-positioner": "^3.0.1",
