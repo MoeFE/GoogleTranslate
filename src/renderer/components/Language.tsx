@@ -91,30 +91,6 @@ const ProgressBar = styled(Action)`
   padding-right: 5px;
   box-sizing: border-box;
 `;
-
-const Spin = styled.div`
-  position: relative;
-  width: 28px;
-  height: 28px;
-  border-radius: 28px;
-  border: 2px solid transparent;
-  border-top-color: #3e83f8;
-  border-right-color: #3e83f8;
-  border-bottom-color: rgba(62, 131, 248, 0);
-  border-left-color: rgba(62, 131, 248, 0);
-  box-sizing: border-box;
-  background: #fff;
-  background-clip: padding-box;
-  animation: loading 0.8s linear infinite;
-  @keyframes loading {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-`;
 // #endregion
 
 @Component
@@ -128,6 +104,9 @@ export default class Language extends Vue {
 
   @Prop({ type: String, required: false, default: 'auto' })
   private readonly country!: string;
+
+  @Prop({ type: Boolean, required: false, default: true })
+  private readonly action!: boolean;
 
   @Prop({ type: Boolean, required: false, default: false })
   private readonly loading!: boolean;
@@ -157,12 +136,18 @@ export default class Language extends Vue {
     this.text = '';
   }
 
+  private handleSpeak(e: Event) {
+    this.$emit('speak', e);
+  }
+
   private handleEnter(e: Event) {
     this.$emit('enter', e);
   }
 
   render() {
-    const { loading, allowClear, readOnly } = this;
+    const {
+      loading, action, allowClear, readOnly,
+    } = this;
 
     return (
       <Lang>
@@ -181,13 +166,17 @@ export default class Language extends Vue {
             onEnter={this.handleEnter}
           />
         )}
-        <Action v-show={this.text}>
+        <Action v-show={this.text && this.action}>
           {allowClear ? <Icon type="clear" onClick={this.handleClear} /> : null}
           <Icon
             type="speak"
             style={{ visibility: this.country === 'auto' ? 'hidden' : '' }}
+            onClick={this.handleSpeak}
           />
         </Action>
+        {this.$slots.progress ? (
+          <ProgressBar>{this.$slots.progress}</ProgressBar>
+        ) : null}
       </Lang>
     );
   }
