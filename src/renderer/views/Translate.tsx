@@ -3,17 +3,20 @@ import { remote } from 'electron';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch, Provide } from 'vue-property-decorator';
+import { State, Mutation } from 'vuex-class';
 import styled, { css } from 'vue-emotion';
 import anime from 'animejs';
+import * as tjs from 'translation.js';
 import Layout, { Main } from 'components/Layout';
 import Header from 'components/Header';
 import Icon from 'components/Icon';
 import Language from 'components/Language';
 import Progress, { Spin } from 'components/Progress';
 import Tools from 'utils/tools';
-import * as tjs from 'translation.js';
+import { IState } from '../store';
 
-const { Menu, MenuItem } = remote;
+const { app, Menu, MenuItem } = remote;
+const currentWindow = remote.getCurrentWindow();
 const errMsg: any = {
   NETWORK_ERROR: '网络繁忙，请稍后再试',
   API_SERVER_ERROR: '翻译错误',
@@ -24,7 +27,7 @@ const errMsg: any = {
 // #region stylesheet
 const header = css`
   .icon-fixed {
-    transform: rotate(-45deg);
+    transform: rotate(0deg);
   }
   .icon-settings:after {
     content: '\\e601';
@@ -90,8 +93,11 @@ export default class Translate extends Vue {
     'meta+ctrl+2': () => this.translate('youdao'),
     'meta+ctrl+3': () => this.translate('google', true),
     'meta+ctrl+4': () => this.translate('google'),
-    'meta+q': () => remote.app.quit(),
+    'meta+q': () => app.quit(),
   };
+
+  @State('isAlwaysOnTop') private readonly isAlwaysOnTop!: boolean;
+  @Mutation('save') private readonly setState!: (payload: IState) => void;
 
   private readonly audio = new Audio();
 
@@ -144,7 +150,8 @@ export default class Translate extends Vue {
 
   // eslint-disable-next-line class-methods-use-this
   private handleClickFixed() {
-    // remote.getCurrentWindow().setAlwaysOnTop()
+    const isAlwaysOnTop = !currentWindow.isAlwaysOnTop();
+    this.setState({ isAlwaysOnTop });
   }
 
   private handleClickSetting() {
@@ -233,12 +240,10 @@ export default class Translate extends Vue {
       new MenuItem({
         label: '退出 Google 翻译',
         accelerator: 'Cmd+Q',
-        click: remote.app.quit,
+        click: app.quit,
       }),
     );
-    menu.popup({
-      window: remote.getCurrentWindow(),
-    });
+    menu.popup({ window: currentWindow });
   }
 
   private async handleSwitch(e: MouseEvent | string) {
@@ -363,10 +368,15 @@ export default class Translate extends Vue {
     return (
       <Layout v-hotkey={this.keymap}>
         <Header class={header}>
-          <Icon type="fixed" slot="left" onClick={this.handleClickFixed} />
           <Icon
-            type="settings"
+            slot="left"
+            type="fixed"
+            rotate={this.isAlwaysOnTop ? 0 : -45}
+            onClick={this.handleClickFixed}
+          />
+          <Icon
             slot="right"
+            type="settings"
             onClick={this.handleClickSetting}
           />
         </Header>
