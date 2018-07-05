@@ -86,7 +86,7 @@ const Action = styled.div`
   width: 60px;
 `;
 
-const ProgressBar = styled(Action)`
+const Progress = styled(Action)`
   margin: 8px 0;
   padding-right: 5px;
   box-sizing: border-box;
@@ -175,7 +175,7 @@ export default class Language extends Vue {
           />
         </Action>
         {this.$slots.progress ? (
-          <ProgressBar>{this.$slots.progress}</ProgressBar>
+          <Progress>{this.$slots.progress}</Progress>
         ) : null}
       </Lang>
     );
