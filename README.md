@@ -35,6 +35,11 @@
 
 您可以在[这里](https://github.com/MoeFE/GoogleTranslate/releases/latest)手动下载最新版本
 
+## FAQ
+
+Q：Electron 不是跨平台的吗？为什么只有 Mac 版本？  
+A：因为 UI 的交互设计不适用于其他操作系统
+
 ## 参与贡献
 
 1.  Fork it!
