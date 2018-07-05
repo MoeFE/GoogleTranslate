@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { remote } from 'electron';
-import referer from 'electron-referer';
-import url from 'url';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch, Provide } from 'vue-property-decorator';
@@ -273,29 +271,29 @@ export default class Translate extends Vue {
   }
 
   public async speak(t: 'source' | 'target') {
-    this[t].action = false;
     const { value: text, key: from } = this[t];
-    const uri = await tjs.google.audio({ text, from, com: true });
-    await Tools.sleep(600);
-    if (text === this[t].value) {
-      const { protocol, hostname } = url.parse(uri);
-      referer(`${protocol}//${hostname}`);
-      this.audio.src = uri;
-      this.audio.play();
-      this.audio.onloadedmetadata = () => {
-        anime({
-          targets: this[t],
-          progress: 1,
-          duration: this.audio.duration * 1e3,
-          easing: 'linear',
-          complete: () => {
-            this[t].progress = 0;
-            this[t].action = true;
-          },
-        });
-      };
-    } else {
-      this[t].action = true;
+    if (text) {
+      this[t].action = false;
+      const uri = await tjs.google.audio({ text, from, com: true });
+      await Tools.sleep(600);
+      if (text === this[t].value) {
+        this.audio.src = uri;
+        this.audio.play();
+        this.audio.onloadedmetadata = () => {
+          anime({
+            targets: this[t],
+            progress: 1,
+            duration: this.audio.duration * 1e3,
+            easing: 'linear',
+            complete: () => {
+              this[t].progress = 0;
+              this[t].action = true;
+            },
+          });
+        };
+      } else {
+        this[t].action = true;
+      }
     }
   }
 

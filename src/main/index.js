@@ -31,11 +31,11 @@ function createMainWindow() {
     resizable: false,
     minimizable: false,
     maximizable: false,
-    scrollBounce: true,
     showDockIcon: isDevelopment,
     transparent: true,
     alwaysOnTop: true,
     webPreferences: {
+      scrollBounce: true,
       webSecurity: false,
       allowRunningInsecureContent: true,
     },
@@ -54,6 +54,12 @@ function createMainWindow() {
     if (isDevelopment) {
       webContents.openDevTools({ mode: 'undocked' });
     } else createProtocol('app');
+
+    webContents.session.webRequest.onBeforeSendHeaders((detail, cb) => {
+      const { requestHeaders } = detail;
+      delete requestHeaders.Referer;
+      cb({ requestHeaders });
+    });
 
     window.on('closed', () => {
       mainWindow = null;
