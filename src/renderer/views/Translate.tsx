@@ -260,6 +260,10 @@ export default class Translate extends Vue {
     this.translate();
   }
 
+  private handlePause() {
+    this.audio.pause();
+  }
+
   private handleTranslate() {
     this.translate();
   }
@@ -285,11 +289,18 @@ export default class Translate extends Vue {
         this.audio.src = uri;
         this.audio.play();
         this.audio.onloadedmetadata = () => {
-          anime({
+          const animeInstance = anime({
             targets: this[t],
             progress: 1,
             duration: this.audio.duration * 1e3,
             easing: 'linear',
+            update: () => {
+              if (this.audio.paused) {
+                animeInstance.pause();
+                this[t].progress = 0;
+                this[t].action = true;
+              }
+            },
             complete: () => {
               this[t].progress = 0;
               this[t].action = true;
@@ -393,7 +404,11 @@ export default class Translate extends Vue {
               allowClear
             >
               {this.source.progress > 0 ? (
-                <Progress slot="progress" value={this.source.progress} />
+                <Progress
+                  slot="progress"
+                  value={this.source.progress}
+                  onPause={this.handlePause}
+                />
               ) : !this.source.action ? (
                 <Spin slot="progress" />
               ) : null}
@@ -417,7 +432,11 @@ export default class Translate extends Vue {
               onSpeak={() => this.speak('target')}
             >
               {this.target.progress > 0 ? (
-                <Progress slot="progress" value={this.target.progress} />
+                <Progress
+                  slot="progress"
+                  value={this.target.progress}
+                  onPause={this.handlePause}
+                />
               ) : !this.target.action ? (
                 <Spin slot="progress" />
               ) : null}

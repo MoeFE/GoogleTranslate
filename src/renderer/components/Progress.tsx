@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import styled from 'vue-emotion';
-import anime from 'animejs';
 
 const ProgressBar = styled.div`
   position: relative;
@@ -73,11 +72,15 @@ export default class Progress extends Vue {
     return (1 - this.value) * 295.416;
   }
 
+  private handlePause(e: Event) {
+    this.$emit('pause', e);
+  }
+
   render() {
     const { path, strokeWidth, strokeDashoffset } = this;
 
     return (
-      <ProgressBar>
+      <ProgressBar onClick={this.handlePause}>
         <svg viewBox="0 0 100 100">
           <path
             d={path}
