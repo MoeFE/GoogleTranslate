@@ -40,6 +40,9 @@
 Q：Electron 不是跨平台的吗？为什么只有 Mac 版本？  
 A：因为 UI 的交互设计不适用于其他操作系统
 
+Q：为什么不能自动更新？  
+A：因为我没有加入 [Apple Developer Program](https://developer.apple.com/programs/)（需要缴纳年费），无法进行[代码签名](https://electronjs.org/docs/tutorial/code-signing)，所以无法使用自动更新功能
+
 ## 参与贡献
 
 1.  Fork it!
@@ -66,6 +69,6 @@ A：因为 UI 的交互设计不适用于其他操作系统
 ## 协议
 
 [GNU General Public License v3.0](./LICENSE)  
-本项目仅供学习交流和私人使用，禁止用作商业用途
+本项目仅供学习交流和私人使用，禁止商业用途
 
 > [qwq.cat](https://qwq.cat) · GitHub [@u3u](https://github.com/u3u) · Twitter [@hanser0v0](https://twitter.com/hanser0v0)
