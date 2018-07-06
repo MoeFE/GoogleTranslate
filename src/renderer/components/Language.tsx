@@ -136,6 +136,10 @@ export default class Language extends Vue {
     this.text = '';
   }
 
+  private handleClick(e: Event) {
+    this.$emit('click', e);
+  }
+
   private handleSpeak(e: Event) {
     this.$emit('speak', e);
   }
@@ -152,7 +156,7 @@ export default class Language extends Vue {
     return (
       <Lang>
         <div class={country}>
-          <Country code={this.country} />
+          <Country code={this.country} onClick={this.handleClick} />
         </div>
         {loading ? (
           <Loading />

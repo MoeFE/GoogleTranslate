@@ -22,7 +22,11 @@ export default class Country extends Vue {
       : `http://${this.ssl ? 'ssl-' : ''}api.itranslateapp.com/flags/${this.code}${this.retina ? '-2x' : ''}.png`; // prettier-ignore
   }
 
+  private handleClick(e: Event) {
+    this.$emit('click', e);
+  }
+
   render() {
-    return <img src={this.src} draggable={false} />;
+    return <img src={this.src} draggable={false} onClick={this.handleClick} />;
   }
 }
