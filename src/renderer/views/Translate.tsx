@@ -373,6 +373,7 @@ export default class Translate extends Vue {
       translateY: [-40, 0],
       translateZ: 0,
     });
+    this.$refs.slang.tbox.focus();
   }
 
   render() {
