@@ -391,7 +391,7 @@ export default class Translate extends Vue {
             onClick={this.handleClickSetting}
           />
         </Header>
-        <Main style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+        <Main>
           <Form ref="form">
             <Language
               ref="slang"
