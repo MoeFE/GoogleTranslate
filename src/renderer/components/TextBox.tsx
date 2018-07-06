@@ -73,7 +73,6 @@ export default class TextBox extends Vue {
     if (!this.isComposition) this.$emit('input', e.target.value);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private handleKeydown(e: Event) {
     // 禁止回车键
     if ((e as KeyboardEvent).keyCode === 13) {
