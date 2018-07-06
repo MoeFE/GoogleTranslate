@@ -1,9 +1,9 @@
+/* eslint-disable global-require */
 import { app, protocol, Menu, MenuItem } from 'electron';
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 import { format as formatUrl } from 'url';
 import path from 'path';
 import createProtocol from 'vue-cli-plugin-electron-builder/lib/createProtocol';
-import menubar from './menubar';
+import menubar from './lib/menubar';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -46,14 +46,12 @@ function createMainWindow() {
     menu.append(new MenuItem({ role: 'about' }));
     menu.append(new MenuItem({ role: 'editMenu' }));
     Menu.setApplicationMenu(menu);
+    createProtocol('app');
   }
 
   mb.on('after-create-window', () => {
     const { window } = mb;
     const { webContents } = window;
-    if (isDevelopment) {
-      webContents.openDevTools({ mode: 'undocked' });
-    } else createProtocol('app');
 
     webContents.session.webRequest.onBeforeSendHeaders((detail, cb) => {
       const { requestHeaders } = detail;
@@ -69,6 +67,7 @@ function createMainWindow() {
       webContents.setZoomFactor(1);
       webContents.setVisualZoomLevelLimits(1, 1);
       webContents.setLayoutZoomLevelLimits(0, 0);
+      webContents.openDevTools({ mode: 'undocked' });
     });
 
     webContents.on('devtools-opened', () => {
@@ -99,9 +98,15 @@ app.on('activate', () => {
 
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
-  // https://electronjs.org/docs/tutorial/devtools-extension
-  installExtension(VUEJS_DEVTOOLS).catch((err) => {
-    console.log('Unable to install `vue-devtools`: \n', err);
-  });
+  if (isDevelopment) {
+    // https://electronjs.org/docs/tutorial/devtools-extension
+    const {
+      default: installExtension,
+      VUEJS_DEVTOOLS,
+    } = require('electron-devtools-installer');
+    installExtension(VUEJS_DEVTOOLS, true).catch((err) => {
+      console.log('Unable to install `vue-devtools`: \n', err);
+    });
+  }
   mainWindow = createMainWindow();
 });
