@@ -128,7 +128,7 @@ export default class Translate extends Vue {
       .map(el => el.clientHeight)
       .reduce((prev, next) => prev + next);
     const innerHeight = 190 + (formHeight + 18) - 129; // eslint-disable-line no-mixed-operators
-    if (innerHeight !== window.innerHeight) {
+    if (innerHeight >= 190 && innerHeight !== window.innerHeight) {
       form.scrollTop = 0; // 滚动条位置始终设置为0，防止视觉抖动
       Tools.resize(window.innerWidth, innerHeight);
     }
