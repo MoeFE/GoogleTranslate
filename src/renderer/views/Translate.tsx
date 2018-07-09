@@ -246,8 +246,7 @@ export default class Translate extends Vue {
     menu.popup({ window: currentWindow });
   }
 
-  private async handleSwitch(e: MouseEvent | string) {
-    await this.$nextTick();
+  private handleSwitch(e: MouseEvent | string) {
     const isInput = typeof e === 'string';
     if (!isInput || this.target.value) {
       this.switch(!isInput);
@@ -269,9 +268,11 @@ export default class Translate extends Vue {
   }
 
   public switch(translate: boolean = true) {
+  public async switch(translate: boolean = true) {
     [this.source, this.target] = [this.target, this.source];
     this.$refs.slang.tbox.focus();
     this.target.value = '';
+    await this.$nextTick();
     if (translate) this.translate();
     anime({
       targets: this.$refs.switch.$el,
