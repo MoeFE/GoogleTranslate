@@ -31,6 +31,7 @@ module.exports = {
       .add('./src/renderer/main.ts');
 
     config.resolve.alias
+      .set('emotion', path.resolve(__dirname, 'src/renderer/lib/emotion.js'))
       .set('assets', path.resolve(__dirname, 'src/renderer/assets'))
       .set('components', path.resolve(__dirname, 'src/renderer/components'))
       .set('plugins', path.resolve(__dirname, 'src/renderer/plugins'))
