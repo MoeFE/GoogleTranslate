@@ -85,6 +85,14 @@ export default class TextBox extends Vue {
     this.isComposition = e.type !== 'compositionend';
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  private handleBlur(e: Event) {
+    const evt = e as FocusEvent;
+    if (evt.relatedTarget === null && evt.target) {
+      (evt.target as HTMLTextAreaElement).focus();
+    }
+  }
+
   mounted() {
     const { tbox } = this.$refs;
     tbox.addEventListener('autosize:resized', this.handleResize);
@@ -107,6 +115,7 @@ export default class TextBox extends Vue {
         onCompositionstart={this.handleComposition}
         onCompositionupdate={this.handleComposition}
         onCompositionend={this.handleComposition}
+        onBlur={this.handleBlur}
       />
     );
   }
