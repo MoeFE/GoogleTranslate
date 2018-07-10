@@ -246,7 +246,8 @@ export default class Translate extends Vue {
     menu.popup({ window: currentWindow });
   }
 
-  private handleSwitch(e: MouseEvent | string) {
+  private async handleSwitch(e: MouseEvent | string) {
+    await this.$nextTick();
     const isInput = typeof e === 'string';
     if (!isInput || this.target.value) {
       this.switch(!isInput);
