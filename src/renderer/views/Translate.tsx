@@ -269,9 +269,7 @@ export default class Translate extends Vue {
       this.translate();
     }
   }
-  }
 
-  public switch(translate: boolean = true) {
   public async switch(translate: boolean = true) {
     [this.source, this.target] = [this.target, this.source];
     this.$refs.slang.tbox.focus();
