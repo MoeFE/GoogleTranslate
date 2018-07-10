@@ -265,7 +265,10 @@ export default class Translate extends Vue {
   }
 
   private handleTranslate() {
-    this.translate();
+    if (!this.target.value) {
+      this.translate();
+    }
+  }
   }
 
   public switch(translate: boolean = true) {
