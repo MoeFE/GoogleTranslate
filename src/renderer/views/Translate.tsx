@@ -334,7 +334,7 @@ export default class Translate extends Vue {
         const auto = swap || sourceLang === 'auto';
         const googl = tjs[engine] as typeof tjs.google;
         await Tools.sleep(200);
-        const { text, result, dict } = await googl.translate({
+        const { text, raw, dict } = await googl.translate({
           text: value,
           from: auto ? lang : sourceLang,
           to: swap ? sourceLang : targetLang,
@@ -353,8 +353,9 @@ export default class Translate extends Vue {
           ];
         }
         if (value === text) {
+          const result: string[] = raw.sentences.map(({ trans }: any) => trans);
           const hasResult = Array.isArray(result) && result.length > 0;
-          this.target.value = (hasResult ? (result as any)[0] : text) || value;
+          this.target.value = (hasResult ? (result as string[]).join('') : text) || value; // prettier-ignore
         }
       }
     } catch ({ code, message }) {
