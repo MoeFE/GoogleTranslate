@@ -66,3 +66,36 @@ export const Main = styled.main`
     pointer-events: none;
   }
 `;
+
+export const Close = styled.button`
+  display: flex;
+  align-items: center;
+  appearance: none;
+  text-decoration: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  color: #fff;
+  background: inherit;
+  outline: 0;
+  border: 0;
+  border-radius: 0 6px 0 0;
+  padding: 0 20px;
+  font-size: 14px !important;
+  font-weight: 500;
+  transition: 0.3s;
+  cursor: default;
+  &:active {
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2) inset;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: #357df3;
+  }
+`;
