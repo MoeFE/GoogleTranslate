@@ -31,6 +31,14 @@ export default class Input extends Vue {
     if (!this.isComposition) this.$emit('input', value);
   }
 
+  private handleKeydown(e: Event) {
+    // 禁止回车键
+    if ((e as KeyboardEvent).keyCode === 13) {
+      e.preventDefault();
+      this.$emit('enter', e);
+    }
+  }
+
   private handleComposition(e: Event) {
     this.isComposition = e.type !== 'compositionend';
   }
@@ -40,6 +48,7 @@ export default class Input extends Vue {
       <input
         class={input}
         v-model={this.text}
+        onKeydown={this.handleKeydown}
         onCompositionstart={this.handleComposition}
         onCompositionupdate={this.handleComposition}
         onCompositionend={this.handleComposition}
