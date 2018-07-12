@@ -34,9 +34,6 @@ module.exports = {
       .set('emotion', path.resolve(__dirname, 'src/renderer/lib/emotion.js'))
       .set('assets', path.resolve(__dirname, 'src/renderer/assets'))
       .set('components', path.resolve(__dirname, 'src/renderer/components'))
-      .set('plugins', path.resolve(__dirname, 'src/renderer/plugins'))
-      .set('router', path.resolve(__dirname, 'src/renderer/router'))
-      .set('stores', path.resolve(__dirname, 'src/renderer/store'))
       .set('utils', path.resolve(__dirname, 'src/renderer/utils'))
       .set('views', path.resolve(__dirname, 'src/renderer/views'));
   },
