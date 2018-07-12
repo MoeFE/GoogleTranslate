@@ -363,7 +363,7 @@ export default class Translate extends Vue {
         ? code
           ? errMsg[code]
           : message
-        : '网络连接已中断';
+        : '您需要连接互联网才能使用 Google 翻译';
     } finally {
       this.target.loading = false;
       await Tools.sleep();
