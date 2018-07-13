@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Comopnent from 'vue-class-component';
 import { injectGlobal } from 'vue-emotion';
+import LocaleProvider from 'components/LocaleProvider';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -44,11 +45,11 @@ injectGlobal`
 export default class App extends Vue {
   render() {
     return (
-      <div id="app">
-        <keep-alive>
+      <LocaleProvider locale="zh-CN">
+        <keep-alive exclude={['Language']}>
           <router-view />
         </keep-alive>
-      </div>
+      </LocaleProvider>
     );
   }
 }
