@@ -13,7 +13,7 @@ import Icon from 'components/Icon';
 import Language from 'components/Language';
 import Progress, { Spin } from 'components/Progress';
 import Tools from 'utils/tools';
-import { IState } from '../store';
+import { IState, ILang } from '../store';
 
 const { app, Menu, MenuItem } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -97,6 +97,8 @@ export default class Translate extends Vue {
   };
 
   @State('isAlwaysOnTop') private readonly isAlwaysOnTop!: boolean;
+  @State('sourceLang') private readonly sourceLang!: ILang;
+  @State('targetLang') private readonly targetLang!: ILang;
   @Mutation('save') private readonly setState!: (payload: IState) => void;
 
   private readonly audio = new Audio();
@@ -148,7 +150,17 @@ export default class Translate extends Vue {
     this.target.action = true;
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  @Watch('source.key')
+  @Watch('source.country')
+  @Watch('target.key')
+  @Watch('target.country')
+  private handleChangeLangs() {
+    this.setState({
+      sourceLang: { key: this.source.key, country: this.source.country },
+      targetLang: { key: this.target.key, country: this.target.country },
+    });
+  }
+
   private handleClickFixed() {
     const isAlwaysOnTop = !currentWindow.isAlwaysOnTop();
     this.setState({ isAlwaysOnTop });
@@ -271,7 +283,6 @@ export default class Translate extends Vue {
   }
   }
 
-  public switch(translate: boolean = true) {
   public async switch(translate: boolean = true) {
     [this.source, this.target] = [this.target, this.source];
     this.$refs.slang.tbox.focus();
@@ -284,36 +295,36 @@ export default class Translate extends Vue {
     });
   }
 
-  public async speak(t: 'source' | 'target') {
-    const { value: text, key: from } = this[t];
+  public async speak(type: 'source' | 'target') {
+    const { value: text, key: from } = this[type];
     if (text) {
-      this[t].action = false;
+      this[type].action = false;
       const uri = await tjs.google.audio({ text, from, com: true });
       await Tools.sleep(600);
-      if (text === this[t].value) {
+      if (text === this[type].value) {
         this.audio.src = uri;
         this.audio.play();
         this.audio.onloadedmetadata = () => {
           const animeInstance = anime({
-            targets: this[t],
+            targets: this[type],
             progress: 1,
             duration: this.audio.duration * 1e3,
             easing: 'linear',
             update: () => {
               if (this.audio.paused) {
                 animeInstance.pause();
-                this[t].progress = 0;
-                this[t].action = true;
+                this[type].progress = 0;
+                this[type].action = true;
               }
             },
             complete: () => {
-              this[t].progress = 0;
-              this[t].action = true;
+              this[type].progress = 0;
+              this[type].action = true;
             },
           });
         };
       } else {
-        this[t].action = true;
+        this[type].action = true;
       }
     }
   }
@@ -379,7 +390,12 @@ export default class Translate extends Vue {
     }
   }
 
-  activated() {
+  created() {
+    Object.assign(this.source, this.sourceLang);
+    Object.assign(this.target, this.targetLang);
+  }
+
+  async activated() {
     Tools.resize(window.innerWidth, 190);
     anime({
       targets: 'form',

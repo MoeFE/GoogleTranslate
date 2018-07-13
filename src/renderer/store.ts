@@ -5,13 +5,28 @@ import store from 'store';
 
 Vue.use(Vuex);
 
+export interface ILang {
+  key: string;
+  country: string;
+}
+
 export interface IState {
   isAlwaysOnTop?: boolean;
+  sourceLang?: ILang;
+  targetLang?: ILang;
 }
 
 const currentWindow = remote.getCurrentWindow();
 const initState: IState = {
   isAlwaysOnTop: true,
+  sourceLang: {
+    key: 'zh-CN',
+    country: 'zh-CN',
+  },
+  targetLang: {
+    key: 'en',
+    country: 'en-UK',
+  },
 };
 
 const s = new Vuex.Store<IState>({
