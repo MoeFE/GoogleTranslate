@@ -1750,6 +1750,12 @@ export const languages = [
   },
 ];
 
+const { dialects } = languages[0];
+const language = dialects[0];
+
+export type IDialects = typeof dialects;
+export type ILanguage = typeof language;
+
 export default {
   languages_count: 92,
   dialects_count: 101,
