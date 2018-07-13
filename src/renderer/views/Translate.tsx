@@ -284,6 +284,7 @@ export default class Translate extends Vue {
   }
 
   public async switch(translate: boolean = true) {
+    if (this.source.key === 'auto') return;
     [this.source, this.target] = [this.target, this.source];
     this.$refs.slang.tbox.focus();
     this.target.value = '';
@@ -341,7 +342,7 @@ export default class Translate extends Vue {
         const lang = await tjs.google.detect({ text: value, com });
 
         // eslint-disable-next-line max-len
-        const swap = lang !== sourceLang && [sourceLang, targetLang].includes(lang); // prettier-ignore
+        const swap = sourceLang !== 'auto' && lang !== sourceLang && [sourceLang, targetLang].includes(lang); // prettier-ignore
         const auto = swap || sourceLang === 'auto';
         const googl = tjs[engine] as typeof tjs.google;
         await Tools.sleep(200);
@@ -448,6 +449,7 @@ export default class Translate extends Vue {
                 ref="switch"
                 type="switch"
                 nativeOnClick={this.handleSwitch}
+                disabled={this.source.key === 'auto'}
               />
             </Divider>
             <Language
