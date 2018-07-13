@@ -1,17 +1,11 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Inject } from 'vue-property-decorator';
 import styled, { css } from 'vue-emotion';
 import Icon from './Icon';
 import Country from './Country';
 import Loading from './Loading';
 import TextBox from './TextBox';
-
-const languages: any = {
-  auto: '检测语言',
-  'zh-CN': '中文（简体）',
-  'en-UK': '英语',
-};
 
 // #region stylesheet
 const country = css`
@@ -120,6 +114,8 @@ export default class Language extends Vue {
   @Prop({ type: Boolean, required: false, default: false })
   private readonly readOnly!: boolean;
 
+  @Inject() private readonly localeProvider!: any;
+
   private get text(): string {
     return this.value;
   }
@@ -152,6 +148,7 @@ export default class Language extends Vue {
     const {
       loading, action, allowClear, readOnly,
     } = this;
+    const { languages } = this.localeProvider;
 
     return (
       <Lang>
@@ -170,7 +167,7 @@ export default class Language extends Vue {
             onEnter={this.handleEnter}
           />
         )}
-        <Action v-show={this.text && this.action}>
+        <Action v-show={this.text && action}>
           {allowClear ? <Icon type="clear" onClick={this.handleClear} /> : null}
           <Icon
             type="speak"
