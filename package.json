@@ -41,7 +41,7 @@
     "babel-plugin-emotion": "^9.2.5",
     "babel-plugin-jsx-v-model": "^2.0.3",
     "download": "^7.1.0",
-    "electron": "^2.0.4",
+    "electron": "^2.0.5",
     "electron-devtools-installer": "^2.2.4",
     "electron-positioner": "^3.0.1",
     "emotion": "^9.2.5",
