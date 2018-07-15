@@ -35,7 +35,7 @@
     "@vue/cli-plugin-eslint": "^3.0.0-rc.4",
     "@vue/cli-plugin-typescript": "^3.0.0-rc.4",
     "@vue/cli-service": "^3.0.0-rc.4",
-    "@vue/eslint-config-airbnb": "^3.0.0-rc.3",
+    "@vue/eslint-config-airbnb": "^3.0.0-rc.4",
     "@vue/eslint-config-typescript": "^3.0.0-rc.4",
     "all-contributors-cli": "^5.2.1",
     "babel-plugin-emotion": "^9.2.5",
