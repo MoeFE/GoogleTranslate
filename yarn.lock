@@ -836,6 +836,10 @@
   version "10.5.1"
   resolved "https://registry.npmjs.org/@types/node/-/node-10.5.1.tgz#d578446f4abff5c0b49ade9b4e5274f6badaadfc"
 
+"@types/node@^10.5.2":
+  version "10.5.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.2.tgz#f19f05314d5421fe37e74153254201a7bf00a707"
+
 "@types/node@^8.0.24":
   version "8.10.20"
   resolved "https://registry.npmjs.org/@types/node/-/node-8.10.20.tgz#fe674ea52e13950ab10954433a7824438aabbcac"
@@ -888,15 +892,15 @@
     eslint-plugin-vue "^4.5.0"
     launch-editor "^2.2.1"
 
-"@vue/cli-plugin-typescript@^3.0.0-rc.3":
-  version "3.0.0-rc.3"
-  resolved "https://registry.npmjs.org/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.0-rc.3.tgz#09877621a394fbd26ba3b30cec4def5b6d9709a3"
+"@vue/cli-plugin-typescript@^3.0.0-rc.4":
+  version "3.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.0-rc.4.tgz#d33996d6ec862e017d599b0ce580fe0d637c45d4"
   dependencies:
-    "@types/node" "^9.3.0"
-    "@vue/cli-shared-utils" "^3.0.0-rc.3"
-    fork-ts-checker-webpack-plugin "^0.4.1"
+    "@types/node" "^10.5.2"
+    "@vue/cli-shared-utils" "^3.0.0-rc.4"
+    fork-ts-checker-webpack-plugin "^0.4.3"
     globby "^8.0.1"
-    ts-loader "^4.3.1"
+    ts-loader "^4.4.2"
     tslint "^5.10.0"
     typescript "~2.9.0"
 
@@ -1007,7 +1011,7 @@
     webpack-merge "^4.1.2"
     yorkie "^1.0.3"
 
-"@vue/cli-shared-utils@^3.0.0-rc.2", "@vue/cli-shared-utils@^3.0.0-rc.3":
+"@vue/cli-shared-utils@^3.0.0-rc.2":
   version "3.0.0-rc.3"
   resolved "https://registry.npmjs.org/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.3.tgz#5fa73945ad82fc8b6e1e88bd171225c8388a8801"
   dependencies:
@@ -4554,9 +4558,9 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.npmjs.org/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
-fork-ts-checker-webpack-plugin@^0.4.1:
-  version "0.4.2"
-  resolved "https://registry.npmjs.org/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-0.4.2.tgz#8b57b736a6623110ee8899f575aef044d64a38ba"
+fork-ts-checker-webpack-plugin@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-0.4.3.tgz#f08baa5122ee3de8760c5935e724f4f9f214fea8"
   dependencies:
     babel-code-frame "^6.22.0"
     chalk "^1.1.3"
@@ -9506,9 +9510,9 @@ tryer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
 
-ts-loader@^4.3.1:
+ts-loader@^4.4.2:
   version "4.4.2"
-  resolved "https://registry.npmjs.org/ts-loader/-/ts-loader-4.4.2.tgz#778d4464b24436873c78f7f9e914d88194c2a248"
+  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-4.4.2.tgz#778d4464b24436873c78f7f9e914d88194c2a248"
   dependencies:
     chalk "^2.3.0"
     enhanced-resolve "^4.0.0"
