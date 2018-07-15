@@ -85,8 +85,8 @@ export default class Translate extends Vue {
     'meta+,': () => {},
     'meta+s': this.handleSwitch,
     'meta+v': this.handlePaste,
-    'meta+shift+1': () => {},
-    'meta+shift+2': () => {},
+    'meta+shift+1': () => this.changeLanguage('source'),
+    'meta+shift+2': () => this.changeLanguage('target'),
     'meta+1': () => this.speak('source'),
     'meta+2': () => this.speak('target'),
     'meta+ctrl+1': () => this.translate('baidu'),
@@ -188,14 +188,14 @@ export default class Translate extends Vue {
       new MenuItem({
         label: '更改源语言',
         accelerator: 'Shift+Cmd+1',
-        click: () => {},
+        click: () => this.changeLanguage('source'),
       }),
     );
     menu.append(
       new MenuItem({
         label: '更改目标语言',
         accelerator: 'Shift+Cmd+2',
-        click: () => {},
+        click: () => this.changeLanguage('target'),
       }),
     );
     menu.append(
@@ -281,6 +281,17 @@ export default class Translate extends Vue {
       this.translate();
     }
   }
+
+  private changeLanguage(type: 'source' | 'target') {
+    const { key, country } = this[type];
+    this.$router.push({
+      name: 'language',
+      query: {
+        type,
+        key,
+        country,
+      },
+    });
   }
 
   public async switch(translate: boolean = true) {
@@ -404,6 +415,14 @@ export default class Translate extends Vue {
       translateZ: 0,
     });
     this.$refs.slang.tbox.focus();
+    const { key, country } = this.$route.query;
+    const type = this.$route.query.type as 'source' | 'target' | null;
+    if (type && key && country) {
+      this[type].key = key;
+      this[type].country = country;
+    }
+    await this.$nextTick();
+    this.translate();
   }
 
   render() {
@@ -430,6 +449,7 @@ export default class Translate extends Vue {
               country={this.source.country}
               action={this.source.action}
               loading={this.source.loading}
+              onClick={() => this.changeLanguage('source')}
               onEnter={this.handleTranslate}
               onSpeak={() => this.speak('source')}
               allowClear
@@ -459,6 +479,7 @@ export default class Translate extends Vue {
               loading={this.target.loading}
               error={this.target.error}
               readOnly={this.source.country === 'auto'}
+              onClick={() => this.changeLanguage('target')}
               onInput={this.handleSwitch}
               onEnter={this.handleSwitch}
               onSpeak={() => this.speak('target')}
