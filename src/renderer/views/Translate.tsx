@@ -175,6 +175,16 @@ export default class Translate extends Vue {
         click: () => {},
       }),
     );
+    menu.append(
+      new MenuItem({
+        label: '帮助',
+        click: () => {
+          remote.shell.openExternal(
+            'https://github.com/MoeFE/GoogleTranslate/issues',
+          );
+        },
+      }),
+    );
     menu.append(new MenuItem({ type: 'separator' }));
     menu.append(
       new MenuItem({
