@@ -134,3 +134,50 @@ export const Switch = {
     );
   `,
 };
+
+export const Radio = {
+  Layout: styled.label`
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &:not(:nth-last-of-type(1)) {
+      margin-right: 10px;
+    }
+    input[type='radio'] {
+      display: none;
+      &:checked + i {
+        background: #3497ff;
+        border-color: transparent;
+        &:before {
+          transform: scale(1);
+        }
+      }
+    }
+  `,
+  Button: styled.i`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #cdcdcd;
+    border-radius: 14px;
+    background: #fff;
+    margin-right: 5px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+    &:before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+      transition: 0.1s ease-in-out;
+      transform: scale(0);
+    }
+  `,
+};
