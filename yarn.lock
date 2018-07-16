@@ -852,9 +852,9 @@
   version "2.0.2"
   resolved "https://registry.npmjs.org/@types/storejs/-/storejs-2.0.2.tgz#e1f6ab3a7e933ee10dd0614eeb522ab95fae8046"
 
-"@vue/babel-preset-app@^3.0.0-rc.4":
-  version "3.0.0-rc.4"
-  resolved "https://registry.npmjs.org/@vue/babel-preset-app/-/babel-preset-app-3.0.0-rc.4.tgz#a1fe2c9f11f30b381eba32723360a48e6f0d72bb"
+"@vue/babel-preset-app@^3.0.0-rc.5":
+  version "3.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@vue/babel-preset-app/-/babel-preset-app-3.0.0-rc.5.tgz#7069a37ed7a536cc962f871b943b75922c61f8f9"
   dependencies:
     "@babel/plugin-syntax-jsx" "7.0.0-beta.47"
     "@babel/plugin-transform-runtime" "7.0.0-beta.47"
@@ -873,12 +873,12 @@
   version "3.0.0-rc.4"
   resolved "https://registry.npmjs.org/@vue/cli-overlay/-/cli-overlay-3.0.0-rc.4.tgz#59fab2d5294f6b8e637635e27cefb82604adfa5e"
 
-"@vue/cli-plugin-babel@^3.0.0-rc.4":
-  version "3.0.0-rc.4"
-  resolved "https://registry.npmjs.org/@vue/cli-plugin-babel/-/cli-plugin-babel-3.0.0-rc.4.tgz#31c87d57984f5f14fa484c187483045fba31e6b0"
+"@vue/cli-plugin-babel@^3.0.0-rc.5":
+  version "3.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-3.0.0-rc.5.tgz#73d710f970fd2b08ae13ff4669458c1989a9b058"
   dependencies:
     "@babel/core" "7.0.0-beta.47"
-    "@vue/babel-preset-app" "^3.0.0-rc.4"
+    "@vue/babel-preset-app" "^3.0.0-rc.5"
     babel-loader "^8.0.0-0"
 
 "@vue/cli-plugin-eslint@^3.0.0-rc.4":
