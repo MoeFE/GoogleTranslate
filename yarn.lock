@@ -869,9 +869,9 @@
   version "3.0.0-rc.3"
   resolved "https://registry.npmjs.org/@vue/cli-overlay/-/cli-overlay-3.0.0-rc.3.tgz#4ebb2236bd48a30b08e8b02e34331fd8a91c5437"
 
-"@vue/cli-overlay@^3.0.0-rc.4":
-  version "3.0.0-rc.4"
-  resolved "https://registry.npmjs.org/@vue/cli-overlay/-/cli-overlay-3.0.0-rc.4.tgz#59fab2d5294f6b8e637635e27cefb82604adfa5e"
+"@vue/cli-overlay@^3.0.0-rc.5":
+  version "3.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-3.0.0-rc.5.tgz#0a61adb1b6af9a2fce75b97cc83c54ee5227f629"
 
 "@vue/cli-plugin-babel@^3.0.0-rc.4":
   version "3.0.0-rc.4"
@@ -904,13 +904,13 @@
     tslint "^5.10.0"
     typescript "~2.9.0"
 
-"@vue/cli-service@^3.0.0-rc.4":
-  version "3.0.0-rc.4"
-  resolved "https://registry.npmjs.org/@vue/cli-service/-/cli-service-3.0.0-rc.4.tgz#d69e92ea2e6fc4ecc41e4effb263be8625865a0f"
+"@vue/cli-service@^3.0.0-rc.5":
+  version "3.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.0.0-rc.5.tgz#ed931795d7efebcd4afe794fc845874ddfacce63"
   dependencies:
     "@intervolga/optimize-cssnano-plugin" "^1.0.5"
-    "@vue/cli-overlay" "^3.0.0-rc.4"
-    "@vue/cli-shared-utils" "^3.0.0-rc.4"
+    "@vue/cli-overlay" "^3.0.0-rc.5"
+    "@vue/cli-shared-utils" "^3.0.0-rc.5"
     "@vue/preload-webpack-plugin" "^1.0.0"
     "@vue/web-component-wrapper" "^1.2.0"
     acorn "^5.7.1"
@@ -1028,6 +1028,21 @@
 "@vue/cli-shared-utils@^3.0.0-rc.4":
   version "3.0.0-rc.4"
   resolved "https://registry.npmjs.org/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.4.tgz#c66b99080cc830b7c3da11359aefd0de833ee996"
+  dependencies:
+    chalk "^2.4.1"
+    execa "^0.10.0"
+    joi "^13.0.0"
+    node-ipc "^9.1.1"
+    opn "^5.3.0"
+    ora "^2.1.0"
+    request "^2.87.0"
+    request-promise-native "^1.0.5"
+    semver "^5.5.0"
+    string.prototype.padstart "^3.0.0"
+
+"@vue/cli-shared-utils@^3.0.0-rc.5":
+  version "3.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.5.tgz#665cc1af7454609313cd1de68ba1dddd82f3c4de"
   dependencies:
     chalk "^2.4.1"
     execa "^0.10.0"
