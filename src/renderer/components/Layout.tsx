@@ -99,3 +99,38 @@ export const Close = styled.button`
     background: #357df3;
   }
 `;
+
+export const Switch = {
+  Layout: styled.div`
+    position: relative;
+    width: 50px;
+    height: 30px;
+    border: 1px solid ${(props: any) => (props.active ? '#4cd964' : '#bebebe')};
+    background: ${(props: any) => (props.active ? '#4cd964' : 'transparent')};
+    border-radius: 30px;
+    transition: 0.2s ease-in-out;
+    box-sizing: border-box;
+  `,
+  Handle: styled.div`
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: ${(props: any) => (props.active && props.dragging ? -7 : 0)}px;
+    width: ${(props: any) => (props.dragging ? 35 : 28)}px;
+    height: 28px;
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    transition-duration: ${(props: any) => (props.dragging ? 0.2 : 0.3)}s;
+    transition-timing-function: ${(props: any) =>
+    (props.dragging
+      ? 'ease-in-out'
+      : 'cubic-bezier(0.175, 0.885, 0.32, 1.275)')};
+    transform: translate3d(
+      ${(props: any) => (props.active ? '19px' : 0)},
+      0,
+      0
+    );
+  `,
+};
