@@ -100,6 +100,30 @@ export const Close = styled.button`
   }
 `;
 
+export const Panel = {
+  Layout: styled.div`
+    position: relative;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 6px;
+    background: #ededed;
+    box-sizing: border-box;
+  `,
+  Title: styled.h3`
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 10px;
+  `,
+  Body: styled.div`
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+  `,
+};
+
 export const Switch = {
   Layout: styled.div`
     position: relative;
