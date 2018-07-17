@@ -41,8 +41,8 @@ export const Spin = styled.div`
   box-sizing: border-box;
   background: #fff;
   background-clip: padding-box;
-  animation: loading 0.8s linear infinite;
-  @keyframes loading {
+  animation: spin-loading 0.8s linear infinite;
+  @keyframes spin-loading {
     0% {
       transform: rotate(0deg);
     }
