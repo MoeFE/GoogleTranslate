@@ -3740,9 +3740,9 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.47, electron-to-chromium@
   version "1.3.52"
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.52.tgz#d2d9f1270ba4a3b967b831c40ef71fb4d9ab5ce0"
 
-electron@^3.0.0-beta.2:
-  version "3.0.0-beta.2"
-  resolved "https://registry.npmjs.org/electron/-/electron-3.0.0-beta.2.tgz#552e2825cc6147dc56936a08d40582a90cc3488c"
+electron@^3.0.0-beta.3:
+  version "3.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.0-beta.3.tgz#fd1db60aa312c79edfdd303820062e8fd46056e7"
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^4.1.0"
