@@ -3,7 +3,7 @@ import { remote } from 'electron';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch, Provide } from 'vue-property-decorator';
-import { State, Mutation } from 'vuex-class';
+import { State, Getter, Mutation } from 'vuex-class';
 import styled, { css } from 'vue-emotion';
 import anime from 'animejs';
 import * as tjs from 'translation.js';
@@ -82,7 +82,7 @@ export default class Translate extends Vue {
   };
 
   private keymap = {
-    'meta+,': () => {},
+    'meta+,': this.handleClickSettings,
     'meta+s': this.handleSwitch,
     'meta+v': this.handlePaste,
     'meta+shift+1': () => this.changeLanguage('source'),
@@ -97,6 +97,7 @@ export default class Translate extends Vue {
   };
 
   @State('isAlwaysOnTop') private readonly isAlwaysOnTop!: boolean;
+  @Getter('translateParams') private readonly translateParams!: any[];
   @State('sourceLang') private readonly sourceLang!: ILang;
   @State('targetLang') private readonly targetLang!: ILang;
   @Mutation('save') private readonly setState!: (payload: IState) => void;
@@ -172,7 +173,7 @@ export default class Translate extends Vue {
       new MenuItem({
         label: '偏好设置',
         accelerator: 'Cmd+,',
-        click: () => {},
+        click: () => this.handleClickSettings(),
       }),
     );
     menu.append(
@@ -279,7 +280,7 @@ export default class Translate extends Vue {
   private async handlePaste() {
     const { value } = this.source;
     await Tools.eventLoop(() => value !== this.source.value);
-    this.translate();
+    this.translate(...this.translateParams);
   }
 
   private handlePause() {
@@ -288,8 +289,12 @@ export default class Translate extends Vue {
 
   private handleTranslate() {
     if (!this.target.value) {
-      this.translate();
+      this.translate(...this.translateParams);
     }
+  }
+
+  private handleClickSettings() {
+    this.$router.push({ name: 'settings' });
   }
 
   private changeLanguage(type: 'source' | 'target') {
@@ -310,7 +315,7 @@ export default class Translate extends Vue {
     this.$refs.slang.tbox.focus();
     this.target.value = '';
     await this.$nextTick();
-    if (translate) this.translate();
+    if (translate) this.translate(...this.translateParams);
     anime({
       targets: this.$refs.switch.$el,
       rotate: ['0deg', '180deg'],
@@ -432,7 +437,7 @@ export default class Translate extends Vue {
       this[type].country = country;
     }
     await this.$nextTick();
-    this.translate();
+    this.translate(...this.translateParams);
   }
 
   render() {
