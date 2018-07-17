@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "animejs": "^2.2.0",
+    "auto-launch": "^5.0.5",
     "autosize": "^4.0.2",
     "keycode": "^2.2.0",
     "lodash-decorators": "^6.0.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/animejs": "^2.0.0",
+    "@types/auto-launch": "^5.0.0",
     "@types/autosize": "^3.0.6",
     "@types/storejs": "^2.0.2",
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",

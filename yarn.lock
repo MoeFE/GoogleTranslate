@@ -818,6 +818,10 @@
   version "2.0.0"
   resolved "https://registry.npmjs.org/@types/animejs/-/animejs-2.0.0.tgz#9163f06aba47595b99951d5560c10e78223f0e20"
 
+"@types/auto-launch@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/@types/auto-launch/-/auto-launch-5.0.0.tgz#ea0ebe9ccb2f1616d5d528de3b9f74438c1dada5"
+
 "@types/autosize@^3.0.6":
   version "3.0.6"
   resolved "https://registry.npmjs.org/@types/autosize/-/autosize-3.0.6.tgz#9022e6a783ec5a4d5e570013701dbc0bfe7667fa"
@@ -1380,6 +1384,10 @@ app-root-path@^2.0.1:
   version "2.1.0"
   resolved "https://registry.npmjs.org/app-root-path/-/app-root-path-2.1.0.tgz#98bf6599327ecea199309866e8140368fd2e646a"
 
+applescript@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/applescript/-/applescript-1.0.0.tgz#bb87af568cad034a4e48c4bdaf6067a3a2701317"
+
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.npmjs.org/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
@@ -1569,6 +1577,16 @@ asynckit@^0.4.0:
 atob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/atob/-/atob-2.1.1.tgz#ae2d5a729477f289d60dd7f96a6314a22dd6c22a"
+
+auto-launch@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.npmjs.org/auto-launch/-/auto-launch-5.0.5.tgz#d14bd002b1ef642f85e991a6195ff5300c8ad3c0"
+  dependencies:
+    applescript "^1.0.0"
+    mkdirp "^0.5.1"
+    path-is-absolute "^1.0.0"
+    untildify "^3.0.2"
+    winreg "1.2.4"
 
 autoprefixer@^6.3.1:
   version "6.7.7"
@@ -9578,6 +9596,10 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
+untildify@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/untildify/-/untildify-3.0.3.tgz#1e7b42b140bcfd922b22e70ca1265bfe3634c7c9"
+
 unzip-response@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
@@ -10125,6 +10147,10 @@ widest-line@^2.0.0:
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
+
+winreg@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.npmjs.org/winreg/-/winreg-1.2.4.tgz#ba065629b7a925130e15779108cf540990e98d1b"
 
 wordwrap@0.0.2:
   version "0.0.2"
