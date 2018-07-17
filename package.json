@@ -14,6 +14,7 @@
   "dependencies": {
     "animejs": "^2.2.0",
     "autosize": "^4.0.2",
+    "keycode": "^2.2.0",
     "lodash-decorators": "^6.0.0",
     "store": "^2.0.12",
     "strings-file": "^0.0.5",
