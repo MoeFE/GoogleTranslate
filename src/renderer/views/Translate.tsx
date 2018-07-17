@@ -251,7 +251,7 @@ export default class Translate extends Vue {
     );
     menu.append(
       new MenuItem({
-        label: '使用谷歌（国内）',
+        label: '使用国内谷歌翻译',
         accelerator: 'Ctrl+Cmd+4',
         enabled: !!this.source.value,
         click: () => this.translate('google'),
