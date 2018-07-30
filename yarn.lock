@@ -810,17 +810,16 @@
     eslint-plugin-vue "^4.5.0"
     launch-editor "^2.2.1"
 
-"@vue/cli-plugin-typescript@^3.0.0-rc.5":
-  version "3.0.0-rc.5"
-  resolved "https://registry.npmjs.org/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.0-rc.5.tgz#64f2752ba0e6d8bb7e7b8af1bcdd4b3e8e11be28"
+"@vue/cli-plugin-typescript@^3.0.0-rc.9":
+  version "3.0.0-rc.9"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.0-rc.9.tgz#503ba744034622a28b0e75c3543a6c554b15c4c3"
   dependencies:
     "@types/node" "^10.5.2"
-    "@vue/cli-shared-utils" "^3.0.0-rc.5"
+    "@vue/cli-shared-utils" "^3.0.0-rc.9"
     fork-ts-checker-webpack-plugin "^0.4.3"
     globby "^8.0.1"
     ts-loader "^4.4.2"
     tslint "^5.10.0"
-    typescript "~2.9.0"
 
 "@vue/cli-service@^3.0.0-rc.8":
   version "3.0.0-rc.8"
@@ -944,9 +943,9 @@
     semver "^5.5.0"
     string.prototype.padstart "^3.0.0"
 
-"@vue/cli-shared-utils@^3.0.0-rc.5":
-  version "3.0.0-rc.5"
-  resolved "https://registry.npmjs.org/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.5.tgz#665cc1af7454609313cd1de68ba1dddd82f3c4de"
+"@vue/cli-shared-utils@^3.0.0-rc.8":
+  version "3.0.0-rc.8"
+  resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.8.tgz#aae953498bddf4e2dba596a69cd5eca17258dc30"
   dependencies:
     chalk "^2.4.1"
     execa "^0.10.0"
@@ -959,9 +958,9 @@
     semver "^5.5.0"
     string.prototype.padstart "^3.0.0"
 
-"@vue/cli-shared-utils@^3.0.0-rc.8":
-  version "3.0.0-rc.8"
-  resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.8.tgz#aae953498bddf4e2dba596a69cd5eca17258dc30"
+"@vue/cli-shared-utils@^3.0.0-rc.9":
+  version "3.0.0-rc.9"
+  resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.9.tgz#557a03970dc141712265d857b9a7c4eeca603a35"
   dependencies:
     chalk "^2.4.1"
     execa "^0.10.0"
@@ -9461,7 +9460,7 @@ typescript-template-language-service-decorator@^1.7.0:
   version "1.7.0"
   resolved "https://registry.npmjs.org/typescript-template-language-service-decorator/-/typescript-template-language-service-decorator-1.7.0.tgz#ef32100ab20045de2ba91079d6c78a7fde7a9ff7"
 
-typescript@^2.5.1, typescript@~2.9.0:
+typescript@^2.5.1:
   version "2.9.2"
   resolved "https://registry.npmjs.org/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
 
