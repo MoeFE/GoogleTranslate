@@ -34,7 +34,7 @@
     "@types/auto-launch": "^5.0.0",
     "@types/autosize": "^3.0.6",
     "@types/storejs": "^2.0.3",
-    "@vue/cli-plugin-babel": "^3.0.0-rc.9",
+    "@vue/cli-plugin-babel": "^3.0.0-rc.10",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.10",
     "@vue/cli-plugin-typescript": "^3.0.0-rc.9",
     "@vue/cli-service": "^3.0.0-rc.9",
