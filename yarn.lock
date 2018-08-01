@@ -810,12 +810,12 @@
     eslint-plugin-vue "^4.5.0"
     launch-editor "^2.2.1"
 
-"@vue/cli-plugin-typescript@^3.0.0-rc.9":
-  version "3.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.0-rc.9.tgz#503ba744034622a28b0e75c3543a6c554b15c4c3"
+"@vue/cli-plugin-typescript@^3.0.0-rc.10":
+  version "3.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.0-rc.10.tgz#4e09e71052317f4dcedae8bb3d722da8fc7ea12c"
   dependencies:
     "@types/node" "^10.5.2"
-    "@vue/cli-shared-utils" "^3.0.0-rc.9"
+    "@vue/cli-shared-utils" "^3.0.0-rc.10"
     fork-ts-checker-webpack-plugin "^0.4.3"
     globby "^8.0.1"
     ts-loader "^4.4.2"
