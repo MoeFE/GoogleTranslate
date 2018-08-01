@@ -783,13 +783,13 @@
     babel-plugin-dynamic-import-node "^2.0.0"
     babel-plugin-transform-vue-jsx "^4.0.1"
 
+"@vue/cli-overlay@^3.0.0-rc.10":
+  version "3.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-3.0.0-rc.10.tgz#d7fc86e1b1afc1b7ae52875c388a5532c0c10505"
+
 "@vue/cli-overlay@^3.0.0-rc.2":
   version "3.0.0-rc.4"
   resolved "https://registry.npmjs.org/@vue/cli-overlay/-/cli-overlay-3.0.0-rc.4.tgz#59fab2d5294f6b8e637635e27cefb82604adfa5e"
-
-"@vue/cli-overlay@^3.0.0-rc.9":
-  version "3.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-3.0.0-rc.9.tgz#542ac6fc1642e326f2770df06cf73566d39b38a7"
 
 "@vue/cli-plugin-babel@^3.0.0-rc.10":
   version "3.0.0-rc.10"
@@ -821,13 +821,13 @@
     ts-loader "^4.4.2"
     tslint "^5.10.0"
 
-"@vue/cli-service@^3.0.0-rc.9":
-  version "3.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.0.0-rc.9.tgz#a4cede79350534711186c37115ba464bdba4fb57"
+"@vue/cli-service@^3.0.0-rc.10":
+  version "3.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.0.0-rc.10.tgz#c1bf783f35dcc897cfdd5bc85268f98528ddea51"
   dependencies:
     "@intervolga/optimize-cssnano-plugin" "^1.0.5"
-    "@vue/cli-overlay" "^3.0.0-rc.9"
-    "@vue/cli-shared-utils" "^3.0.0-rc.9"
+    "@vue/cli-overlay" "^3.0.0-rc.10"
+    "@vue/cli-shared-utils" "^3.0.0-rc.10"
     "@vue/preload-webpack-plugin" "^1.0.0"
     "@vue/web-component-wrapper" "^1.2.0"
     acorn "^5.7.1"
@@ -946,21 +946,6 @@
 "@vue/cli-shared-utils@^3.0.0-rc.2":
   version "3.0.0-rc.4"
   resolved "https://registry.npmjs.org/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.4.tgz#c66b99080cc830b7c3da11359aefd0de833ee996"
-  dependencies:
-    chalk "^2.4.1"
-    execa "^0.10.0"
-    joi "^13.0.0"
-    node-ipc "^9.1.1"
-    opn "^5.3.0"
-    ora "^2.1.0"
-    request "^2.87.0"
-    request-promise-native "^1.0.5"
-    semver "^5.5.0"
-    string.prototype.padstart "^3.0.0"
-
-"@vue/cli-shared-utils@^3.0.0-rc.9":
-  version "3.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0-rc.9.tgz#557a03970dc141712265d857b9a7c4eeca603a35"
   dependencies:
     chalk "^2.4.1"
     execa "^0.10.0"
