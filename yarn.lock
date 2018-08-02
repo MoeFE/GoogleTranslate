@@ -3617,9 +3617,9 @@ electron@^2.0.5:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
-electron@^3.0.0-beta.3:
-  version "3.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.0-beta.3.tgz#fd1db60aa312c79edfdd303820062e8fd46056e7"
+electron@^3.0.0-beta.4:
+  version "3.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.0-beta.4.tgz#557485c64a56e5db87e488fbfd93a8791a884966"
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^4.1.0"
