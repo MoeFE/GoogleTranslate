@@ -980,12 +980,12 @@
     eslint-import-resolver-webpack "^0.9.0"
     eslint-plugin-import "^2.11.0"
 
-"@vue/eslint-config-typescript@^3.0.0-rc.9":
-  version "3.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/@vue/eslint-config-typescript/-/eslint-config-typescript-3.0.0-rc.9.tgz#cf20066873151411328ad314c0661784b7151332"
+"@vue/eslint-config-typescript@^3.0.0-rc.10":
+  version "3.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@vue/eslint-config-typescript/-/eslint-config-typescript-3.0.0-rc.10.tgz#980f0c46797c1f29a6dba105458ebdce2e350eda"
   dependencies:
     eslint-plugin-typescript "^0.12.0"
-    typescript-eslint-parser "^16.0.0"
+    typescript-eslint-parser "^17.0.1"
 
 "@vue/preload-webpack-plugin@^1.0.0":
   version "1.0.0"
@@ -9413,6 +9413,13 @@ typedarray@^0.0.6:
 typescript-eslint-parser@^16.0.0:
   version "16.0.1"
   resolved "https://registry.npmjs.org/typescript-eslint-parser/-/typescript-eslint-parser-16.0.1.tgz#b40681c7043b222b9772748b700a000b241c031b"
+  dependencies:
+    lodash.unescape "4.0.1"
+    semver "5.5.0"
+
+typescript-eslint-parser@^17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/typescript-eslint-parser/-/typescript-eslint-parser-17.0.1.tgz#ddc681a3afa51a9baa6746a001eb5f29fb1365d3"
   dependencies:
     lodash.unescape "4.0.1"
     semver "5.5.0"
