@@ -9854,9 +9854,9 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue-tsx-support@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/vue-tsx-support/-/vue-tsx-support-2.0.1.tgz#c1fcda32b9d563563103ed87fafd6f52dbca9bc4"
+vue-tsx-support@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/vue-tsx-support/-/vue-tsx-support-2.1.1.tgz#697db1d38bad53543429e9ecdff19704b0399390"
 
 vue@^2.5.17:
   version "2.5.17"
