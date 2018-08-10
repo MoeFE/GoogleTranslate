@@ -994,9 +994,9 @@
     eslint-import-resolver-webpack "^0.9.0"
     eslint-plugin-import "^2.11.0"
 
-"@vue/eslint-config-typescript@^3.0.0-rc.12":
-  version "3.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/@vue/eslint-config-typescript/-/eslint-config-typescript-3.0.0-rc.12.tgz#6c765ffd8b711a785dda5377138595027aa79dc2"
+"@vue/eslint-config-typescript@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@vue/eslint-config-typescript/-/eslint-config-typescript-3.0.0.tgz#adfe1f59816132948f9eabedcade1b0a12bb29b4"
   dependencies:
     eslint-plugin-typescript "^0.12.0"
     typescript-eslint-parser "^18.0.0"
