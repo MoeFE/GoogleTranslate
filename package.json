@@ -37,7 +37,7 @@
     "@vue/cli-plugin-babel": "^3.0.0-rc.12",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.12",
     "@vue/cli-plugin-typescript": "^3.0.0-rc.12",
-    "@vue/cli-service": "^3.0.0-rc.12",
+    "@vue/cli-service": "^3.0.0",
     "@vue/eslint-config-airbnb": "^3.0.0-rc.12",
     "@vue/eslint-config-typescript": "^3.0.0-rc.12",
     "all-contributors-cli": "^5.4.0",
