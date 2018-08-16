@@ -73,7 +73,8 @@ export class Option extends Vue {
     return this.$attrs.value;
   }
 
-  @Inject() private readonly select!: Select;
+  @Inject()
+  private readonly select!: Select;
 
   @Inject('Option.handleClick')
   private readonly handleClick!: (value: string, uid: number) => void;

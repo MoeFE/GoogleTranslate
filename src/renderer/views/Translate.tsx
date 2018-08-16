@@ -96,11 +96,16 @@ export default class Translate extends Vue {
     'meta+q': () => app.quit(),
   };
 
-  @State('isAlwaysOnTop') private readonly isAlwaysOnTop!: boolean;
-  @Getter('translateParams') private readonly translateParams!: any[];
-  @State('sourceLang') private readonly sourceLang!: ILang;
-  @State('targetLang') private readonly targetLang!: ILang;
-  @Mutation('save') private readonly setState!: (payload: IState) => void;
+  @State('isAlwaysOnTop')
+  private readonly isAlwaysOnTop!: boolean;
+  @Getter('translateParams')
+  private readonly translateParams!: any[];
+  @State('sourceLang')
+  private readonly sourceLang!: ILang;
+  @State('targetLang')
+  private readonly targetLang!: ILang;
+  @Mutation('save')
+  private readonly setState!: (payload: IState) => void;
 
   private readonly audio = new Audio();
 

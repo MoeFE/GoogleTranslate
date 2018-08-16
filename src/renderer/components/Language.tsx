@@ -114,7 +114,8 @@ export default class Language extends Vue {
   @Prop({ type: Boolean, required: false, default: false })
   private readonly readOnly!: boolean;
 
-  @Inject() private readonly localeProvider!: any;
+  @Inject()
+  private readonly localeProvider!: any;
 
   private get text(): string {
     return this.value;

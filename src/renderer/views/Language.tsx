@@ -65,9 +65,12 @@ export default class Language extends Vue {
     languages: HTMLDivElement;
   };
 
-  @Inject() private readonly localeProvider!: any;
-  @State('recentlyUsed') private readonly recentlyUsed!: IDialects;
-  @Mutation('save') private readonly setState!: (payload: IState) => void;
+  @Inject()
+  private readonly localeProvider!: any;
+  @State('recentlyUsed')
+  private readonly recentlyUsed!: IDialects;
+  @Mutation('save')
+  private readonly setState!: (payload: IState) => void;
 
   private kw: string = '';
   private lang: string = '';

@@ -48,6 +48,12 @@ const Indicator = styled.div`
 @Component
 export default class Loading extends Vue {
   render() {
-    return <Indicator>{[...Array(3)].map(() => <i />)}</Indicator>;
+    return (
+      <Indicator>
+        {[...Array(3)].map(() => (
+          <i />
+        ))}
+      </Indicator>
+    );
   }
 }

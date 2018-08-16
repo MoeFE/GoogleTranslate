@@ -22,9 +22,8 @@ export default class Header extends Vue {
     return (
       <Layout.Header>
         {this.$slots.left ? <div class="left">{this.$slots.left}</div> : null}
-        <H1>
-          Googl<i>e</i> Translate
-        </H1>
+        {/* prettier-ignore */}
+        <H1>Googl<i>e</i> Translate</H1>
         {this.$slots.right ? (
           <div class="right">{this.$slots.right}</div>
         ) : null}

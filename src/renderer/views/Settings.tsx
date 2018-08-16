@@ -47,7 +47,8 @@ export default class Settings extends Vue {
     googleCN: '国内谷歌',
   };
 
-  @Mutation('save') private readonly setState!: (payload: IState) => void;
+  @Mutation('save')
+  private readonly setState!: (payload: IState) => void;
 
   private get autoLaunch() {
     return (this.$store.state as IState).autoLaunch;
