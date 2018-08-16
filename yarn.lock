@@ -805,12 +805,12 @@
     eslint-loader "^2.0.0"
     eslint-plugin-vue "^4.5.0"
 
-"@vue/cli-plugin-typescript@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.0.tgz#fcda971939a8dd9426135a11852eeeb6d54ff576"
+"@vue/cli-plugin-typescript@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.0.1.tgz#c1fa2d57911de0ebbab8731228a288d3361e2005"
   dependencies:
     "@types/node" "^10.5.2"
-    "@vue/cli-shared-utils" "^3.0.0"
+    "@vue/cli-shared-utils" "^3.0.1"
     fork-ts-checker-webpack-plugin "^0.4.4"
     globby "^8.0.1"
     ts-loader "^4.4.2"
@@ -926,6 +926,22 @@
 "@vue/cli-shared-utils@^3.0.0", "@vue/cli-shared-utils@^3.0.0-rc.2":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0.tgz#f4886ce9a62dd2088e112af4d54f61c1667318d0"
+  dependencies:
+    chalk "^2.4.1"
+    execa "^0.10.0"
+    joi "^13.0.0"
+    launch-editor "^2.2.1"
+    node-ipc "^9.1.1"
+    opn "^5.3.0"
+    ora "^2.1.0"
+    request "^2.87.0"
+    request-promise-native "^1.0.5"
+    semver "^5.5.0"
+    string.prototype.padstart "^3.0.0"
+
+"@vue/cli-shared-utils@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-3.0.1.tgz#1084f8e4c20a01b3bb17059992aedc6d4774e270"
   dependencies:
     chalk "^2.4.1"
     execa "^0.10.0"
