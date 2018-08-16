@@ -2,7 +2,10 @@
 import { app, protocol, Menu, MenuItem } from 'electron';
 import { format as formatUrl } from 'url';
 import path from 'path';
-import createProtocol from 'vue-cli-plugin-electron-builder/lib/createProtocol';
+import {
+  createProtocol,
+  installVueDevtools,
+} from 'vue-cli-plugin-electron-builder/lib';
 import menubar from './lib/menubar';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -53,6 +56,10 @@ function createMainWindow() {
     const { window } = mb;
     const { webContents } = window;
 
+    if (!process.env.IS_TEST) {
+      webContents.openDevTools({ mode: 'undocked' });
+    }
+
     webContents.session.webRequest.onBeforeSendHeaders((detail, cb) => {
       const { requestHeaders } = detail;
       delete requestHeaders.Referer;
@@ -67,7 +74,6 @@ function createMainWindow() {
       webContents.setZoomFactor(1);
       webContents.setVisualZoomLevelLimits(1, 1);
       webContents.setLayoutZoomLevelLimits(0, 0);
-      webContents.openDevTools({ mode: 'undocked' });
     });
 
     webContents.on('devtools-opened', () => {
@@ -97,16 +103,10 @@ app.on('activate', () => {
 });
 
 // create main BrowserWindow when electron is ready
-app.on('ready', () => {
-  if (isDevelopment) {
-    // https://electronjs.org/docs/tutorial/devtools-extension
-    const {
-      default: installExtension,
-      VUEJS_DEVTOOLS,
-    } = require('electron-devtools-installer');
-    installExtension(VUEJS_DEVTOOLS, true).catch((err) => {
-      console.log('Unable to install `vue-devtools`: \n', err);
-    });
+app.on('ready', async () => {
+  if (isDevelopment && !process.env.IS_TEST) {
+    // Install Vue Devtools
+    await installVueDevtools();
   }
   mainWindow = createMainWindow();
 });
