@@ -154,7 +154,8 @@ export default class Language extends Vue {
 
   private async handleBlur() {
     await this.$nextTick();
-    this.$refs.input.$el.focus();
+    const { input } = this.$refs;
+    if (input) input.$el.focus();
   }
 
   mounted() {
