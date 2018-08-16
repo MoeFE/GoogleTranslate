@@ -19,7 +19,9 @@
 
 ## 预览
 
-<img alt="preview" src="https://i.loli.net/2018/07/01/5b38a2111de77.png" width="560">
+<img alt="预览动态图" src="https://i.loli.net/2018/07/17/5b4dfbda30200.gif" width="420">
+<img alt="更改语言" src="https://i.loli.net/2018/07/17/5b4dfc253a5d7.png" width="420">
+<img alt="应用程序设置" src="https://i.loli.net/2018/07/17/5b4dfc25357a1.png" width="420">
 
 ## 功能
 
@@ -27,7 +29,7 @@
 - [x] 语音朗读
 - [x] 顶端显示
 - [x] 开机启动
-- [x] 自动更新
+- [x] ~~自动更新~~
 - [x] 全局快捷键呼出
 - [x] 内置多种翻译引擎
 
