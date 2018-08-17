@@ -24,10 +24,10 @@ function createMainWindow() {
     index: isDevelopment
       ? process.env.WEBPACK_DEV_SERVER_URL
       : formatUrl({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file',
-        slashes: true,
-      }),
+          pathname: path.join(__dirname, 'index.html'),
+          protocol: 'file',
+          slashes: true,
+        }),
     height: 190,
     width: 420,
     hasShadow: false,

@@ -872,7 +872,6 @@
 
 "@vue/cli-service@https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/master/vue-cli-service-custom-2.tgz":
   version "3.0.0-rc.2"
-  uid "3bc04776e28672df9e7297b83cab510cdca4c657"
   resolved "https://github.com/nklayman/vue-cli-plugin-electron-builder/raw/master/vue-cli-service-custom-2.tgz#3bc04776e28672df9e7297b83cab510cdca4c657"
   dependencies:
     "@vue/cli-overlay" "^3.0.0-rc.2"
@@ -925,7 +924,7 @@
     webpack-merge "^4.1.2"
     yorkie "^1.0.3"
 
-"@vue/cli-shared-utils@^3.0.0", "@vue/cli-shared-utils@^3.0.0-rc.2":
+"@vue/cli-shared-utils@^3.0.0-rc.2":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@vue/cli-shared-utils/-/cli-shared-utils-3.0.0.tgz#f4886ce9a62dd2088e112af4d54f61c1667318d0"
   dependencies:
