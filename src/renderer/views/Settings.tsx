@@ -11,7 +11,6 @@ import Link from 'components/Link';
 import InputShortcutKeys from 'components/InputShortcutKeys';
 import Tools from 'utils/tools';
 import { IState } from '../store';
-import pkg from '../../../package.json';
 
 const header = css`
   .right {
@@ -120,7 +119,7 @@ export default class Settings extends Vue {
                 <p>Google Translate 触手可及，使用此快捷键打开：</p>
                 <InputShortcutKeys
                   placeholder="点击添加快捷键"
-                  focus-placeholder="按下按键记录快捷键"
+                  focusPlaceholder="按下按键记录快捷键"
                   v-model={this.shortcutKeys}
                 />
               </Panel.Body>
@@ -148,7 +147,7 @@ export default class Settings extends Vue {
             <Link href="https://github.com/MoeFE/GoogleTranslate">
               Google Translate
             </Link>
-            <Help>{pkg.version}</Help>
+            <Help>{VERSION}</Help>
           </Footer>
         </Main>
       </Layout>

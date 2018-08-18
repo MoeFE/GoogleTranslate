@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const path = require('path');
 
 module.exports = {
@@ -29,6 +30,13 @@ module.exports = {
       .entry('app')
       .clear()
       .add('./src/renderer/main.ts');
+
+    config.plugin('define').tap((args) => {
+      Object.assign(args[0], {
+        VERSION: JSON.stringify(require('./package.json').version),
+      });
+      return args;
+    });
 
     config.resolve.alias
       .set('emotion', path.resolve(__dirname, 'src/renderer/lib/emotion.js'))
