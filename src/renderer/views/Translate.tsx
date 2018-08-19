@@ -9,7 +9,7 @@ import anime from 'animejs';
 import * as tjs from 'translation.js';
 import Layout, { Main } from 'components/Layout';
 import Header from 'components/Header';
-import Icon from 'components/Icon';
+import Icon, { IconProps, IconEvents } from 'components/Icon';
 import Language from 'components/Language';
 import Progress, { Spin } from 'components/Progress';
 import Tools from 'utils/tools';
@@ -59,7 +59,7 @@ const Divider = styled.div`
   }
 `;
 
-const Switch = styled(Icon)`
+const Switch = styled<IconProps, IconEvents>(Icon)`
   display: inline-block;
   position: relative;
   z-index: 1;
@@ -274,7 +274,7 @@ export default class Translate extends Vue {
     menu.popup({ window: currentWindow });
   }
 
-  private async handleSwitch(e: MouseEvent | string) {
+  private async handleSwitch(e: Event | string) {
     await this.$nextTick();
     const isInput = typeof e === 'string';
     if (!isInput || this.target.value) {
@@ -488,7 +488,7 @@ export default class Translate extends Vue {
               <Switch
                 ref="switch"
                 type="switch"
-                nativeOnClick={this.handleSwitch}
+                onClick={this.handleSwitch}
                 disabled={this.source.key === 'auto'}
               />
             </Divider>

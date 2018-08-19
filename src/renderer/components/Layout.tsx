@@ -148,9 +148,9 @@ export const Switch = {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     transition-duration: ${(props: any) => (props.dragging ? 0.2 : 0.3)}s;
     transition-timing-function: ${(props: any) =>
-    (props.dragging
-      ? 'ease-in-out'
-      : 'cubic-bezier(0.175, 0.885, 0.32, 1.275)')};
+      (props.dragging
+        ? 'ease-in-out'
+        : 'cubic-bezier(0.175, 0.885, 0.32, 1.275)')};
     transform: translate3d(
       ${(props: any) => (props.active ? '19px' : 0)},
       0,

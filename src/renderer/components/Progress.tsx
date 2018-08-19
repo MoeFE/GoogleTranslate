@@ -1,8 +1,9 @@
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import styled from 'vue-emotion';
 
+// #region stylesheet
 const ProgressBar = styled.div`
   position: relative;
   display: inline-block;
@@ -51,9 +52,24 @@ export const Spin = styled.div`
     }
   }
 `;
+// #endregion
+
+export interface ProgressProps {
+  value?: number;
+  strokeWidth?: number;
+  duration?: number;
+  easing?: string;
+}
+
+export interface ProgressEvents {
+  onPause: Event;
+}
 
 @Component
-export default class Progress extends Vue {
+export default class Progress extends Vue.Component<
+  ProgressProps,
+  ProgressEvents
+> {
   @Prop({ type: Number, required: false, default: 0 })
   private readonly value!: number;
 

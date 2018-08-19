@@ -191,7 +191,7 @@ export default class Language extends Vue {
                 type="search"
                 placeholder="搜索语言"
                 v-model={this.kw}
-                nativeOnBlur={this.handleBlur}
+                onBlur={this.handleBlur}
                 autofocus
               />
             </SearchForm>

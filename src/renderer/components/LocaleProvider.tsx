@@ -1,12 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop, Provide, Watch } from 'vue-property-decorator';
 
+export interface LocaleProviderProps {
+  locale?: string;
+}
+
 @Component
-export default class LocaleProvider extends Vue {
+export default class LocaleProvider extends Vue.Component<LocaleProviderProps> {
   public languages = {};
   public localizable = {};
 

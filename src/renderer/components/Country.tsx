@@ -1,9 +1,23 @@
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+export interface CountryProps {
+  ssl?: boolean;
+  code?: string;
+  retina?: boolean;
+  local?: boolean;
+}
+
+export interface CountryEvents {
+  onClick: Event;
+}
+
 @Component
-export default class Country extends Vue {
+export default class Country extends Vue.Component<
+  CountryProps,
+  CountryEvents
+> {
   @Prop({ type: Boolean, required: false, default: false })
   private readonly ssl!: boolean;
 

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop, Watch, Inject } from 'vue-property-decorator';
 import styled from 'vue-emotion';
@@ -39,8 +39,22 @@ const TextArea = styled.textarea`
   }
 `;
 
+export interface TextBoxProps {
+  value?: string;
+  placeholder?: string;
+  readonly?: boolean;
+}
+
+export interface TextBoxEvents {
+  onInput: string;
+  onEnter: Event;
+}
+
 @Component
-export default class TextBox extends Vue {
+export default class TextBox extends Vue.Component<
+  TextBoxProps,
+  TextBoxEvents
+> {
   public readonly $refs!: {
     tbox: HTMLTextAreaElement;
   };

@@ -1,12 +1,22 @@
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { Radio as radio } from './Layout';
 
 const { Layout, Button } = radio;
 
+export interface RadioProps {
+  checked?: boolean;
+  value?: string;
+  name?: string; // eslint-disable-line no-restricted-globals
+}
+
+export interface RadioEvents {
+  onChange: string;
+}
+
 @Component
-export default class Radio extends Vue {
+export default class Radio extends Vue.Component<RadioProps, RadioEvents> {
   @Prop({ type: Boolean, required: false, default: false })
   private readonly checked!: boolean;
 

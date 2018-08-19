@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { remote } from 'electron';
 
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop, Watch, Provide, Inject } from 'vue-property-decorator';
 import { State } from 'vuex-class';
@@ -12,14 +12,13 @@ import Tools from 'utils/tools';
 const currentWindow = remote.getCurrentWindow();
 
 // #region stylesheet
-const select = css`
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-`;
+interface CustomProps {}
 
-export const Optgroup = styled.div`
+interface OptgroupProps {
+  label: string;
+}
+
+export const Optgroup = styled<OptgroupProps, CustomProps>('div')`
   &:before {
     content: attr(label);
     display: block;
@@ -31,15 +30,16 @@ export const Optgroup = styled.div`
   }
 `;
 
-const Opt = styled.div`
+const Opt = styled<OptionProps, OptionEvents>('div')`
   display: flex;
   align-items: center;
   position: relative;
   padding: 0 15px;
   font-weight: 500;
-  color: ${(props: any) => (props.active ? '#3e83f8;' : '')};
-  color: ${(props: any) => (props.selected ? '#fff;' : '')};
-  background-color: ${(props: any) => (props.selected ? '#3e83f8;' : '')};
+  color: ${(props: OptionProps) => (props.active ? '#3e83f8;' : '')};
+  color: ${(props: OptionProps) => (props.selected ? '#fff;' : '')};
+  background-color: ${(props: OptionProps) =>
+    (props.selected ? '#3e83f8;' : '')};
   &:nth-of-type(1) {
     margin-top: 5px;
   }
@@ -48,7 +48,7 @@ const Opt = styled.div`
   }
   :before {
     content: '';
-    display: ${(props: any) => (props.inverse ? 'block' : 'none')};
+    display: ${(props: OptionProps) => (props.inverse ? 'block' : 'none')};
     position: absolute;
     left: 23px;
     width: 28px;
@@ -65,13 +65,30 @@ const Opt = styled.div`
 `;
 // #endregion
 
-@Component
-export class Option extends Vue {
-  public readonly _uid!: number;
+export interface OptionProps {
+  value?: string;
+  active?: boolean;
+  inverse?: boolean;
+  selected?: boolean;
+}
 
-  public get value() {
-    return this.$attrs.value;
-  }
+export interface OptionEvents {
+  onClick: (e: Event) => void;
+  onMouseenter: (e: Event) => void;
+}
+
+@Component
+export class Option extends Vue.Component<OptionProps, OptionEvents> {
+  @Prop({ type: String, required: true })
+  public readonly value!: string;
+
+  @Prop({ type: Boolean, required: false, default: false })
+  private readonly active!: boolean;
+
+  @Prop({ type: Boolean, required: false, default: false })
+  private readonly inverse!: boolean;
+
+  public readonly _uid!: number;
 
   @Inject()
   private readonly select!: Select;
@@ -85,8 +102,8 @@ export class Option extends Vue {
   render() {
     return (
       <Opt
-        active={this.$attrs.active}
-        inverse={this.$attrs.inverse}
+        active={this.active}
+        inverse={this.inverse}
         selected={this._uid === this.select.selectedOptionId}
         onClick={() => this.handleClick(this.value, this._uid)}
         onMouseenter={() => this.handleMouseEnter(this.value, this._uid)}
@@ -97,8 +114,17 @@ export class Option extends Vue {
   }
 }
 
+export interface SelectProps {
+  value?: string;
+}
+
+export interface SelectEvents {
+  onInput: string;
+  onSelected: string;
+}
+
 @Component
-export default class Select extends Vue {
+export default class Select extends Vue.Component<SelectProps, SelectEvents> {
   private readonly keymap = {
     up: () => this.move('up'),
     down: () => this.move('down'),
@@ -174,9 +200,9 @@ export default class Select extends Vue {
     this.disableMouseEnter = true;
     const { length } = this.options;
     const index =
-      direction === 'up'
-        ? (length + (this.selectedIndex - 1)) % length
-        : (this.selectedIndex + 1) % length;
+      (direction === 'up'
+        ? length + (this.selectedIndex - 1)
+        : this.selectedIndex + 1) % length;
     this.selectedValue = this.options[index].value;
     this.selectedOptionId = this.options[index]._uid;
     await this.$nextTick();
@@ -188,7 +214,15 @@ export default class Select extends Vue {
 
   render() {
     return (
-      <div class={select} v-hotkey={this.keymap}>
+      <div
+        class={css`
+          display: block;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        `}
+        v-hotkey={this.keymap}
+      >
         {this.$slots.default}
       </div>
     );

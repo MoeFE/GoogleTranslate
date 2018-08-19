@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop, Inject } from 'vue-property-decorator';
 import styled, { css } from 'vue-emotion';
@@ -8,7 +8,7 @@ import Loading from './Loading';
 import TextBox from './TextBox';
 
 // #region stylesheet
-const country = css`
+const CountryWrapper = styled.div`
   position: relative;
   width: 44px;
   height: 44px;
@@ -87,8 +87,28 @@ const Progress = styled(Action)`
 `;
 // #endregion
 
+export interface LanguageProps {
+  value?: string;
+  country?: string;
+  action?: boolean;
+  loading?: boolean;
+  error?: boolean;
+  allowClear?: boolean;
+  readOnly?: boolean;
+}
+
+export interface LanguageEvents {
+  onInput: string;
+  onClick: Event;
+  onSpeak: Event;
+  onEnter: Event;
+}
+
 @Component
-export default class Language extends Vue {
+export default class Language extends Vue.Component<
+  LanguageProps,
+  LanguageEvents
+> {
   public readonly $refs!: {
     tbox: TextBox;
   };
@@ -146,23 +166,21 @@ export default class Language extends Vue {
   }
 
   render() {
-    const {
-      loading, action, allowClear, readOnly,
-    } = this;
+    const { country, loading, action, allowClear, readOnly } = this;
     const { languages } = this.localeProvider;
 
     return (
       <Lang>
-        <div class={country}>
-          <Country code={this.country} onClick={this.handleClick} />
-        </div>
+        <CountryWrapper>
+          <Country code={country} onClick={this.handleClick} />
+        </CountryWrapper>
         {loading ? (
           <Loading />
         ) : (
           <TextBox
             ref="tbox"
             style={{ color: this.error ? '#ff2600' : '' }}
-            placeholder={languages[this.country]}
+            placeholder={languages[country]}
             readonly={readOnly}
             v-model={this.text}
             onEnter={this.handleEnter}
@@ -172,8 +190,8 @@ export default class Language extends Vue {
           {allowClear ? <Icon type="clear" onClick={this.handleClear} /> : null}
           <Icon
             type="speak"
-            style={{ visibility: this.country === 'auto' ? 'hidden' : '' }}
-            onClick={this.handleSpeak}
+            style={{ visibility: country === 'auto' ? 'hidden' : '' }}
+            onClick={this.handleSpeak as any} // TODO: 这里的事件处理类型有问题，暂时需要强制转换成 any 类型（vue-tsx-support bug）
           />
         </Action>
         {this.$slots.progress ? (

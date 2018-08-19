@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
-
-import Vue from 'vue';
+import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import styled from 'vue-emotion';
@@ -29,7 +28,7 @@ const Input = styled.div`
   &:focus {
     border: 1px solid #199bff;
     &:empty:before {
-      content: attr(focus-placeholder);
+      content: attr(focusPlaceholder);
       color: #bbb;
       padding: 0 10px;
     }
@@ -99,8 +98,14 @@ const Badge = styled.span`
 `;
 // #endregion
 
+interface IKeyMap {
+  icon: string;
+  text: string;
+  sort: number;
+}
+
 const keyMap: {
-  [index: string]: { icon: string; text: string; sort: number }; // eslint-disable-line indent
+  [index: string]: IKeyMap;
 } = {
   Alt: { icon: '⌥', text: 'alt', sort: 1 },
   Control: { icon: '⌃', text: 'ctrl', sort: 2 },
@@ -115,8 +120,12 @@ const keyMap: {
   ' ': { icon: '　', text: 'space', sort: 4 },
 };
 
+interface ShortcutKeysProps {
+  value: string;
+}
+
 @Component
-class ShortcutKeys extends Vue {
+class ShortcutKeys extends Vue.Component<ShortcutKeysProps> {
   @Prop({ type: String, required: true })
   private readonly value!: string;
 
@@ -135,8 +144,21 @@ class ShortcutKeys extends Vue {
   }
 }
 
+export interface InputShortcutKeysProps {
+  value?: string;
+  placeholder?: string;
+  focusPlaceholder?: string;
+}
+
+export interface InputShortcutKeysEvents {
+  input: string;
+}
+
 @Component
-export default class InputShortcutKeys extends Vue {
+export default class InputShortcutKeys extends Vue.Component<
+  InputShortcutKeysProps,
+  InputShortcutKeysEvents
+> {
   public readonly $refs!: {
     input: HTMLDivElement;
   };
@@ -184,9 +206,7 @@ export default class InputShortcutKeys extends Vue {
   }
 
   private async handleKeydown(e: Event) {
-    const {
-      altKey, shiftKey, key, keyCode, target,
-    } = e as KeyboardEvent;
+    const { altKey, shiftKey, key, keyCode, target } = e as KeyboardEvent;
     if (key === 'CapsLock') return;
     const keyChar = keycode(e); // String.fromCharCode(keyCode);
     const isKeyCombinations = Object.keys(keyMap)
@@ -228,7 +248,8 @@ export default class InputShortcutKeys extends Vue {
           />
         ))}
         {this.distinctKeys.length > 0 ? (
-          <Icon tabindex={-1} type="clear" nativeOnFocus={this.handleClear} />
+          // TODO: 这里的事件处理类型有问题，暂时需要强制转换成 any 类型（vue-tsx-support bug）
+          <Icon tabindex={-1} type="clear" onFocus={this.handleClear as any} />
         ) : null}
       </Input>
     );
