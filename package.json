@@ -39,7 +39,7 @@
     "@vue/cli-plugin-typescript": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-airbnb": "^3.0.1",
-    "@vue/eslint-config-typescript": "^3.0.0",
+    "@vue/eslint-config-typescript": "^3.0.1",
     "all-contributors-cli": "^5.4.0",
     "babel-plugin-emotion": "^9.2.6",
     "babel-plugin-jsx-v-model": "^2.0.3",
