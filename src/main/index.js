@@ -85,6 +85,11 @@ function createMainWindow() {
     });
   });
 
+  mb.on('after-show', () => {
+    const { window } = mb;
+    window.focus();
+  });
+
   return mb;
 }
 
