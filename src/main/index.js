@@ -1,14 +1,13 @@
 /* eslint-disable global-require */
-import { app, protocol, shell, Menu, MenuItem, Notification } from 'electron';
+import { app, protocol, Menu, MenuItem } from 'electron';
 import { format as formatUrl } from 'url';
 import path from 'path';
-import download from 'download';
 import {
   createProtocol,
   installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib';
 import menubar from './lib/menubar';
-import pkg from '../../package.json';
+import checkForUpdates from './checkForUpdates';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -111,22 +110,8 @@ app.on('ready', async () => {
       // Install Vue Devtools
       await installVueDevtools();
     } else {
-      const release = await download(
-        'https://api.github.com/repos/MoeFE/GoogleTranslate/releases/latest',
-      ).then(res => JSON.parse(res.toString()));
-      const [version] = release.name.match(/[\d|.]+/);
-      if (version > pkg.version) {
-        const notice = new Notification({
-          title: 'Google 翻译',
-          body: `发现新版本 (${release.name}) 可用，点击下载最新版本！`,
-        });
-        notice.on('click', () =>
-          shell.openExternal(
-            'https://github.com/MoeFE/GoogleTranslate/releases/latest',
-          ),
-        );
-        notice.show();
-      }
+      // Check for updates
+      await checkForUpdates();
     }
   } finally {
     mainWindow = createMainWindow();
