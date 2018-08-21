@@ -74,7 +74,7 @@ const s = new Vuex.Store<IState>({
   getters: {
     translateParams({ defaultEngine }) {
       if (defaultEngine) {
-        return [defaultEngine.replace('CN', ''), !defaultEngine.includes('CN')];
+        return [defaultEngine.replace('CN', ''), defaultEngine === 'google'];
       }
       return ['google', true];
     },
