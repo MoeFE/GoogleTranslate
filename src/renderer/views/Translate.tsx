@@ -134,7 +134,10 @@ export default class Translate extends Vue {
   };
 
   @Provide('handleResize')
+  @Watch('source.loading')
+  @Watch('target.loading')
   private async handleResize() {
+    await this.$nextTick();
     const { form } = this.$refs;
     const formHeight = [...form.children]
       .map(el => el.clientHeight)
@@ -432,7 +435,7 @@ export default class Translate extends Vue {
   }
 
   async activated() {
-    Tools.resize(window.innerWidth, 190);
+    this.handleResize();
     anime({
       targets: 'form',
       translateY: [-40, 0],
