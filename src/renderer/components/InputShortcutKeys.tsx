@@ -248,8 +248,7 @@ export default class InputShortcutKeys extends Vue.Component<
           />
         ))}
         {this.distinctKeys.length > 0 ? (
-          // TODO: 这里的事件处理类型有问题，暂时需要强制转换成 any 类型（vue-tsx-support bug）
-          <Icon tabindex={-1} type="clear" onFocus={this.handleClear as any} />
+          <Icon tabindex={-1} type="clear" onFocus={this.handleClear} />
         ) : null}
       </Input>
     );

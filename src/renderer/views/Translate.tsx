@@ -59,7 +59,11 @@ const Divider = styled.div`
   }
 `;
 
-const Switch = styled<IconProps, IconEvents>(Icon)`
+interface SwitchEvents {
+  onClick?: (e: Event) => void;
+}
+
+const Switch = styled<IconProps, SwitchEvents>(Icon)`
   display: inline-block;
   position: relative;
   z-index: 1;

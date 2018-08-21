@@ -191,7 +191,7 @@ export default class Language extends Vue.Component<
           <Icon
             type="speak"
             style={{ visibility: country === 'auto' ? 'hidden' : '' }}
-            onClick={this.handleSpeak as any} // TODO: 这里的事件处理类型有问题，暂时需要强制转换成 any 类型（vue-tsx-support bug）
+            onClick={this.handleSpeak}
           />
         </Action>
         {this.$slots.progress ? (

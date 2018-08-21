@@ -15,8 +15,8 @@ export interface IconProps {
 }
 
 export interface IconEvents {
-  onClick?: (e: Event) => void;
-  onFocus?: (e: Event) => void;
+  onClick: (e: Event) => void;
+  onFocus: (e: Event) => void;
 }
 
 @Component
