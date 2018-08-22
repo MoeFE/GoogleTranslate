@@ -4,7 +4,6 @@ import { Watch, Inject } from 'vue-property-decorator';
 import { State, Mutation } from 'vuex-class';
 import styled, { css } from 'vue-emotion';
 import anime from 'animejs';
-import { Debounce } from 'lodash-decorators';
 import { languages, IDialects, ILanguage } from 'assets/languages';
 import Layout, { Main, Close } from 'components/Layout';
 import Header from 'components/Header';
