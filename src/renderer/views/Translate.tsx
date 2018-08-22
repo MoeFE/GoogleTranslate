@@ -337,9 +337,10 @@ export default class Translate extends Vue {
 
   public async speak(type: 'source' | 'target') {
     const { value: text, key: from } = this[type];
+    const [, com] = this.translateParams;
     if (text) {
       this[type].action = false;
-      const uri = await tjs.google.audio({ text, from, com: true });
+      const uri = await tjs.google.audio({ text, from, com });
       await Tools.sleep(600);
       if (text === this[type].value) {
         this.audio.src = uri;
