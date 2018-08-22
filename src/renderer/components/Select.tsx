@@ -9,8 +9,6 @@ import styled, { css } from 'vue-emotion';
 import anime from 'animejs';
 import Tools from 'utils/tools';
 
-const currentWindow = remote.getCurrentWindow();
-
 // #region stylesheet
 interface CustomProps {}
 
@@ -186,7 +184,6 @@ export default class Select extends Vue.Component<SelectProps, SelectEvents> {
       }
       this.selectedValue = value;
       this.selectedOptionId = uid;
-      currentWindow.focus(); // 窗口失焦时也会出发 mouseenter，为了方便键盘操作，自动获得焦点
     }
   }
 

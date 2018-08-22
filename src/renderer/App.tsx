@@ -1,3 +1,5 @@
+import { remote } from 'electron';
+
 import Vue from 'vue';
 import Comopnent from 'vue-class-component';
 import { injectGlobal } from 'vue-emotion';
@@ -43,6 +45,13 @@ injectGlobal`
 
 @Comopnent
 export default class App extends Vue {
+  created() {
+    const window = remote.getCurrentWindow();
+    document.addEventListener('mouseenter', () => {
+      window.focus();
+    });
+  }
+
   render() {
     return (
       <LocaleProvider locale="zh-CN">
