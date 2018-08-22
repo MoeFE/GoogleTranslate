@@ -1,4 +1,5 @@
 /* eslint-disable no-nested-ternary */
+/* eslint-disable no-restricted-globals */
 import { remote } from 'electron';
 import Vue from 'vue';
 import Component from 'vue-class-component';
@@ -16,7 +17,7 @@ import Tools from 'utils/tools';
 import { IState, ILang } from '../store';
 
 const { app, Menu, MenuItem } = remote;
-const currentWindow = remote.getCurrentWindow();
+const window = remote.getCurrentWindow();
 const errMsg: any = {
   NETWORK_ERROR: '网络繁忙，请稍后再试',
   API_SERVER_ERROR: '翻译错误',
@@ -143,9 +144,9 @@ export default class Translate extends Vue {
       .map(el => el.clientHeight)
       .reduce((prev, next) => prev + next);
     const innerHeight = 190 + (formHeight + 18) - 129; // eslint-disable-line no-mixed-operators
-    if (innerHeight >= 190 && innerHeight !== window.innerHeight) {
+    if (innerHeight >= 190 && innerHeight !== self.innerHeight) {
       form.scrollTop = 0; // 滚动条位置始终设置为0，防止视觉抖动
-      Tools.resize(window.innerWidth, innerHeight);
+      Tools.resize(self.innerWidth, innerHeight);
     }
   }
 
@@ -175,7 +176,7 @@ export default class Translate extends Vue {
   }
 
   private handleClickFixed() {
-    const isAlwaysOnTop = !currentWindow.isAlwaysOnTop();
+    const isAlwaysOnTop = !window.isAlwaysOnTop();
     this.setState({ isAlwaysOnTop });
   }
 
@@ -278,7 +279,7 @@ export default class Translate extends Vue {
         click: app.quit,
       }),
     );
-    menu.popup({ window: currentWindow });
+    menu.popup({ window });
   }
 
   private async handleSwitch(e: Event | string) {

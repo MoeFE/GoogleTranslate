@@ -28,7 +28,8 @@ const googleTranslateAutoLauncher = new AutoLaunch({
   name: 'Google 翻译',
 });
 
-const currentWindow = remote.getCurrentWindow();
+const window = remote.getCurrentWindow();
+
 const initState: IState = {
   autoLaunch: false,
   isAlwaysOnTop: true,
@@ -111,11 +112,10 @@ s.watch(
       );
       notice.show();
     } finally {
-      currentWindow.setAlwaysOnTop(isAlwaysOnTop);
+      window.setAlwaysOnTop(isAlwaysOnTop);
       if (shortcutKeys) {
         remote.globalShortcut.unregisterAll();
         remote.globalShortcut.register(shortcutKeys, () => {
-          const window = remote.getCurrentWindow();
           if (window.isVisible()) window.hide();
           else window.show();
         });
