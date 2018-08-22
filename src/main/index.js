@@ -62,8 +62,10 @@ function createMainWindow() {
     }
 
     webContents.session.webRequest.onBeforeSendHeaders((detail, cb) => {
-      const { requestHeaders } = detail;
-      delete requestHeaders.Referer;
+      const { url, requestHeaders } = detail;
+      if (url.includes('fanyi.youdao.com')) {
+        requestHeaders.Referer = 'http://fanyi.youdao.com';
+      } else delete requestHeaders.Referer;
       cb({ requestHeaders });
     });
 
