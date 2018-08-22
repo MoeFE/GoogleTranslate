@@ -72,10 +72,8 @@ export default class TextBox extends Vue.Component<
     await this.$nextTick();
     const { tbox } = this.$refs;
     if (this.value) tbox.focus();
-    if (tbox.value !== this.value) {
-      tbox.value = this.value;
-      autosize.update(tbox);
-    }
+    tbox.value = this.value;
+    autosize.update(tbox);
   }
 
   private get text() {
