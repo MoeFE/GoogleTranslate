@@ -24,12 +24,10 @@ export default class LocaleProvider extends Vue.Component<LocaleProviderProps> {
 
   @Watch('locale', { immediate: true })
   private async handleChangeLocale() {
-    const localeExists = fs.existsSync(
-      path.resolve(__static, `i18n/${this.locale}`),
-    );
-    const locale = localeExists ? this.locale : 'zh-CN';
-    const uri = `/i18n/${locale}/languages.json`;
-    this.languages = await fetch(uri).then(res => res.json());
+    const exists = fs.existsSync(path.join(__static, `i18n/${this.locale}`));
+    const locale = exists ? this.locale : 'zh-CN';
+    const filename = path.join(__static, `/i18n/${locale}/languages.json`);
+    this.languages = JSON.parse(fs.readFileSync(filename).toString());
   }
 
   render() {
