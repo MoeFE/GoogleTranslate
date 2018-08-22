@@ -67,7 +67,7 @@ const initState: IState = {
   ],
 };
 
-const s = new Vuex.Store<IState>({
+const $store = new Vuex.Store<IState>({
   state: {
     ...initState,
     ...store.get('state'),
@@ -89,10 +89,14 @@ const s = new Vuex.Store<IState>({
   actions: {},
 });
 
-s.watch(
-  () => s.state,
+$store.watch(
+  () => $store.state,
   async () => {
-    const { autoLaunch = false, isAlwaysOnTop = true, shortcutKeys } = s.state;
+    const {
+      autoLaunch = false,
+      isAlwaysOnTop = true,
+      shortcutKeys,
+    } = $store.state;
     try {
       if (autoLaunch) {
         await googleTranslateAutoLauncher.enable();
@@ -128,4 +132,4 @@ s.watch(
   },
 );
 
-export default s;
+export default $store;
