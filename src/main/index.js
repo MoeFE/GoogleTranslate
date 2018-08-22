@@ -57,7 +57,7 @@ function createMainWindow() {
     const { window } = mb;
     const { webContents } = window;
 
-    if (!process.env.IS_TEST) {
+    if (isDevelopment && !process.env.IS_TEST) {
       webContents.openDevTools({ mode: 'undocked' });
     }
 
