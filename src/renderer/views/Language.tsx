@@ -11,7 +11,7 @@ import Input from 'components/Input';
 import Country from 'components/Country';
 import Select, { Optgroup, Option } from 'components/Select';
 import { resize } from '@/utils';
-import { IState } from '../store';
+import { IState } from '@/store';
 
 // #region stylesheet
 const header = css`

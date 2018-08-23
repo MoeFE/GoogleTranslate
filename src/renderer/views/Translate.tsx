@@ -14,7 +14,7 @@ import Icon, { IconProps, IconEvents } from 'components/Icon';
 import Language from 'components/Language';
 import Progress, { Spin } from 'components/Progress';
 import * as Tools from '@/utils';
-import { IState, ILang } from '../store';
+import { IState, ILang } from '@/store';
 
 const { app, Menu, MenuItem } = remote;
 const window = remote.getCurrentWindow();
@@ -418,7 +418,7 @@ export default class Translate extends Vue {
             this.source.country,
           ];
         }
-        if (value === text) {
+        if (this.source.value === text) {
           if (engine === 'google') {
             result = raw.sentences.map(({ trans }: any) => trans);
           }

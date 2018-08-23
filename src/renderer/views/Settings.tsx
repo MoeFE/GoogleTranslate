@@ -10,7 +10,7 @@ import Radio from 'components/Radio';
 import Link from 'components/Link';
 import InputShortcutKeys from 'components/InputShortcutKeys';
 import { resize } from '@/utils';
-import { IState } from '../store';
+import { IState } from '@/store';
 
 const header = css`
   .right {
