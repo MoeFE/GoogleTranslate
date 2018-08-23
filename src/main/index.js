@@ -47,7 +47,12 @@ function createMainWindow() {
 
   if (!isDevelopment) {
     const menu = new Menu();
-    menu.append(new MenuItem({ role: 'about' }));
+    menu.append(
+      new MenuItem({
+        role: 'about',
+        submenu: [{ role: 'toggledevtools' }],
+      }),
+    );
     menu.append(new MenuItem({ role: 'editMenu' }));
     Menu.setApplicationMenu(menu);
     createProtocol('app');
