@@ -45,6 +45,9 @@ A：因为 UI 的交互设计不适用于其他操作系统
 Q：为什么不能自动更新？  
 A：因为我没有加入 [Apple Developer Program](https://developer.apple.com/programs/)（需要缴纳年费），无法进行[代码签名](https://electronjs.org/docs/tutorial/code-signing)，所以无法使用自动更新功能
 
+Q：所有翻译引擎都提示当前翻译接口不可用？  
+A：在新版本中，无论你使用哪种翻译引擎，都会先调用国内谷歌翻译的检测语言接口。出现这种情况一般是你的代理节点出现流量异常，导致请求被谷歌拦截，需要输入验证码（你还可以使用 <kbd>option</kbd> + <kbd>command</kbd> + <kbd>I</kbd> 打开调试工具查看请求结果是否正确）所以如果出现这个问题，请更换你的代理节点或不使用代理直接使用国内谷歌引擎。
+
 ## 参与贡献
 
 1.  Fork it!
