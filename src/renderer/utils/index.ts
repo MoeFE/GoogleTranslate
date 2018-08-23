@@ -11,10 +11,7 @@ export function resize(width: number, height: number) {
     height,
     duration: 150,
     easing: 'easeOutQuart',
-    update: () =>
-      requestAnimationFrame(() =>
-        window.resizeTo(targets.width, targets.height),
-      ),
+    update: () => window.resizeTo(targets.width, targets.height),
   });
   return animeInstance.finished;
 }
