@@ -2,7 +2,9 @@ import { remote } from 'electron';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import store from 'store';
+import anime from 'animejs';
 import AutoLaunch from 'auto-launch';
+import Tools from 'utils/tools';
 import { IDialects } from 'assets/languages';
 
 const { Notification } = remote;
@@ -92,6 +94,8 @@ const $store = new Vuex.Store<IState>({
 $store.watch(
   () => $store.state,
   async () => {
+    await Promise.all(anime.running.map(x => x.finished));
+    await Tools.sleep(300);
     const {
       autoLaunch = false,
       isAlwaysOnTop = true,

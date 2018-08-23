@@ -36,7 +36,10 @@ export default abstract class Tools {
       height,
       duration: 150,
       easing: 'easeOutQuart',
-      update: () => window.resizeTo(targets.width, targets.height),
+      update: () =>
+        requestAnimationFrame(() =>
+          window.resizeTo(targets.width, targets.height),
+        ),
     });
     return animeInstance.finished;
   }
