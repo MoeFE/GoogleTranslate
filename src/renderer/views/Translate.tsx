@@ -20,9 +20,9 @@ const { app, Menu, MenuItem } = remote;
 const window = remote.getCurrentWindow();
 const errMsg: any = {
   NETWORK_ERROR: '网络繁忙，请稍后再试',
-  API_SERVER_ERROR: '翻译错误',
+  API_SERVER_ERROR: '当前翻译接口不可用',
   UNSUPPORTED_LANG: '当前引擎不支持翻译该语种',
-  NETWORK_TIMEOUT: '翻译超时',
+  NETWORK_TIMEOUT: '翻译接口超时',
 };
 
 // #region stylesheet
