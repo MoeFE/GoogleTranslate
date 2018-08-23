@@ -134,6 +134,10 @@ export default class Translate extends Vue {
     error: false,
   };
 
+  private get isActive() {
+    return this.$route.name === 'translate';
+  }
+
   @Provide('handleResize')
   @Watch('source.loading')
   @Watch('target.loading')
@@ -418,7 +422,7 @@ export default class Translate extends Vue {
             this.source.country,
           ];
         }
-        if (this.source.value === text) {
+        if (this.isActive && this.source.value === text) {
           if (engine === 'google') {
             result = raw.sentences.map(({ trans }: any) => trans);
           }
