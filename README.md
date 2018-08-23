@@ -13,9 +13,10 @@
 
 > 🌐 Google 翻译 Mac 客户端（这是 2.0 版本的分支）
 
-## 状态：重写中
+## 状态：公测版
 
-新版本使用 [`@vue/cli`](https://cli.vuejs.org) 3.x 和 [`vue-cli-plugin-electron-builder`](https://github.com/nklayman/vue-cli-plugin-electron-builder) 构建，将修复[所有已知问题](https://github.com/MoeFE/GoogleTranslate/issues)。
+所有已知问题都已经修复，并优化了用户体验，但可能依然有少量 BUG。  
+如果你在使用中发现了问题，请在[这里](https://github.com/MoeFE/GoogleTranslate/issues/new)报告问题，非常感谢！
 
 ## 预览
 
@@ -47,6 +48,10 @@ A：因为我没有加入 [Apple Developer Program](https://developer.apple.com/
 
 Q：所有翻译引擎都提示当前翻译接口不可用？  
 A：在新版本中，无论你使用哪种翻译引擎，都会先调用国内谷歌翻译的检测语言接口。出现这种情况一般是你的代理节点出现流量异常，导致请求被谷歌拦截，需要输入验证码（你还可以使用 <kbd>option</kbd> + <kbd>command</kbd> + <kbd>I</kbd> 打开调试工具查看请求结果是否正确）所以如果出现这个问题，请更换你的代理节点或不使用代理直接使用国内谷歌引擎。
+
+Q：无法打开应用，提示该应用来自身份不明的开发者？  
+A：在终端中输入 `sudo spctl –master-disable` 然后按回车确认，密码是系统开机密码。  
+然后打开系统偏好设置 ⇨ 安全性和隐私 ⇨ 任何来源，勾选即可。
 
 ## 参与贡献
 
