@@ -43,10 +43,23 @@ injectGlobal`
   }
 `;
 
+const window = remote.getCurrentWindow();
+
 @Comopnent
 export default class App extends Vue {
+  private keymap = {
+    esc: this.handleEscape,
+  };
+
+  private handleEscape() {
+    if (this.$route.name === 'translate') {
+      window.hide();
+    } else {
+      this.$router.push('/');
+    }
+  }
+
   created() {
-    const window = remote.getCurrentWindow();
     document.addEventListener('mouseenter', () => {
       window.focus();
     });
@@ -54,7 +67,7 @@ export default class App extends Vue {
 
   render() {
     return (
-      <LocaleProvider locale="zh-CN">
+      <LocaleProvider locale="zh-CN" v-hotkey={this.keymap}>
         <keep-alive exclude={['Language']}>
           <router-view />
         </keep-alive>
