@@ -55,7 +55,7 @@ const Languages = styled.div`
 `;
 // #endregion
 
-@Component
+@Component({ name: 'Language' })
 export default class Language extends Vue {
   public readonly $refs!: {
     input: Input;
