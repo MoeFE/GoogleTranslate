@@ -10,7 +10,7 @@ import Header from 'components/Header';
 import Input from 'components/Input';
 import Country from 'components/Country';
 import Select, { Optgroup, Option } from 'components/Select';
-import Tools from 'utils/tools';
+import { resize } from '@/utils';
 import { IState } from '../store';
 
 // #region stylesheet
@@ -113,7 +113,7 @@ export default class Language extends Vue {
     const mainHeight = selectHeight <= 19 ? 34 : selectHeight + 5;
     const innerHeight = Math.min(530, 130 + mainHeight);
     if (innerHeight !== window.innerHeight) {
-      Tools.resize(window.innerWidth, innerHeight);
+      resize(window.innerWidth, innerHeight);
     }
   }
 
@@ -158,7 +158,7 @@ export default class Language extends Vue {
   }
 
   mounted() {
-    Tools.resize(window.innerWidth, 530);
+    resize(window.innerWidth, 530);
     anime({
       targets: [this.$refs.search, this.$refs.languages],
       translateY: 0,

@@ -13,7 +13,7 @@ import Header from 'components/Header';
 import Icon, { IconProps, IconEvents } from 'components/Icon';
 import Language from 'components/Language';
 import Progress, { Spin } from 'components/Progress';
-import Tools from 'utils/tools';
+import * as Tools from '@/utils';
 import { IState, ILang } from '../store';
 
 const { app, Menu, MenuItem } = remote;

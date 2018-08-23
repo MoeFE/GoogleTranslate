@@ -9,7 +9,7 @@ import Switch from 'components/Switch';
 import Radio from 'components/Radio';
 import Link from 'components/Link';
 import InputShortcutKeys from 'components/InputShortcutKeys';
-import Tools from 'utils/tools';
+import { resize } from '@/utils';
 import { IState } from '../store';
 
 const header = css`
@@ -82,7 +82,7 @@ export default class Settings extends Vue {
   }
 
   activated() {
-    Tools.resize(window.innerWidth, 660);
+    resize(window.innerWidth, 660);
     anime({
       targets: Panel.Layout.toString(),
       delay: (el, index) => index * 50,

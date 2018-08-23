@@ -12,7 +12,7 @@
     "baseUrl": ".",
     "types": ["node"],
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["src/renderer/*"],
       "assets/*": ["src/renderer/assets/*"],
       "components/*": ["src/renderer/components/*"],
       "utils/*": ["src/renderer/utils/*"],

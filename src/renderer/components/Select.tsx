@@ -7,7 +7,7 @@ import { Prop, Watch, Provide, Inject } from 'vue-property-decorator';
 import { State } from 'vuex-class';
 import styled, { css } from 'vue-emotion';
 import anime from 'animejs';
-import Tools from 'utils/tools';
+import { sleep } from '@/utils';
 
 // #region stylesheet
 interface CustomProps {}
@@ -180,7 +180,7 @@ export default class Select extends Vue.Component<SelectProps, SelectEvents> {
       if (anime.running.length > 0) {
         // 动画过程中设置 selectedValue 会导致动画卡顿
         await Promise.all(anime.running.map(x => x.finished));
-        await Tools.sleep(100);
+        await sleep(100);
       }
       this.selectedValue = value;
       this.selectedOptionId = uid;

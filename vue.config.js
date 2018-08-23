@@ -39,6 +39,7 @@ module.exports = {
     });
 
     config.resolve.alias
+      .set('@', path.resolve(__dirname, 'src/renderer'))
       .set('emotion', path.resolve(__dirname, 'src/renderer/lib/emotion.js'))
       .set('assets', path.resolve(__dirname, 'src/renderer/assets'))
       .set('components', path.resolve(__dirname, 'src/renderer/components'))
