@@ -170,7 +170,7 @@ export const Radio = {
     input[type='radio'] {
       display: none;
       &:checked + i {
-        background: #3497ff;
+        background: linear-gradient(to right, #3497ff, #3497ff);
         border-color: transparent;
         &:before {
           transform: scale(1);
@@ -179,9 +179,7 @@ export const Radio = {
     }
   `,
   Button: styled.i`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
     position: relative;
     width: 14px;
     height: 14px;
@@ -193,8 +191,9 @@ export const Radio = {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
     &:before {
       content: '';
-      display: inline-block;
       position: absolute;
+      top: 4px;
+      left: 4px;
       width: 4px;
       height: 4px;
       border-radius: 4px;
