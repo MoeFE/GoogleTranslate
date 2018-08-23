@@ -121,13 +121,13 @@ $store.watch(
       notice.show();
     } finally {
       window.setAlwaysOnTop(isAlwaysOnTop);
+      remote.globalShortcut.unregisterAll();
       if (shortcutKeys) {
-        remote.globalShortcut.unregisterAll();
         remote.globalShortcut.register(shortcutKeys, () => {
           if (window.isVisible()) window.hide();
           else window.show();
         });
-      } else remote.globalShortcut.unregisterAll();
+      }
     }
   },
   {
