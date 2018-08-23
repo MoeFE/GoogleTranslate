@@ -186,7 +186,10 @@ export default class Translate extends Vue {
       new MenuItem({
         label: '偏好设置',
         accelerator: 'Cmd+,',
-        click: () => this.handleClickSettings(),
+        click: async () => {
+          await Tools.sleep();
+          this.handleClickSettings();
+        },
       }),
     );
     menu.append(
@@ -212,14 +215,20 @@ export default class Translate extends Vue {
       new MenuItem({
         label: '更改源语言',
         accelerator: 'Shift+Cmd+1',
-        click: () => this.changeLanguage('source'),
+        click: async () => {
+          await Tools.sleep();
+          this.changeLanguage('source');
+        },
       }),
     );
     menu.append(
       new MenuItem({
         label: '更改目标语言',
         accelerator: 'Shift+Cmd+2',
-        click: () => this.changeLanguage('target'),
+        click: async () => {
+          await Tools.sleep();
+          this.changeLanguage('target');
+        },
       }),
     );
     menu.append(
