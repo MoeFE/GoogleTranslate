@@ -120,6 +120,8 @@ const keyMap: {
   ' ': { icon: '　', text: 'space', sort: 4 },
 };
 
+const banList = ['CapsLock', 'Escape'];
+
 interface ShortcutKeysProps {
   value: string;
 }
@@ -207,7 +209,7 @@ export default class InputShortcutKeys extends Vue.Component<
 
   private async handleKeydown(e: Event) {
     const { altKey, shiftKey, key, keyCode, target } = e as KeyboardEvent;
-    if (key === 'CapsLock') return;
+    if (banList.includes(key)) return;
     const keyChar = keycode(e); // String.fromCharCode(keyCode);
     const isKeyCombinations = Object.keys(keyMap)
       .splice(0, 4)
