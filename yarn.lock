@@ -3759,18 +3759,6 @@ execa@^0.10.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-execa@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-0.11.0.tgz#0b3c71daf9b9159c252a863cd981af1b4410d97a"
-  dependencies:
-    cross-spawn "^6.0.0"
-    get-stream "^4.0.0"
-    is-stream "^1.1.0"
-    npm-run-path "^2.0.0"
-    p-finally "^1.0.0"
-    signal-exit "^3.0.0"
-    strip-eof "^1.0.0"
-
 execa@^0.7.0:
   version "0.7.0"
   resolved "https://registry.npmjs.org/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
@@ -3801,6 +3789,18 @@ execa@^0.9.0:
   dependencies:
     cross-spawn "^5.0.1"
     get-stream "^3.0.0"
+    is-stream "^1.1.0"
+    npm-run-path "^2.0.0"
+    p-finally "^1.0.0"
+    signal-exit "^3.0.0"
+    strip-eof "^1.0.0"
+
+execa@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-1.0.0.tgz#c6236a5bb4df6d6f15e88e7f017798216749ddd8"
+  dependencies:
+    cross-spawn "^6.0.0"
+    get-stream "^4.0.0"
     is-stream "^1.1.0"
     npm-run-path "^2.0.0"
     p-finally "^1.0.0"
@@ -9273,12 +9273,12 @@ vue-class-component@^6.2.0:
   version "6.2.0"
   resolved "https://registry.npmjs.org/vue-class-component/-/vue-class-component-6.2.0.tgz#7adb1daa9a868c75f30f97f33f4f1b94aee62089"
 
-vue-cli-plugin-electron-builder@1.0.0-rc.1:
-  version "1.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-electron-builder/-/vue-cli-plugin-electron-builder-1.0.0-rc.1.tgz#a5f00bc9e7fd83ab8ee9ea8012ea8445020ea018"
+vue-cli-plugin-electron-builder@1.0.0-rc.2:
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-electron-builder/-/vue-cli-plugin-electron-builder-1.0.0-rc.2.tgz#2968d82b20448306df0e78fc4b7fc9d3b3363c62"
   dependencies:
     electron-builder "^20.28.1"
-    execa "^0.11.0"
+    execa "^1.0.0"
     fs-extra "^7.0.0"
     lodash.merge "^4.6.1"
     portfinder "^1.0.16"
