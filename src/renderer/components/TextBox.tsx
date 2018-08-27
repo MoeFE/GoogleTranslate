@@ -23,9 +23,6 @@ const TextArea = styled.textarea`
   overflow-y: scroll;
   word-break: break-all;
   user-select: text;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   &::-webkit-input-placeholder {
     color: #ccc;
   }

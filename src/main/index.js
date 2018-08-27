@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import { app, protocol, Menu, MenuItem } from 'electron';
+import { app, protocol, Menu, MenuItem, systemPreferences } from 'electron';
 import { format as formatUrl } from 'url';
 import path from 'path';
 import {
@@ -44,6 +44,12 @@ function createMainWindow() {
       allowRunningInsecureContent: true,
     },
   });
+
+  systemPreferences.setUserDefault(
+    'AppleShowScrollBars',
+    'string',
+    'Automatic',
+  );
 
   if (!isDevelopment) {
     const menu = new Menu();
