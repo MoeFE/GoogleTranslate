@@ -86,7 +86,9 @@ export default class Translate extends Vue {
     switch: Vue;
   };
 
-  private keymap = {
+  private keymap: {
+    [index: string]: Function;
+  } = {
     'meta+,': this.handleClickSettings,
     'meta+s': this.handleSwitch,
     'meta+v': this.handlePaste,
@@ -442,9 +444,19 @@ export default class Translate extends Vue {
     }
   }
 
+  proxy(invoke: Function) {
+    if (this.isActive) invoke();
+  }
+
   created() {
     Object.assign(this.source, this.sourceLang);
     Object.assign(this.target, this.targetLang);
+
+    Object.keys(this.keymap).forEach((key, index, arr) => {
+      if (index < arr.length - 1) {
+        this.keymap[key] = this.proxy.bind(this, this.keymap[key]);
+      }
+    });
   }
 
   async activated() {
