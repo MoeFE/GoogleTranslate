@@ -18,7 +18,9 @@ import { IState, ILang } from '@/store';
 
 const { app, Menu, MenuItem } = remote;
 const window = remote.getCurrentWindow();
-const errMsg: any = {
+const errMsg: {
+  [index: string]: string;
+} = {
   NETWORK_ERROR: '网络繁忙，请稍后再试',
   API_SERVER_ERROR: '当前翻译接口不可用',
   UNSUPPORTED_LANG: '当前引擎不支持翻译该语种',
