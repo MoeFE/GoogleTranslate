@@ -1,6 +1,6 @@
 {
   "name": "google-translate",
-  "version": "2.0.0",
+  "version": "2.0.0-beta.2",
   "private": true,
   "main": "build/bundled/background.js",
   "scripts": {
