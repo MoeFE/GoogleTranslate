@@ -13,5 +13,7 @@ export default async function checkForUpdates() {
     });
     notice.on('click', () => shell.openExternal(url));
     notice.show();
+    return true;
   }
+  return false;
 }

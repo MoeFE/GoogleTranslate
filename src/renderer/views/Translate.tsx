@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-restricted-globals */
-import { remote } from 'electron';
+import { remote, ipcRenderer } from 'electron';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch, Provide } from 'vue-property-decorator';
@@ -16,7 +16,8 @@ import Progress, { Spin } from 'components/Progress';
 import * as Tools from '@/utils';
 import { IState, ILang } from '@/store';
 
-const { app, Menu, MenuItem } = remote;
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const { app, dialog, Menu, MenuItem } = remote;
 const window = remote.getCurrentWindow();
 const errMsg: {
   [index: string]: string;
@@ -197,6 +198,22 @@ export default class Translate extends Vue {
         click: async () => {
           await Tools.sleep();
           this.handleClickSettings();
+        },
+      }),
+    );
+    menu.append(
+      new MenuItem({
+        label: '检查更新',
+        click: () => {
+          if (isDevelopment) {
+            dialog.showMessageBox({
+              title: '检查更新',
+              message: 'Google 翻译已是最新版本',
+              buttons: ['知道了'],
+            });
+          } else {
+            ipcRenderer.send('check-for-updates');
+          }
         },
       }),
     );
@@ -457,6 +474,16 @@ export default class Translate extends Vue {
     Object.keys(this.keymap).forEach((key, index, arr) => {
       if (index < arr.length - 1) {
         this.keymap[key] = this.proxy.bind(this, this.keymap[key]);
+      }
+    });
+
+    ipcRenderer.on('check-for-updates', (event: Event, arg: any) => {
+      if (arg === false) {
+        dialog.showMessageBox({
+          title: '检查更新',
+          message: 'Google 翻译已是最新版本',
+          buttons: ['知道了'],
+        });
       }
     });
   }

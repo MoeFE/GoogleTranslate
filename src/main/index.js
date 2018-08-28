@@ -1,5 +1,12 @@
 /* eslint-disable global-require */
-import { app, protocol, Menu, MenuItem, systemPreferences } from 'electron';
+import {
+  app,
+  protocol,
+  systemPreferences,
+  ipcMain,
+  Menu,
+  MenuItem,
+} from 'electron';
 import { format as formatUrl } from 'url';
 import path from 'path';
 import {
@@ -129,7 +136,10 @@ app.on('ready', async () => {
       await installVueDevtools();
     } else {
       // Check for updates
-      await checkForUpdates();
+      checkForUpdates(); // do not await
+      ipcMain.on('check-for-updates', async (event, arg) => {
+        event.sender.send('check-for-updates', await checkForUpdates());
+      });
     }
   } finally {
     mainWindow = createMainWindow();
