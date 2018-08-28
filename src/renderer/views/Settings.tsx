@@ -37,6 +37,10 @@ const Help = styled.p`
 
 @Component
 export default class Settings extends Vue {
+  public readonly $refs!: {
+    hack: HTMLInputElement;
+  };
+
   private engineMap: {
     [index: string]: string;
   } = {
@@ -81,14 +85,15 @@ export default class Settings extends Vue {
     this.defaultEngine = value;
   }
 
-  activated() {
-    resize(window.innerWidth, 660);
+  async activated() {
     anime({
       targets: Panel.Layout.toString(),
       delay: (el, index) => index * 50,
       translateY: [40, 0],
       translateZ: 0,
     });
+    await resize(window.innerWidth, 660);
+    this.$refs.hack.focus();
   }
 
   render() {
@@ -141,6 +146,12 @@ export default class Settings extends Vue {
                 ))}
               </Panel.Body>
             </Panel.Layout>
+            <input
+              ref="hack"
+              class={css`
+                opacity: 0;
+              `}
+            />
           </Container>
           <Footer>
             <Help>给个 Star 鼓励一下吧 (ฅ´ω`ฅ)</Help>
