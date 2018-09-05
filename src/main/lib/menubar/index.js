@@ -92,7 +92,6 @@ module.exports = function create(opts) {
 
       const winOpts = extend(defaults, opts);
       menubar.window = new BrowserWindow(winOpts);
-
       menubar.positioner = new Positioner(menubar.window);
 
       menubar.window.on('blur', () => {

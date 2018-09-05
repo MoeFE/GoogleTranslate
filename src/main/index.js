@@ -45,6 +45,7 @@ function createMainWindow() {
     showDockIcon: isDevelopment,
     transparent: true,
     alwaysOnTop: true,
+    preloadWindow: true,
     webPreferences: {
       scrollBounce: true,
       webSecurity: false,
@@ -70,6 +71,14 @@ function createMainWindow() {
     Menu.setApplicationMenu(menu);
     createProtocol('app');
   }
+
+  ipcMain.on('showWindow', () => {
+    mb.showWindow();
+  });
+
+  ipcMain.on('hideWindow', () => {
+    mb.hideWindow();
+  });
 
   mb.on('after-create-window', () => {
     const { window } = mb;
