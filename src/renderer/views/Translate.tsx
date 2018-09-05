@@ -17,8 +17,12 @@ import * as Tools from '@/utils';
 import { IState, ILang } from '@/store';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
-const { app, dialog, Menu, MenuItem } = remote;
+const { app, Menu, MenuItem, Notification } = remote;
 const window = remote.getCurrentWindow();
+const notice = new Notification({
+  title: 'Google 翻译',
+  body: 'Google 翻译已是最新版本',
+});
 const errMsg: {
   [index: string]: string;
 } = {
@@ -206,11 +210,7 @@ export default class Translate extends Vue {
         label: '检查更新',
         click: () => {
           if (isDevelopment) {
-            dialog.showMessageBox({
-              title: '检查更新',
-              message: 'Google 翻译已是最新版本',
-              buttons: ['知道了'],
-            });
+            notice.show();
           } else {
             ipcRenderer.send('check-for-updates');
           }
@@ -479,11 +479,7 @@ export default class Translate extends Vue {
 
     ipcRenderer.on('check-for-updates', (event: Event, arg: any) => {
       if (arg === false) {
-        dialog.showMessageBox({
-          title: '检查更新',
-          message: 'Google 翻译已是最新版本',
-          buttons: ['知道了'],
-        });
+        notice.show();
       }
     });
   }
