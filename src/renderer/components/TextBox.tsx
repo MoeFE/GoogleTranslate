@@ -72,7 +72,7 @@ export default class TextBox extends Vue.Component<
     historyValuePool: [''],
   };
 
-  private addValueToHistory() {
+  addValueToHistory() {
     const { valueHistory } = this;
     valueHistory.historyValuePool.length = valueHistory.currentPosition + 1;
     this.valueHistory.historyValuePool.push(this.text);

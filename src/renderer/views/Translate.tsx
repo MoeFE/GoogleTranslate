@@ -484,12 +484,17 @@ export default class Translate extends Vue {
         notice.show();
       }
     });
-    ipcRenderer.on('translate-clipboard-text', (event: Event, arg: any) => {
-      if (arg) {
-        this.source.value = arg;
-        this.translate();
-      }
-    });
+    ipcRenderer.on(
+      'translate-clipboard-text',
+      async (event: Event, arg: any) => {
+        if (arg) {
+          this.source.value = arg;
+          await Tools.sleep();
+          this.$refs.slang.$refs.tbox.addValueToHistory();
+          this.translate(...this.translateParams);
+        }
+      },
+    );
   }
 
   async activated() {
