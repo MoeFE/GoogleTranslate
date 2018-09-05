@@ -82,9 +82,9 @@ export default class TextBox extends Vue.Component<
     if (!this.isComposition) this.$emit('input', e.target.value);
   }
 
-  private handleKeydown(e: Event) {
+  private handleKeydown(e: KeyboardEvent) {
     // 禁止回车键
-    if ((e as KeyboardEvent).keyCode === 13) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       e.preventDefault();
       this.$emit('enter', e);
     }
