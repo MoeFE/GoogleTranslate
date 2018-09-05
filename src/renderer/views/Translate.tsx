@@ -338,6 +338,8 @@ export default class Translate extends Vue {
     }
   }
 
+  private throttleHandleTranslate = Tools.throttle(this.handleTranslate);
+
   private handleClickSettings() {
     this.$router.push({ name: 'settings' });
   }
@@ -534,6 +536,7 @@ export default class Translate extends Vue {
               loading={this.source.loading}
               onClick={() => this.changeLanguage('source')}
               onEnter={this.handleTranslate}
+              onInput={this.throttleHandleTranslate}
               onSpeak={() => this.speak('source')}
               allowClear
             >
