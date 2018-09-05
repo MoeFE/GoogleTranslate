@@ -86,7 +86,7 @@ function createMainWindow() {
     const oldString = clipboard.readText();
     robotjs.keyTap('c', 'command'); // Invalid when no selection text
     const newString = clipboard.readText();
-    mb.window.webContents.send('clipboardText', newString);
+    mb.window.webContents.send('clipboardText', newString.trim());
     clipboard.writeText(oldString);
   });
 
