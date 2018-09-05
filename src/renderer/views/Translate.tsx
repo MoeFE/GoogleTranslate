@@ -420,7 +420,7 @@ export default class Translate extends Vue {
         const auto = swap || sourceLang === 'auto';
         const googl = tjs[engine] as typeof tjs.google;
         await Tools.sleep(200);
-        const originStr = /^[a-zA-Z]+$/.test(trimStr)
+        const originStr = /^[a-zA-Z_-]+$/.test(trimStr)
           ? startCase(trimStr)
           : trimStr;
         let {
