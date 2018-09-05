@@ -482,6 +482,12 @@ export default class Translate extends Vue {
         notice.show();
       }
     });
+    ipcRenderer.on('clipboardText', (event: Event, arg: any) => {
+      if (arg) {
+        this.source.value = arg;
+        this.translate();
+      }
+    });
   }
 
   async activated() {

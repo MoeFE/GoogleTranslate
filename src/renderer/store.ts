@@ -18,6 +18,7 @@ export interface ILang {
 
 export interface IState {
   autoLaunch?: boolean;
+  translateSelection?: boolean;
   isAlwaysOnTop?: boolean;
   shortcutKeys?: string;
   defaultEngine?: string;
@@ -34,6 +35,7 @@ const window = remote.getCurrentWindow();
 
 const initState: IState = {
   autoLaunch: false,
+  translateSelection: false,
   isAlwaysOnTop: true,
   shortcutKeys: '',
   defaultEngine: 'google',
@@ -100,6 +102,7 @@ $store.watch(
       autoLaunch = false,
       isAlwaysOnTop = true,
       shortcutKeys,
+      translateSelection,
     } = $store.state;
     try {
       if (autoLaunch) {
@@ -124,8 +127,14 @@ $store.watch(
       remote.globalShortcut.unregisterAll();
       if (shortcutKeys) {
         remote.globalShortcut.register(shortcutKeys, () => {
-          if (window.isVisible()) ipcRenderer.send('hideWindow');
-          else ipcRenderer.send('showWindow');
+          if (window.isVisible()) {
+            ipcRenderer.send('hideWindow');
+          } else {
+            if (translateSelection) {
+              ipcRenderer.send('copySelection');
+            }
+            ipcRenderer.send('showWindow');
+          }
         });
       }
     }

@@ -61,6 +61,14 @@ export default class Settings extends Vue {
     this.setState({ autoLaunch });
   }
 
+  private get translateSelection() {
+    return (this.$store.state as IState).translateSelection;
+  }
+
+  private set translateSelection(translateSelection) {
+    this.setState({ translateSelection });
+  }
+
   private get defaultEngine() {
     return (this.$store.state as IState).defaultEngine;
   }
@@ -128,6 +136,18 @@ export default class Settings extends Vue {
                   v-model={this.shortcutKeys}
                 />
               </Panel.Body>
+            </Panel.Layout>
+            <Panel.Layout>
+              <Panel.Title>自动翻译选择的文本</Panel.Title>
+              <Panel.Body>使用快捷键打开时才有效。</Panel.Body>
+              <Switch
+                v-model={this.translateSelection}
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '20px',
+                }}
+              />
             </Panel.Layout>
             <Panel.Layout>
               <Panel.Title>翻译引擎</Panel.Title>

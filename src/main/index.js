@@ -6,9 +6,11 @@ import {
   ipcMain,
   Menu,
   MenuItem,
+  clipboard,
 } from 'electron';
 import { format as formatUrl } from 'url';
 import path from 'path';
+import robotjs from 'robotjs';
 import {
   createProtocol,
   installVueDevtools,
@@ -78,6 +80,14 @@ function createMainWindow() {
 
   ipcMain.on('hideWindow', () => {
     mb.hideWindow();
+  });
+
+  ipcMain.on('copySelection', () => {
+    const oldString = clipboard.readText();
+    robotjs.keyTap('c', 'command'); // Invalid when no selection text
+    const newString = clipboard.readText();
+    mb.window.webContents.send('clipboardText', newString);
+    clipboard.writeText(oldString);
   });
 
   mb.on('after-create-window', () => {
