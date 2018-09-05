@@ -460,7 +460,7 @@ export default class Translate extends Vue {
         : '您需要连接互联网才能使用 Google 翻译';
     } finally {
       this.target.loading = false;
-      await Tools.sleep();
+      await Tools.sleep(100);
       this.$refs.slang.tbox.focus();
     }
   }
