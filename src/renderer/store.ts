@@ -1,4 +1,4 @@
-import { remote } from 'electron';
+import { remote, ipcRenderer } from 'electron';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import store from 'store';
@@ -124,8 +124,8 @@ $store.watch(
       remote.globalShortcut.unregisterAll();
       if (shortcutKeys) {
         remote.globalShortcut.register(shortcutKeys, () => {
-          if (window.isVisible()) window.hide();
-          else window.show();
+          if (window.isVisible()) ipcRenderer.send('hideWindow');
+          else ipcRenderer.send('showWindow');
         });
       }
     }

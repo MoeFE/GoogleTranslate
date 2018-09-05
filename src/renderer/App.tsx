@@ -1,4 +1,4 @@
-import { remote } from 'electron';
+import { ipcRenderer } from 'electron';
 
 import Vue from 'vue';
 import Comopnent from 'vue-class-component';
@@ -43,8 +43,6 @@ injectGlobal`
   }
 `;
 
-const window = remote.getCurrentWindow();
-
 @Comopnent
 export default class App extends Vue {
   private keymap = {
@@ -53,7 +51,7 @@ export default class App extends Vue {
 
   private handleEscape() {
     if (this.$route.name === 'translate') {
-      window.hide();
+      ipcRenderer.send('hideWindow');
     } else {
       this.$router.push('/');
     }
