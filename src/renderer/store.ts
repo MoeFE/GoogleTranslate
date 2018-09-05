@@ -129,10 +129,9 @@ $store.watch(
         remote.globalShortcut.register(shortcutKeys, () => {
           if (window.isVisible()) {
             ipcRenderer.send('hideWindow');
+          } else if (translateSelection) {
+            ipcRenderer.send('translateSelection');
           } else {
-            if (translateSelection) {
-              ipcRenderer.send('copySelection');
-            }
             ipcRenderer.send('showWindow');
           }
         });

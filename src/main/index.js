@@ -82,12 +82,14 @@ function createMainWindow() {
     mb.hideWindow();
   });
 
-  ipcMain.on('copySelection', () => {
+  ipcMain.on('translateSelection', async () => {
     const oldString = clipboard.readText();
     robotjs.keyTap('c', 'command'); // Invalid when no selection text
+    await new Promise(resolve => setTimeout(resolve, 100));
     const newString = clipboard.readText();
-    mb.window.webContents.send('clipboardText', newString.trim());
     clipboard.writeText(oldString);
+    mb.showWindow();
+    mb.window.webContents.send('translate-clipboard-text', newString.trim());
   });
 
   mb.on('after-create-window', () => {
