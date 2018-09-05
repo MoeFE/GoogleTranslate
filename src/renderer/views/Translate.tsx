@@ -333,7 +333,7 @@ export default class Translate extends Vue {
   }
 
   private handleTranslate() {
-    if (!this.target.value) {
+    if (!this.target.value || this.target.error) {
       this.translate(...this.translateParams);
     }
   }
