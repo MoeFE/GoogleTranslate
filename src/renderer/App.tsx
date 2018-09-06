@@ -1,4 +1,4 @@
-import { ipcRenderer } from 'electron';
+import { remote, ipcRenderer } from 'electron';
 
 import Vue from 'vue';
 import Comopnent from 'vue-class-component';
@@ -42,6 +42,8 @@ injectGlobal`
     }
   }
 `;
+
+const window = remote.getCurrentWindow();
 
 @Comopnent
 export default class App extends Vue {
