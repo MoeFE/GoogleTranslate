@@ -5,6 +5,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch, Provide } from 'vue-property-decorator';
 import { State, Getter, Mutation } from 'vuex-class';
+import startCase from 'lodash/startCase';
 import styled, { css } from 'vue-emotion';
 import anime from 'animejs';
 import * as tjs from 'translation.js';
@@ -411,22 +412,26 @@ export default class Translate extends Vue {
     try {
       const { key: sourceLang, value } = this.source;
       const { key: targetLang } = this.target;
-      if (value) {
+      const trimStr = value.trim();
+      if (trimStr) {
         this.target.loading = true;
-        const lang = await tjs.google.detect({ text: value, com });
+        const lang = await tjs.google.detect({ text: trimStr, com });
 
         // eslint-disable-next-line max-len
         const swap = sourceLang !== 'auto' && lang !== sourceLang && [sourceLang, targetLang].includes(lang); // prettier-ignore
         const auto = swap || sourceLang === 'auto';
         const googl = tjs[engine] as typeof tjs.google;
         await Tools.sleep(200);
+        const originStr = /^[a-zA-Z_-]+$/.test(trimStr)
+          ? startCase(trimStr)
+          : trimStr;
         let {
           text, // eslint-disable-line prefer-const
           raw, // eslint-disable-line prefer-const
           dict, // eslint-disable-line prefer-const
           result,
         } = await googl.translate({
-          text: value,
+          text: originStr,
           from: auto ? lang : sourceLang,
           to: swap ? sourceLang : targetLang,
           com,
@@ -443,7 +448,7 @@ export default class Translate extends Vue {
             this.source.country,
           ];
         }
-        if (this.isActive && this.source.value === text) {
+        if (this.isActive && originStr === text) {
           if (engine === 'google') {
             result = raw.sentences.map(({ trans }: any) => trans);
           }
