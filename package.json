@@ -5,6 +5,7 @@
   "main": "build/bundled/background.js",
   "scripts": {
     "serve": "vue-cli-service serve:electron",
+    "serve:debug": "vue-cli-service serve:electron --debug",
     "build": "vue-cli-service build:electron",
     "lint": "vue-cli-service lint",
     "lint:prettier": "prettier-eslint-check \"**/*.{js,jsx,json,ts,tsx,scss,vue,md}\"",

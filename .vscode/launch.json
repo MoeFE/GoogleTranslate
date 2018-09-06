@@ -12,7 +12,7 @@
       "request": "launch",
       "name": "Electron Main",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-      "program": "${workspaceFolder}/src/main/index.js"
+      "program": "${workspaceFolder}/build/background.js"
     }
   ]
 }
