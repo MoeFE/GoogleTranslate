@@ -99,9 +99,9 @@ export interface LanguageProps {
 
 export interface LanguageEvents {
   onInput: string;
-  onClick: Event;
-  onSpeak: Event;
-  onEnter: Event;
+  onClick: MouseEvent;
+  onSpeak: MouseEvent;
+  onEnter: KeyboardEvent;
 }
 
 @Component
@@ -153,15 +153,15 @@ export default class Language extends Vue.Component<
     this.text = '';
   }
 
-  private handleClick(e: Event) {
+  private handleClick(e: MouseEvent) {
     this.$emit('click', e);
   }
 
-  private handleSpeak(e: Event) {
+  private handleSpeak(e: MouseEvent) {
     this.$emit('speak', e);
   }
 
-  private handleEnter(e: Event) {
+  private handleEnter(e: KeyboardEvent) {
     this.$emit('enter', e);
   }
 

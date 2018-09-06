@@ -202,13 +202,13 @@ export default class InputShortcutKeys extends Vue.Component<
     this.cacheKeys = [];
   }
 
-  private handleClear(e: Event) {
+  private handleClear(e: FocusEvent) {
     e.stopPropagation();
     this.handleFocus();
   }
 
-  private async handleKeydown(e: Event) {
-    const { altKey, shiftKey, key, keyCode, target } = e as KeyboardEvent;
+  private async handleKeydown(e: KeyboardEvent) {
+    const { altKey, shiftKey, key, keyCode, target } = e;
     if (banList.includes(key)) return;
     const keyChar = keycode(e); // String.fromCharCode(keyCode);
     const isKeyCombinations = Object.keys(keyMap)

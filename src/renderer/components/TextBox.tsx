@@ -45,7 +45,7 @@ export interface TextBoxProps {
 
 export interface TextBoxEvents {
   onInput: string;
-  onEnter: Event;
+  onEnter: KeyboardEvent;
 }
 
 export interface TextBoxValueHistory {
@@ -72,12 +72,13 @@ export default class TextBox extends Vue.Component<
     historyValuePool: [''],
   };
 
-  addValueToHistory() {
+  public addValueToHistory() {
     const { valueHistory } = this;
     valueHistory.historyValuePool.length = valueHistory.currentPosition + 1;
     this.valueHistory.historyValuePool.push(this.text);
     valueHistory.currentPosition += 1;
   }
+
   private undo() {
     const { valueHistory } = this;
     if (valueHistory.currentPosition) {
@@ -85,6 +86,7 @@ export default class TextBox extends Vue.Component<
       this.text = valueHistory.historyValuePool[valueHistory.currentPosition];
     }
   }
+
   private redo() {
     const { valueHistory } = this;
     if (
@@ -139,15 +141,14 @@ export default class TextBox extends Vue.Component<
     }
   }
 
-  private handleComposition(e: Event) {
+  private handleComposition(e: CompositionEvent) {
     this.isComposition = e.type !== 'compositionend';
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private handleBlur(e: Event) {
-    const evt = e as FocusEvent;
-    if (evt.relatedTarget === null && evt.target) {
-      (evt.target as HTMLTextAreaElement).focus();
+  private handleBlur(e: FocusEvent) {
+    if (e.relatedTarget === null && e.target) {
+      (e.target as HTMLTextAreaElement).focus();
     }
   }
 

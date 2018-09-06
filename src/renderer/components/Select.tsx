@@ -68,8 +68,8 @@ export interface OptionProps {
 }
 
 export interface OptionEvents {
-  onClick: (e: Event) => void;
-  onMouseenter: (e: Event) => void;
+  onClick: (e: MouseEvent) => void;
+  onMouseenter: (e: MouseEvent) => void;
 }
 
 @Component

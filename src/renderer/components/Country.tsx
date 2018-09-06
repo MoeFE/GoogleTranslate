@@ -10,7 +10,7 @@ export interface CountryProps {
 }
 
 export interface CountryEvents {
-  onClick: Event;
+  onClick: MouseEvent;
 }
 
 @Component
@@ -36,7 +36,7 @@ export default class Country extends Vue.Component<
       : `http://${this.ssl ? 'ssl-' : ''}api.itranslateapp.com/flags/${this.code}${this.retina ? '-2x' : ''}.png`; // prettier-ignore
   }
 
-  private handleClick(e: Event) {
+  private handleClick(e: MouseEvent) {
     this.$emit('click', e);
   }
 

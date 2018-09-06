@@ -69,7 +69,7 @@ const Divider = styled.div`
 `;
 
 interface SwitchEvents {
-  onClick?: (e: Event) => void;
+  onClick?: (e: MouseEvent) => void;
 }
 
 const Switch = styled<IconProps, SwitchEvents>(Icon)`

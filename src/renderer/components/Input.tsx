@@ -12,8 +12,8 @@ export interface InputProps {
 
 export interface InputEvents {
   onInput: string;
-  onEnter: Event;
-  onBlur: Event;
+  onEnter: KeyboardEvent;
+  onBlur: FocusEvent;
 }
 
 @Component
@@ -31,19 +31,18 @@ export default class Input extends Vue.Component<InputProps, InputEvents> {
     if (!this.isComposition) this.$emit('input', value);
   }
 
-  private handleKeydown(e: Event) {
-    // 禁止回车键
-    if ((e as KeyboardEvent).keyCode === 13) {
+  private handleKeydown(e: KeyboardEvent) {
+    if (e.keyCode === 13) {
       e.preventDefault();
       this.$emit('enter', e);
     }
   }
 
-  private handleBlur(e: Event) {
+  private handleBlur(e: FocusEvent) {
     this.$emit('blur', e);
   }
 
-  private handleComposition(e: Event) {
+  private handleComposition(e: CompositionEvent) {
     this.isComposition = e.type !== 'compositionend';
   }
 

@@ -26,8 +26,10 @@ export default class Radio extends Vue.Component<RadioProps, RadioEvents> {
   @Prop({ type: String, required: false })
   private readonly name!: string; // eslint-disable-line no-restricted-globals
 
-  private handleChange(e: any) {
-    this.$emit('change', e.target.value);
+  private handleChange(e: Event) {
+    if (e.target) {
+      this.$emit('change', (e.target as HTMLInputElement).value);
+    }
   }
 
   render() {

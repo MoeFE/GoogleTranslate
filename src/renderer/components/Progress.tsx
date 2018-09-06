@@ -62,7 +62,7 @@ export interface ProgressProps {
 }
 
 export interface ProgressEvents {
-  onPause: Event;
+  onPause: MouseEvent;
 }
 
 @Component
@@ -88,7 +88,7 @@ export default class Progress extends Vue.Component<
     return (1 - this.value) * 295.416;
   }
 
-  private handlePause(e: Event) {
+  private handlePause(e: MouseEvent) {
     this.$emit('pause', e);
   }
 

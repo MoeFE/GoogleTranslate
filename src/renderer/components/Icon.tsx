@@ -15,8 +15,8 @@ export interface IconProps {
 }
 
 export interface IconEvents {
-  onClick: (e: Event) => void;
-  onFocus: (e: Event) => void;
+  onClick: (e: MouseEvent) => void;
+  onFocus: (e: FocusEvent) => void;
 }
 
 @Component
@@ -27,11 +27,11 @@ export default class Icon extends Vue.Component<IconProps, IconEvents> {
   @Prop({ type: Number, required: false })
   private readonly rotate!: number;
 
-  private handleClick(e: Event) {
+  private handleClick(e: MouseEvent) {
     this.$emit('click', e);
   }
 
-  private handleFocus(e: Event) {
+  private handleFocus(e: FocusEvent) {
     this.$emit('focus', e);
   }
 

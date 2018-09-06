@@ -14,7 +14,7 @@ export default class Link extends Vue.Component<LinkProps> {
   @Prop({ type: String, required: false, default: 'javascript:;' }) // eslint-disable-line no-script-url
   private readonly href!: string;
 
-  private handleClick(e: Event) {
+  private handleClick(e: MouseEvent) {
     e.preventDefault();
     remote.shell.openExternal(this.href);
   }
