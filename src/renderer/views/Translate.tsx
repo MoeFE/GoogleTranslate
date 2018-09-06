@@ -11,7 +11,7 @@ import anime from 'animejs';
 import * as tjs from 'translation.js';
 import Layout, { Main } from 'components/Layout';
 import Header from 'components/Header';
-import Icon, { IconProps, IconEvents } from 'components/Icon';
+import Icon, { IconProps } from 'components/Icon';
 import Language from 'components/Language';
 import Progress, { Spin } from 'components/Progress';
 import * as Tools from '@/utils';

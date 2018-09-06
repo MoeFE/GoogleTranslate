@@ -1,10 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import { remote } from 'electron';
-
 import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
-import { Prop, Watch, Provide, Inject } from 'vue-property-decorator';
-import { State } from 'vuex-class';
+import { Prop, Provide, Inject } from 'vue-property-decorator';
 import styled, { css } from 'vue-emotion';
 import anime from 'animejs';
 import { sleep } from '@/utils';

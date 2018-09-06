@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import styled, { css } from 'vue-emotion';
+import styled from 'vue-emotion';
 import * as Layout from './Layout';
 
 const H1 = styled.h1`

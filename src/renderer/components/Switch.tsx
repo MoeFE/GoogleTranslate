@@ -1,7 +1,6 @@
 import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import styled from 'vue-emotion';
 import { Switch } from './Layout';
 
 export interface SwitchProps {

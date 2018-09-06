@@ -1,7 +1,7 @@
 import * as Vue from 'vue-tsx-support';
 import Component from 'vue-class-component';
 import { Prop, Inject } from 'vue-property-decorator';
-import styled, { css } from 'vue-emotion';
+import styled from 'vue-emotion';
 import Icon from './Icon';
 import Country from './Country';
 import Loading from './Loading';
