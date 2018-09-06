@@ -170,7 +170,7 @@ export default class Translate extends Vue {
     this.target.value = '';
     this.target.error = false;
     this.target.loading = false;
-    this.$refs.slang.tbox.focus();
+    // this.$refs.slang.tbox.focus();
   }
 
   @Watch('target.value')
@@ -465,8 +465,8 @@ export default class Translate extends Vue {
         : '您需要连接互联网才能使用 Google 翻译';
     } finally {
       this.target.loading = false;
-      await Tools.sleep(100);
-      this.$refs.slang.tbox.focus();
+      // await Tools.sleep(100);
+      // this.$refs.slang.tbox.focus();
     }
   }
 
