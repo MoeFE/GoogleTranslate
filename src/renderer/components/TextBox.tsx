@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch, Inject } from 'vue-property-decorator';
 import styled from 'vue-emotion';
 import autosize from 'autosize';
+import * as Tools from '@/utils';
 
 const TextArea = styled.textarea`
   -webkit-appearance: none;
@@ -47,6 +48,11 @@ export interface TextBoxEvents {
   onEnter: Event;
 }
 
+export interface TextBoxValueHistory {
+  currentPosition: number;
+  historyValuePool: string[];
+}
+
 @Component
 export default class TextBox extends Vue.Component<
   TextBoxProps,
@@ -60,6 +66,35 @@ export default class TextBox extends Vue.Component<
   private readonly value!: string;
 
   private isComposition: boolean = false; // 是否正在输入法输入
+
+  private valueHistory: TextBoxValueHistory = {
+    currentPosition: 0,
+    historyValuePool: [''],
+  };
+
+  addValueToHistory() {
+    const { valueHistory } = this;
+    valueHistory.historyValuePool.length = valueHistory.currentPosition + 1;
+    this.valueHistory.historyValuePool.push(this.text);
+    valueHistory.currentPosition += 1;
+  }
+  private undo() {
+    const { valueHistory } = this;
+    if (valueHistory.currentPosition) {
+      valueHistory.currentPosition -= 1;
+      this.text = valueHistory.historyValuePool[valueHistory.currentPosition];
+    }
+  }
+  private redo() {
+    const { valueHistory } = this;
+    if (
+      valueHistory.currentPosition + 1 <
+      valueHistory.historyValuePool.length
+    ) {
+      valueHistory.currentPosition += 1;
+      this.text = valueHistory.historyValuePool[valueHistory.currentPosition];
+    }
+  }
 
   @Inject('handleResize')
   private readonly handleResize!: EventListenerOrEventListenerObject;
@@ -77,16 +112,30 @@ export default class TextBox extends Vue.Component<
     return this.value;
   }
 
+  private throttleHandleInput = Tools.throttle(this.addValueToHistory, 1000);
+
   private set text(e: any) {
     // 等待输入法上屏后再更新值
-    if (!this.isComposition) this.$emit('input', e.target.value);
+    if (!this.isComposition) {
+      this.$emit('input', typeof e === 'string' ? e : e.target.value);
+    }
   }
 
-  private handleKeydown(e: Event) {
+  private handleKeydown(e: KeyboardEvent) {
     // 禁止回车键
-    if ((e as KeyboardEvent).keyCode === 13) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       e.preventDefault();
       this.$emit('enter', e);
+    }
+    // command + y or command + shift + z
+    if ((e.keyCode === 89 || (e.keyCode === 90 && e.shiftKey)) && e.metaKey) {
+      e.preventDefault();
+      this.redo();
+    }
+    // command + z
+    if (e.keyCode === 90 && e.metaKey && !e.shiftKey) {
+      e.preventDefault();
+      this.undo();
     }
   }
 
@@ -125,6 +174,7 @@ export default class TextBox extends Vue.Component<
         onCompositionupdate={this.handleComposition}
         onCompositionend={this.handleComposition}
         onBlur={this.handleBlur}
+        onInput={this.throttleHandleInput}
       />
     );
   }

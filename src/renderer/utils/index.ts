@@ -20,6 +20,14 @@ export function sleep(delay = 0) {
   return new Promise(resolve => setTimeout(resolve, delay));
 }
 
+export function throttle(fn: Function, delay = 500) {
+  let timer = 0;
+  return (...rest: any[]) => {
+    clearTimeout(timer);
+    timer = setTimeout(fn.bind(null, ...rest), delay);
+  };
+}
+
 export function eventLoop(
   target: () => any,
   timeout: number = 3000,

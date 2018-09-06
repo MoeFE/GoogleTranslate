@@ -334,10 +334,12 @@ export default class Translate extends Vue {
   }
 
   private handleTranslate() {
-    if (!this.target.value) {
+    if (!this.target.value || this.target.error) {
       this.translate(...this.translateParams);
     }
   }
+
+  private throttleHandleTranslate = Tools.throttle(this.handleTranslate);
 
   private handleClickSettings() {
     this.$router.push({ name: 'settings' });
@@ -463,7 +465,7 @@ export default class Translate extends Vue {
         : '您需要连接互联网才能使用 Google 翻译';
     } finally {
       this.target.loading = false;
-      await Tools.sleep();
+      await Tools.sleep(100);
       this.$refs.slang.tbox.focus();
     }
   }
@@ -487,6 +489,17 @@ export default class Translate extends Vue {
         notice.show();
       }
     });
+    ipcRenderer.on(
+      'translate-clipboard-text',
+      async (event: Event, arg: any) => {
+        if (arg) {
+          this.source.value = arg;
+          await Tools.sleep();
+          this.$refs.slang.$refs.tbox.addValueToHistory();
+          this.translate(...this.translateParams);
+        }
+      },
+    );
   }
 
   async activated() {
@@ -533,6 +546,7 @@ export default class Translate extends Vue {
               loading={this.source.loading}
               onClick={() => this.changeLanguage('source')}
               onEnter={this.handleTranslate}
+              onInput={this.throttleHandleTranslate}
               onSpeak={() => this.speak('source')}
               allowClear
             >

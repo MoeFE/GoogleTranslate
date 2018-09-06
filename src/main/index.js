@@ -6,9 +6,11 @@ import {
   ipcMain,
   Menu,
   MenuItem,
+  clipboard,
 } from 'electron';
 import { format as formatUrl } from 'url';
 import path from 'path';
+import robotjs from 'robotjs';
 import {
   createProtocol,
   installVueDevtools,
@@ -78,6 +80,16 @@ function createMainWindow() {
 
   ipcMain.on('hideWindow', () => {
     mb.hideWindow();
+  });
+
+  ipcMain.on('translateSelection', async () => {
+    const oldString = clipboard.readText();
+    robotjs.keyTap('c', 'command'); // Invalid when no selection text
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const newString = clipboard.readText();
+    clipboard.writeText(oldString);
+    mb.showWindow();
+    mb.window.webContents.send('translate-clipboard-text', newString.trim());
   });
 
   mb.on('after-create-window', () => {

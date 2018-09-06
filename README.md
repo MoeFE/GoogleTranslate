@@ -67,10 +67,9 @@ A：在终端中输入 `sudo spctl –master-disable` 然后按回车确认，�
 感谢这些美好的人 ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
 <!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/20062482?v=4" width="100px;"/><br /><sub><b>さくら</b></sub>](https://qwq.cat)<br />[💻](https://github.com/MoeFE/GoogleTranslate/commits?author=u3u "Code") [📖](https://github.com/MoeFE/GoogleTranslate/commits?author=u3u "Documentation") [🎨](#design-u3u "Design") [🤔](#ideas-u3u "Ideas, Planning, & Feedback") | [<img src="https://avatars1.githubusercontent.com/u/9591690?v=4" width="100px;"/><br /><sub><b>Batur</b></sub>](https://github.com/Batur24)<br />[💬](#question-Batur24 "Answering Questions") [🐛](https://github.com/MoeFE/GoogleTranslate/issues?q=author%3ABatur24 "Bug reports") [🤔](#ideas-Batur24 "Ideas, Planning, & Feedback") [⚠️](https://github.com/MoeFE/GoogleTranslate/commits?author=Batur24 "Tests") |
-| :---: | :---: |
+| [<img src="https://avatars2.githubusercontent.com/u/20062482?v=4" width="100px;"/><br /><sub><b>さくら</b></sub>](https://qwq.cat)<br />[💻](https://github.com/MoeFE/GoogleTranslate/commits?author=u3u "Code") [📖](https://github.com/MoeFE/GoogleTranslate/commits?author=u3u "Documentation") [🎨](#design-u3u "Design") [🤔](#ideas-u3u "Ideas, Planning, & Feedback") | [<img src="https://avatars1.githubusercontent.com/u/9591690?v=4" width="100px;"/><br /><sub><b>Batur</b></sub>](https://github.com/Batur24)<br />[💬](#question-Batur24 "Answering Questions") [🐛](https://github.com/MoeFE/GoogleTranslate/issues?q=author%3ABatur24 "Bug reports") [🤔](#ideas-Batur24 "Ideas, Planning, & Feedback") [⚠️](https://github.com/MoeFE/GoogleTranslate/commits?author=Batur24 "Tests") | [<img src="https://avatars3.githubusercontent.com/u/3841872?v=4" width="100px;"/><br /><sub><b>mantou</b></sub>](https://github.com/mantou132)<br />[💻](https://github.com/MoeFE/GoogleTranslate/commits?author=mantou132 "Code") [🤔](#ideas-mantou132 "Ideas, Planning, & Feedback") |
+| :---: | :---: | :---: |
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
