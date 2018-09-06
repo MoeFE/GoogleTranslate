@@ -19,6 +19,12 @@ const header = css`
   }
 `;
 
+const position = css`
+  position: absolute !important;
+  top: 10px;
+  right: 20px;
+`;
+
 const Container = styled.div`
   flex: 1;
   width: 100%;
@@ -100,7 +106,7 @@ export default class Settings extends Vue {
       translateY: [40, 0],
       translateZ: 0,
     });
-    await resize(window.innerWidth, 660);
+    await resize(window.innerWidth, 700);
     this.$refs.hack.focus();
   }
 
@@ -117,14 +123,12 @@ export default class Settings extends Vue {
             <Panel.Layout>
               <Panel.Title>自动开始</Panel.Title>
               <Panel.Body>启动 Mac 时自动启动 Google Translate。</Panel.Body>
-              <Switch
-                v-model={this.autoLaunch}
-                style={{
-                  position: 'absolute',
-                  top: '10px',
-                  right: '20px',
-                }}
-              />
+              <Switch class={position} v-model={this.autoLaunch} />
+            </Panel.Layout>
+            <Panel.Layout>
+              <Panel.Title>自动翻译选择的文本</Panel.Title>
+              <Panel.Body>使用快捷键打开时才有效。</Panel.Body>
+              <Switch class={position} v-model={this.translateSelection} />
             </Panel.Layout>
             <Panel.Layout>
               <Panel.Title>定义快捷键</Panel.Title>
@@ -136,18 +140,6 @@ export default class Settings extends Vue {
                   v-model={this.shortcutKeys}
                 />
               </Panel.Body>
-            </Panel.Layout>
-            <Panel.Layout>
-              <Panel.Title>自动翻译选择的文本</Panel.Title>
-              <Panel.Body>使用快捷键打开时才有效。</Panel.Body>
-              <Switch
-                v-model={this.translateSelection}
-                style={{
-                  position: 'absolute',
-                  top: '10px',
-                  right: '20px',
-                }}
-              />
             </Panel.Layout>
             <Panel.Layout>
               <Panel.Title>翻译引擎</Panel.Title>
@@ -169,6 +161,8 @@ export default class Settings extends Vue {
             <input
               ref="hack"
               class={css`
+                position: absolute;
+                z-index: -1;
                 opacity: 0;
               `}
             />
