@@ -54,6 +54,9 @@ function createMainWindow() {
     },
   });
 
+  const { window } = mb;
+  const { webContents } = window;
+
   systemPreferences.setUserDefault(
     'AppleShowScrollBars',
     'string',
@@ -88,45 +91,39 @@ function createMainWindow() {
     const newString = clipboard.readText();
     clipboard.writeText(oldString);
     mb.showWindow();
-    mb.window.webContents.send('translate-clipboard-text', newString.trim());
+    webContents.send('translate-clipboard-text', newString.trim());
   });
 
-  mb.on('after-create-window', () => {
-    const { window } = mb;
-    const { webContents } = window;
+  if (isDevelopment && !process.env.IS_TEST) {
+    webContents.openDevTools({ mode: 'undocked' });
+  }
 
-    if (isDevelopment && !process.env.IS_TEST) {
-      webContents.openDevTools({ mode: 'undocked' });
-    }
+  webContents.session.webRequest.onBeforeSendHeaders((detail, cb) => {
+    const { url, requestHeaders } = detail;
+    if (url.includes('fanyi.youdao.com')) {
+      requestHeaders.Referer = 'http://fanyi.youdao.com';
+    } else delete requestHeaders.Referer;
+    cb({ requestHeaders });
+  });
 
-    webContents.session.webRequest.onBeforeSendHeaders((detail, cb) => {
-      const { url, requestHeaders } = detail;
-      if (url.includes('fanyi.youdao.com')) {
-        requestHeaders.Referer = 'http://fanyi.youdao.com';
-      } else delete requestHeaders.Referer;
-      cb({ requestHeaders });
-    });
+  window.on('closed', () => {
+    mainWindow = null;
+  });
 
-    window.on('closed', () => {
-      mainWindow = null;
-    });
+  webContents.on('did-finish-load', () => {
+    webContents.setZoomFactor(1);
+    webContents.setVisualZoomLevelLimits(1, 1);
+    webContents.setLayoutZoomLevelLimits(0, 0);
+  });
 
-    webContents.on('did-finish-load', () => {
-      webContents.setZoomFactor(1);
-      webContents.setVisualZoomLevelLimits(1, 1);
-      webContents.setLayoutZoomLevelLimits(0, 0);
-    });
-
-    webContents.on('devtools-opened', () => {
+  webContents.on('devtools-opened', () => {
+    window.focus();
+    setImmediate(() => {
       window.focus();
-      setImmediate(() => {
-        window.focus();
-      });
     });
   });
 
   mb.on('after-show', () => {
-    const { window } = mb;
     window.focus();
   });
 
