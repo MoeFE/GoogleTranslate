@@ -154,6 +154,7 @@ module.exports = function create(opts) {
       if (!menubar.window) return;
       menubar.emit('hide');
       menubar.window.hide();
+      if (!menubar.window.webContents.isDevToolsOpened()) app.hide();
       menubar.emit('after-hide');
     }
 
