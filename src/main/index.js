@@ -76,15 +76,15 @@ function createMainWindow() {
     createProtocol('app');
   }
 
-  ipcMain.on('showWindow', () => {
-    mb.showWindow();
+  ipcMain.on('show-window', () => {
+    mb.showWindow(mb.tray.getBounds());
   });
 
-  ipcMain.on('hideWindow', () => {
+  ipcMain.on('hide-window', () => {
     mb.hideWindow();
   });
 
-  ipcMain.on('translateSelection', async () => {
+  ipcMain.on('translate-selection', async () => {
     const oldString = clipboard.readText();
     robotjs.keyTap('c', 'command'); // Invalid when no selection text
     await new Promise(resolve => setTimeout(resolve, 100));

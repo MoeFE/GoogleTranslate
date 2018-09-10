@@ -128,11 +128,11 @@ $store.watch(
       if (shortcutKeys) {
         remote.globalShortcut.register(shortcutKeys, () => {
           if (window.isVisible()) {
-            ipcRenderer.send('hideWindow');
+            ipcRenderer.send('hide-window');
           } else if (translateSelection) {
-            ipcRenderer.send('translateSelection');
+            ipcRenderer.send('translate-selection');
           } else {
-            ipcRenderer.send('showWindow');
+            ipcRenderer.send('show-window');
           }
         });
       }
