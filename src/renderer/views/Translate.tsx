@@ -91,6 +91,7 @@ export default class Translate extends Vue {
   public readonly $refs!: {
     form: HTMLFormElement;
     slang: Language;
+    tlang: Language;
     switch: Vue;
   };
 
@@ -469,7 +470,9 @@ export default class Translate extends Vue {
     } finally {
       this.target.loading = false;
       await Tools.sleep(100);
-      this.$refs.slang.tbox.focus();
+      if (document.activeElement !== this.$refs.tlang.tbox) {
+        this.$refs.slang.tbox.focus();
+      }
     }
   }
 
@@ -577,6 +580,7 @@ export default class Translate extends Vue {
               />
             </Divider>
             <Language
+              ref="tlang"
               v-model={this.target.value}
               country={this.target.country}
               action={this.target.action}
