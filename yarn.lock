@@ -824,9 +824,9 @@
     ts-loader "^4.4.2"
     tslint "^5.10.0"
 
-"@vue/cli-service@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.0.2.tgz#a942183eae39c4d15d22660c07374bb7e5edc99a"
+"@vue/cli-service@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.0.3.tgz#dd91f2ee40922001559601d458209e4398887337"
   dependencies:
     "@intervolga/optimize-cssnano-plugin" "^1.0.5"
     "@vue/cli-overlay" "^3.0.2"
