@@ -73,10 +73,12 @@ export default class TextBox extends Vue.Component<
   };
 
   public addValueToHistory() {
-    const { valueHistory } = this;
-    valueHistory.historyValuePool.length = valueHistory.currentPosition + 1;
-    this.valueHistory.historyValuePool.push(this.text);
-    valueHistory.currentPosition += 1;
+    if (!this.isComposition) {
+      const { valueHistory } = this;
+      valueHistory.historyValuePool.length = valueHistory.currentPosition + 1;
+      this.valueHistory.historyValuePool.push(this.text);
+      valueHistory.currentPosition += 1;
+    }
   }
 
   private undo() {
@@ -105,7 +107,6 @@ export default class TextBox extends Vue.Component<
   private async handleChange() {
     await this.$nextTick();
     const { tbox } = this.$refs;
-    if (this.value) tbox.focus();
     tbox.value = this.value;
     autosize.update(tbox);
   }
