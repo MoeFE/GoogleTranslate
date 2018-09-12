@@ -421,10 +421,9 @@ export default class Translate extends Vue {
         const swap = sourceLang !== 'auto' && lang !== sourceLang && [sourceLang, targetLang].includes(lang); // prettier-ignore
         const auto = swap || sourceLang === 'auto';
         const googl = tjs[engine] as typeof tjs.google;
+        const originStr = this.startCase(trimStr);
         await Tools.sleep(200);
-        const originStr = /^[a-zA-Z_-]+$/.test(trimStr)
-          ? startCase(trimStr)
-          : trimStr;
+
         let {
           text, // eslint-disable-line prefer-const
           raw, // eslint-disable-line prefer-const
@@ -448,7 +447,11 @@ export default class Translate extends Vue {
             this.source.country,
           ];
         }
-        if (this.isActive && originStr === text) {
+
+        if (
+          this.isActive &&
+          this.startCase(this.source.value.trim()) === text // Don't use cached text to compare
+        ) {
           if (engine === 'google') {
             result = raw.sentences.map(({ trans }: any) => trans);
           }
@@ -470,7 +473,12 @@ export default class Translate extends Vue {
     }
   }
 
-  proxy(invoke: Function) {
+  // eslint-disable-next-line class-methods-use-this
+  private startCase(str: string) {
+    return /^[a-zA-Z_-]+$/.test(str) ? startCase(str) : str;
+  }
+
+  private proxy(invoke: Function) {
     if (this.isActive) invoke();
   }
 
