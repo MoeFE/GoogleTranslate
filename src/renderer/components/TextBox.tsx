@@ -22,7 +22,7 @@ const TextArea = styled.textarea`
   min-height: 26px;
   max-height: 300px;
   overflow-y: scroll;
-  word-break: break-all;
+  word-break: keep-all;
   user-select: text;
   &::-webkit-input-placeholder {
     color: #ccc;
