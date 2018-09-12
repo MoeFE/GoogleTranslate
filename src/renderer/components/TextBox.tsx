@@ -107,7 +107,6 @@ export default class TextBox extends Vue.Component<
   private async handleChange() {
     await this.$nextTick();
     const { tbox } = this.$refs;
-    // if (this.value) tbox.focus();
     tbox.value = this.value;
     autosize.update(tbox);
   }
