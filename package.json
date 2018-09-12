@@ -58,7 +58,7 @@
     "prettier-eslint-cli": "^4.7.1",
     "typescript": "^3.0.3",
     "typescript-styled-plugin": "^0.10.0",
-    "vue-cli-plugin-electron-builder": "1.0.0-rc.2",
+    "vue-cli-plugin-electron-builder": "1.0.0-rc.3",
     "vue-jsx-hot-loader": "^1.4.0",
     "vue-template-compiler": "^2.5.17",
     "vue-tsx-support": "^2.1.1"
