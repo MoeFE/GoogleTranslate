@@ -322,6 +322,7 @@ export default class Translate extends Vue {
     await this.$nextTick();
     const isInput = typeof e === 'string';
     this.switch(!isInput);
+    if (isInput) this.throttleHandleTranslate();
   }
 
   private async handlePaste() {
