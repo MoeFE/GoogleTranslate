@@ -29,7 +29,7 @@ export function throttle(fn: Function, delay = 500) {
 }
 
 export function eventLoop(
-  target: () => any,
+  target: Function,
   timeout: number = 3000,
 ): Promise<void> {
   return new Promise((resolve, reject) => {
