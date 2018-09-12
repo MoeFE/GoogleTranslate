@@ -327,7 +327,7 @@ export default class Translate extends Vue {
 
   private async handlePaste() {
     const { value } = this.source;
-    await Tools.eventLoop(() => value !== this.source.value);
+    await Tools.eventLoop(() => value || value !== this.source.value);
     this.translate(...this.translateParams);
   }
 
