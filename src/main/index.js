@@ -54,7 +54,7 @@ function createMainWindow() {
     },
   });
 
-  const { window } = mb;
+  const { window, tray } = mb;
   const { webContents } = window;
 
   systemPreferences.setUserDefault(
@@ -77,7 +77,7 @@ function createMainWindow() {
   }
 
   ipcMain.on('show-window', () => {
-    mb.showWindow(mb.tray.getBounds());
+    mb.showWindow(tray.getBounds());
   });
 
   ipcMain.on('hide-window', () => {
