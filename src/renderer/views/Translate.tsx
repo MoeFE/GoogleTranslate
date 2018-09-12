@@ -329,13 +329,15 @@ export default class Translate extends Vue {
     const { value } = this.source;
     await Tools.eventLoop(() => value || value !== this.source.value);
     this.translate(...this.translateParams);
+    this.throttleHandleTranslate();
   }
 
   private handlePause() {
     this.audio.pause();
   }
 
-  private handleTranslate() {
+  private async handleTranslate() {
+    await this.$nextTick();
     if (!this.target.value || this.target.error) {
       this.translate(...this.translateParams);
     }
