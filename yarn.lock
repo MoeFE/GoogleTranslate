@@ -1566,7 +1566,7 @@ babel-plugin-dynamic-import-node@^2.0.0:
     babel-plugin-syntax-dynamic-import "^6.18.0"
     object.assign "^4.1.0"
 
-babel-plugin-emotion@^9.2.10, babel-plugin-emotion@^9.2.9:
+babel-plugin-emotion@^9.2.10:
   version "9.2.10"
   resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-9.2.10.tgz#983c288106cece7ce761df0513683ef0d241c466"
   dependencies:
@@ -3451,11 +3451,11 @@ emotion-utils@^9.1.0:
   version "9.1.0"
   resolved "https://registry.npmjs.org/emotion-utils/-/emotion-utils-9.1.0.tgz#7484dbf18f3b1dc1de68559d1ff35a74caa998dc"
 
-emotion@^9.2.9:
-  version "9.2.9"
-  resolved "https://registry.yarnpkg.com/emotion/-/emotion-9.2.9.tgz#c2028705acc60a138ecb69d3fc1d2056764f61a1"
+emotion@^9.2.10:
+  version "9.2.10"
+  resolved "https://registry.yarnpkg.com/emotion/-/emotion-9.2.10.tgz#9ba8e33d3dff1352af03f92d761ac6889cb0c545"
   dependencies:
-    babel-plugin-emotion "^9.2.9"
+    babel-plugin-emotion "^9.2.10"
     create-emotion "^9.2.6"
 
 encodeurl@~1.0.2:
