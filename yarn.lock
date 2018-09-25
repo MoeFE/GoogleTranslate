@@ -775,9 +775,9 @@
   version "2.0.3"
   resolved "https://registry.npmjs.org/@types/storejs/-/storejs-2.0.3.tgz#1b66b98e01cc8d05e769731c59668b938f85ba26"
 
-"@vue/babel-preset-app@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/@vue/babel-preset-app/-/babel-preset-app-3.0.1.tgz#24188938e93f259f7141a6a1190da9c511d123d8"
+"@vue/babel-preset-app@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@vue/babel-preset-app/-/babel-preset-app-3.0.4.tgz#5702e18b118b0a91a8aa988be5eefcb8245c8b87"
   dependencies:
     "@babel/plugin-proposal-class-properties" "7.0.0-beta.47"
     "@babel/plugin-proposal-decorators" "7.0.0-beta.47"
@@ -794,12 +794,12 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-3.0.2.tgz#18411420798135295fe80523579b22e4c6bb3d3b"
 
-"@vue/cli-plugin-babel@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-3.0.3.tgz#967ef902553c1c6152ef6330cb05816a730dfdb5"
+"@vue/cli-plugin-babel@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-3.0.4.tgz#f2e4a12f498e285fdc605ad29df4b9b0d4a0eb10"
   dependencies:
     "@babel/core" "7.0.0-beta.47"
-    "@vue/babel-preset-app" "^3.0.1"
+    "@vue/babel-preset-app" "^3.0.4"
     babel-loader "^8.0.0-0"
 
 "@vue/cli-plugin-eslint@^3.0.3":
