@@ -9413,6 +9413,10 @@ vue-class-component@^6.2.0:
   version "6.2.0"
   resolved "https://registry.npmjs.org/vue-class-component/-/vue-class-component-6.2.0.tgz#7adb1daa9a868c75f30f97f33f4f1b94aee62089"
 
+vue-class-component@^7.0.1:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.1.0.tgz#b33efcb10e17236d684f70b1e96f1946ec793e87"
+
 vue-cli-plugin-electron-builder@1.0.0-rc.2:
   version "1.0.0-rc.2"
   resolved "https://registry.npmjs.org/vue-cli-plugin-electron-builder/-/vue-cli-plugin-electron-builder-1.0.0-rc.2.tgz#2968d82b20448306df0e78fc4b7fc9d3b3363c62"
@@ -9469,11 +9473,12 @@ vue-loader@^15.4.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-property-decorator@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.npmjs.org/vue-property-decorator/-/vue-property-decorator-7.0.0.tgz#46f53dd741eb86c3af091bb0492400c450eebf19"
+vue-property-decorator@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-8.2.1.tgz#3791662033b20d20d098cb20e86fd23842982508"
   dependencies:
-    vue-class-component "^6.2.0"
+    vue "^2.6.10"
+    vue-class-component "^7.0.1"
 
 vue-router@^3.0.1:
   version "3.0.1"
@@ -9501,9 +9506,9 @@ vue-tsx-support@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/vue-tsx-support/-/vue-tsx-support-2.1.1.tgz#697db1d38bad53543429e9ecdff19704b0399390"
 
-vue@^2.5.17:
-  version "2.5.17"
-  resolved "https://registry.npmjs.org/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+vue@^2.5.17, vue@^2.6.10:
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
 
 vuex-class@^0.3.1:
   version "0.3.1"
