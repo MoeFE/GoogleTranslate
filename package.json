@@ -39,7 +39,7 @@
     "@types/storejs": "^2.0.3",
     "@vue/cli-plugin-babel": "^3.0.3",
     "@vue/cli-plugin-eslint": "^3.0.3",
-    "@vue/cli-plugin-typescript": "^3.0.3",
+    "@vue/cli-plugin-typescript": "^4.0.2",
     "@vue/cli-service": "^3.0.3",
     "@vue/eslint-config-airbnb": "^3.0.3",
     "@vue/eslint-config-typescript": "^3.0.3",
